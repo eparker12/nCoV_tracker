@@ -1,0 +1,259 @@
+,country,alpha2,alpha3,numeric,latitude,longitude,penalty,population,WHO_ID,notes
+1,Antarctica,AQ,ATA,10,-90,0,0.6,NA,Antarctica,NA
+2,South Georgia and the South Sandwich Islands,GS,SGS,239,-54.5,-37,0.8,NA,SouthGeorgiaandtheSouthSandwichIslands,NA
+3,Bouvet Island,BV,BVT,74,-54.4333,3.4,0.8,NA,BouvetIsland,NA
+4,Heard Island and McDonald Islands,HM,HMD,334,-53.1,72.5167,0.8,NA,HeardIslandandMcDonaldIslands,NA
+5,Falkland Islands (Malvinas),FK,FLK,238,-51.75,-59,0.8,3000,FalklandIslands(Malvinas),NA
+6,French Southern Territories,TF,ATF,260,-43,67,0.9,NA,FrenchSouthernTerritories,NA
+7,New Zealand,NZ,NZL,554,-41,174,0.9,4822000,NewZealand,NA
+8,Argentina,AR,ARG,32,-34,-64,1.3,45196000,Argentina,NA
+9,Uruguay,UY,URY,858,-33,-56,1.3,3474000,Uruguay,NA
+10,Chile,CL,CHL,152,-30,-71,1.3,19116000,Chile,NA
+11,Lesotho,LS,LSO,426,-29.5,28.5,1.3,2142000,Lesotho,NA
+12,Norfolk Island,NF,NFK,574,-29.0333,167.95,1.3,NA,NorfolkIsland,NA
+13,South Africa,ZA,ZAF,710,-29,24,1.3,59309000,SouthAfrica,NA
+14,Australia,AU,AUS,36,-27,133,1.3,25500000,Australia,NA
+15,Swaziland,SZ,SWZ,748,-26.5,31.5,1.3,1160000,Swaziland,NA
+16,Pitcairn,PN,PCN,612,-24.7,-127.4,1.3,NA,Pitcairn,NA
+17,Paraguay,PY,PRY,600,-23,-58,1.3,7133000,Paraguay,NA
+18,Botswana,BW,BWA,72,-22,24,1.3,2352000,Botswana,NA
+19,Namibia,NA,NAM,516,-22,17,1.3,2541000,Namibia,NA
+20,New Caledonia,NC,NCL,540,-21.5,165.5,1.3,285000,NewCaledonia,NA
+21,Cook Islands,CK,COK,184,-21.2333,-159.7667,1.3,18000,CookIslands,NA
+22,Reunion,RE,REU,638,-21.1,55.6,1.3,895000,Reunion,NA
+23,Mauritius,MU,MUS,480,-20.2833,57.55,1.3,1272000,Mauritius,NA
+24,Madagascar,MG,MDG,450,-20,47,1.3,27691000,Madagascar,NA
+25,Tonga,TO,TON,776,-20,-175,1.3,106000,Tonga,NA
+26,Zimbabwe,ZW,ZWE,716,-20,30,1.3,14863000,Zimbabwe,NA
+27,Niue,NU,NIU,570,-19.0333,-169.8667,1.3,2000,Niue,NA
+28,Mozambique,MZ,MOZ,508,-18.25,35,1.3,31255000,Mozambique,NA
+29,Fiji,FJ,FJI,242,-18,175,1.3,896000,Fiji,NA
+30,Bolivia,BO,BOL,68,-17,-65,1.3,11673000,Bolivia,NA
+31,"Bolivia, Plurinational State of",BO,BOL,68,-17,-65,1.3,11673000,"Bolivia,PlurinationalStateof",NA
+32,Vanuatu,VU,VUT,548,-16,167,1.3,307000,Vanuatu,NA
+33,"Saint Helena, Ascension and Tristan da Cunha",SH,SHN,654,-15.9333,-5.7,1.3,6000,"SaintHelena,AscensionandTristandaCunha",NA
+34,French Polynesia,PF,PYF,258,-15,-140,1.3,281000,FrenchPolynesia,NA
+35,Zambia,ZM,ZMB,894,-15,30,1.3,18384000,Zambia,NA
+36,American Samoa,AS,ASM,16,-14.3333,-170,1.3,55000,AmericanSamoa,NA
+37,Samoa,WS,WSM,882,-13.5833,-172.3333,1.3,198000,Samoa,NA
+38,Malawi,MW,MWI,454,-13.5,34,1.3,19130000,Malawi,NA
+39,Wallis and Futuna,WF,WLF,876,-13.3,-176.2,1.3,11000,WallisandFutuna,NA
+40,Mayotte,YT,MYT,175,-12.8333,45.1667,1.3,273000,Mayotte,NA
+41,Angola,AO,AGO,24,-12.5,18.5,1.3,32866000,Angola,NA
+42,Cocos (Keeling) Islands,CC,CCK,166,-12.5,96.8333,1.3,NA,Cocos(Keeling)Islands,NA
+43,Comoros,KM,COM,174,-12.1667,44.25,1.3,870000,Comoros,NA
+44,Christmas Island,CX,CXR,162,-10.5,105.6667,1.3,NA,ChristmasIsland,NA
+45,Brazil,BR,BRA,76,-10,-55,1.3,212559000,Brazil,NA
+46,Peru,PE,PER,604,-10,-76,1.3,32972000,Peru,NA
+47,Tokelau,TK,TKL,772,-9,-172,1.3,1000,Tokelau,NA
+48,Timor-Leste,TL,TLS,626,-8.55,125.5167,1.3,1318000,Timor-Leste,NA
+49,Solomon Islands,SB,SLB,90,-8,159,1.3,687000,SolomonIslands,NA
+50,Tuvalu,TV,TUV,798,-8,178,1.3,12000,Tuvalu,NA
+51,British Indian Ocean Territory,IO,IOT,86,-6,71.5,1.3,NA,BritishIndianOceanTerritory,NA
+52,Papua New Guinea,PG,PNG,598,-6,147,1.3,8947000,PapuaNewGuinea,NA
+53,"Tanzania, United Republic of",TZ,TZA,834,-6,35,1.3,59734000,"Tanzania,UnitedRepublicof",NA
+54,Indonesia,ID,IDN,360,-5,120,1.3,273524000,Indonesia,NA
+55,Seychelles,SC,SYC,690,-4.5833,55.6667,1.3,98000,Seychelles,NA
+56,Burundi,BI,BDI,108,-3.5,30,1.3,11891000,Burundi,NA
+57,Ecuador,EC,ECU,218,-2,-77.5,1.3,17643000,Ecuador,NA
+58,Rwanda,RW,RWA,646,-2,30,1.3,12952000,Rwanda,NA
+59,Congo,CG,COG,178,-1,15,1.3,5518000,Congo,NA
+60,Gabon,GA,GAB,266,-1,11.75,1.3,2226000,Gabon,NA
+61,Nauru,NR,NRU,520,-0.5333,166.9167,1.3,11000,Nauru,NA
+62,"Congo, the Democratic Republic of the",CD,COD,180,0,25,1.3,89561000,"Congo,theDemocraticRepublicofthe",NA
+63,Kenya,KE,KEN,404,1,38,1.3,53771000,Kenya,NA
+64,Sao Tome and Principe,ST,STP,678,1,7,1.3,219000,SaoTomeandPrincipe,NA
+65,Uganda,UG,UGA,800,1,32,1.3,45741000,Uganda,NA
+66,Singapore,SG,SGP,702,1.3667,103.8,1.3,5850000,Singapore,NA
+67,Kiribati,KI,KIR,296,1.4167,173,1.3,119000,Kiribati,NA
+68,Equatorial Guinea,GQ,GNQ,226,2,10,1.3,1403000,EquatorialGuinea,NA
+69,Malaysia,MY,MYS,458,2.5,112.5,1.3,32366000,Malaysia,NA
+70,Maldives,MV,MDV,462,3.25,73,1.3,541000,Maldives,NA
+71,Colombia,CO,COL,170,4,-72,1.3,50883000,Colombia,NA
+72,French Guiana,GF,GUF,254,4,-53,1.3,299000,FrenchGuiana,NA
+73,Suriname,SR,SUR,740,4,-56,1.3,587000,Suriname,NA
+74,Brunei,BN,BRN,96,4.5,114.6667,1.3,437000,Brunei,NA
+75,Brunei Darussalam,BN,BRN,96,4.5,114.6667,1.3,437000,BruneiDarussalam,NA
+76,Guyana,GY,GUY,328,5,-59,1.3,787000,Guyana,NA
+77,Cameroon,CM,CMR,120,6,12,1.3,26546000,Cameroon,NA
+78,Liberia,LR,LBR,430,6.5,-9.5,1.3,5058000,Liberia,NA
+79,"Micronesia, Federated States of",FM,FSM,583,6.9167,158.25,1.3,115000,"Micronesia,FederatedStatesof",NA
+80,Central African Republic,CF,CAF,140,7,21,1.3,4830000,CentralAfricanRepublic,NA
+81,Sri Lanka,LK,LKA,144,7,81,1.3,21413000,SriLanka,NA
+82,Palau,PW,PLW,585,7.5,134.5,1.3,18000,Palau,NA
+83,Cote d'Ivoire,CI,CIV,384,8,-5,1.3,26378000,Coted'Ivoire,NA
+84,Ethiopia,ET,ETH,231,8,38,1.3,114964000,Ethiopia,NA
+85,Ghana,GH,GHA,288,8,-2,1.3,31073000,Ghana,NA
+86,Ivory Coast,CI,CIV,384,8,-5,1.3,26378000,IvoryCoast,NA
+87,Togo,TG,TGO,768,8,1.1667,1.3,8279000,Togo,NA
+88,Venezuela,VE,VEN,862,8,-66,1.3,28436000,Venezuela,NA
+89,"Venezuela, Bolivarian Republic of",VE,VEN,862,8,-66,1.3,28436000,"Venezuela,BolivarianRepublicof",NA
+90,Sierra Leone,SL,SLE,694,8.5,-11.5,1.3,7977000,SierraLeone,NA
+91,Marshall Islands,MH,MHL,584,9,168,1.3,59000,MarshallIslands,NA
+92,Panama,PA,PAN,591,9,-80,1.3,4315000,Panama,NA
+93,Benin,BJ,BEN,204,9.5,2.25,1.3,12123000,Benin,NA
+94,Costa Rica,CR,CRI,188,10,-84,1.3,5094000,CostaRica,NA
+95,Nigeria,NG,NGA,566,10,8,1.3,206140000,Nigeria,NA
+96,Somalia,SO,SOM,706,10,49,1.3,15893000,Somalia,NA
+97,Guinea,GN,GIN,324,11,-10,1.3,13133000,Guinea,NA
+98,Trinidad & Tobago,TT,TTO,780,11,-61,1.3,1399000,Trinidad&Tobago,NA
+99,Trinidad and Tobago,TT,TTO,780,11,-61,1.3,1399000,TrinidadandTobago,NA
+100,Djibouti,DJ,DJI,262,11.5,43,1.3,988000,Djibouti,NA
+101,Guinea-Bissau,GW,GNB,624,12,-15,1.3,1968000,Guinea-Bissau,NA
+102,Grenada,GD,GRD,308,12.1167,-61.6667,1.3,113000,Grenada,NA
+103,Netherlands Antilles,AN,ANT,530,12.25,-68.75,1.3,NA,NetherlandsAntilles,NA
+104,Aruba,AW,ABW,533,12.5,-69.9667,1.3,107000,Aruba,NA
+105,Burkina Faso,BF,BFA,854,13,-2,1.3,20903000,BurkinaFaso,NA
+106,Cambodia,KH,KHM,116,13,105,1.3,16719000,Cambodia,NA
+107,Nicaragua,NI,NIC,558,13,-85,1.3,6625000,Nicaragua,NA
+108,Philippines,PH,PHL,608,13,122,1.3,109581000,Philippines,NA
+109,Barbados,BB,BRB,52,13.1667,-59.5333,1.3,287000,Barbados,NA
+110,Saint Vincent & the Grenadines,VC,VCT,670,13.25,-61.2,1.3,111000,SaintVincent&theGrenadines,NA
+111,Saint Vincent and the Grenadines,VC,VCT,670,13.25,-61.2,1.3,111000,SaintVincentandtheGrenadines,NA
+112,St. Vincent and the Grenadines,VC,VCT,670,13.25,-61.2,1.3,111000,St.VincentandtheGrenadines,NA
+113,Gambia,GM,GMB,270,13.4667,-16.5667,1.3,2417000,Gambia,NA
+114,Guam,GU,GUM,316,13.4667,144.7833,1.3,169000,Guam,NA
+115,El Salvador,SV,SLV,222,13.8333,-88.9167,1.3,6486000,ElSalvador,NA
+116,Saint Lucia,LC,LCA,662,13.8833,-61.1333,1.3,184000,SaintLucia,NA
+117,Senegal,SN,SEN,686,14,-14,1.3,16744000,Senegal,NA
+118,Martinique,MQ,MTQ,474,14.6667,-61,1.3,375000,Martinique,NA
+119,Chad,TD,TCD,148,15,19,1.3,16426000,Chad,NA
+120,Eritrea,ER,ERI,232,15,39,1.3,3546000,Eritrea,NA
+121,Honduras,HN,HND,340,15,-86.5,1.3,9905000,Honduras,NA
+122,Sudan,SD,SDN,736,15,30,1.3,NA,Sudan,NA
+123,Thailand,TH,THA,764,15,100,1.3,69800000,Thailand,NA
+124,Yemen,YE,YEM,887,15,48,1.3,29826000,Yemen,NA
+125,Northern Mariana Islands,MP,MNP,580,15.2,145.75,1.3,58000,NorthernMarianaIslands,NA
+126,Dominica,DM,DMA,212,15.4167,-61.3333,1.3,72000,Dominica,NA
+127,Guatemala,GT,GTM,320,15.5,-90.25,1.3,17916000,Guatemala,NA
+128,Cape Verde,CV,CPV,132,16,-24,1.3,556000,CapeVerde,NA
+129,Niger,NE,NER,562,16,8,1.3,24207000,Niger,NA
+130,Viet Nam,VN,VNM,704,16,106,1.3,97339000,VietNam,NA
+131,Vietnam,VN,VNM,704,16,106,1.3,97339000,Vietnam,NA
+132,Guadeloupe,GP,GLP,312,16.25,-61.5833,1.3,400000,Guadeloupe,NA
+133,Montserrat,MS,MSR,500,16.75,-62.2,1.3,5000,Montserrat,NA
+134,Mali,ML,MLI,466,17,-4,1.3,20251000,Mali,NA
+135,Antigua and Barbuda,AG,ATG,28,17.05,-61.8,1.3,98000,AntiguaandBarbuda,NA
+136,Belize,BZ,BLZ,84,17.25,-88.75,1.3,398000,Belize,NA
+137,Saint Kitts and Nevis,KN,KNA,659,17.3333,-62.75,1.3,53000,SaintKittsandNevis,NA
+138,Lao People's Democratic Republic,LA,LAO,418,18,105,1.3,7276000,LaoPeople'sDemocraticRepublic,NA
+139,Anguilla,AI,AIA,660,18.25,-63.1667,1.3,15000,Anguilla,NA
+140,Jamaica,JM,JAM,388,18.25,-77.5,1.3,2961000,Jamaica,NA
+141,Puerto Rico,PR,PRI,630,18.25,-66.5,1.3,2861000,PuertoRico,NA
+142,"Virgin Islands, U.S.",VI,VIR,850,18.3333,-64.8333,1.3,104000,"VirginIslands,U.S.",NA
+143,"Virgin Islands, British",VG,VGB,92,18.5,-64.5,1.3,30000,"VirginIslands,British",NA
+144,Dominican Republic,DO,DOM,214,19,-70.6667,1.3,10848000,DominicanRepublic,NA
+145,Haiti,HT,HTI,332,19,-72.4167,1.3,11403000,Haiti,NA
+146,United States Minor Outlying Islands,UM,UMI,581,19.2833,166.6,1.3,NA,UnitedStatesMinorOutlyingIslands,NA
+147,Cayman Islands,KY,CYM,136,19.5,-80.5,1.3,66000,CaymanIslands,NA
+148,India,IN,IND,356,20,77,1.3,1380004000,India,NA
+149,Mauritania,MR,MRT,478,20,-12,1.3,4650000,Mauritania,NA
+150,Oman,OM,OMN,512,21,57,1.3,5107000,Oman,NA
+151,Cuba,CU,CUB,192,21.5,-80,1.3,11327000,Cuba,NA
+152,Turks and Caicos Islands,TC,TCA,796,21.75,-71.5833,1.3,39000,TurksandCaicosIslands,NA
+153,Burma,MM,MMR,104,22,98,1.3,54410000,Burma,NA
+154,Myanmar,MM,MMR,104,22,98,1.3,54410000,Myanmar,NA
+155,Macao,MO,MAC,446,22.1667,113.55,1.3,649000,China-Macao,NA
+156,Hong Kong,HK,HKG,344,22.25,114.1667,1.3,7497000,China-HongKongSAR,NA
+157,Mexico,MX,MEX,484,23,-102,1.3,128933000,Mexico,NA
+158,Taiwan,TW,TWN,158,23.5,121,1.3,23817000,China-Taipei,NA
+160,Bangladesh,BD,BGD,50,24,90,1.3,164689000,Bangladesh,NA
+161,United Arab Emirates,AE,ARE,784,24,54,1.3,9890000,UnitedArabEmirates,NA
+162,Bahamas,BS,BHS,44,24.25,-76,1.3,393000,Bahamas,NA
+163,Western Sahara,EH,ESH,732,24.5,-13,1.3,597000,WesternSahara,NA
+164,Libya,LY,LBY,434,25,17,1.3,6871000,Libya,NA
+165,Libyan Arab Jamahiriya,LY,LBY,434,25,17,1.3,6871000,LibyanArabJamahiriya,NA
+166,Saudi Arabia,SA,SAU,682,25,45,1.3,34814000,SaudiArabia,NA
+167,Qatar,QA,QAT,634,25.5,51.25,1.3,2881000,Qatar,NA
+168,Bahrain,BH,BHR,48,26,50.55,1.3,1702000,Bahrain,NA
+169,Egypt,EG,EGY,818,27,30,1.3,102334000,Egypt,NA
+170,Bhutan,BT,BTN,64,27.5,90.5,1.3,772000,Bhutan,NA
+171,Algeria,DZ,DZA,12,28,3,1.3,43851000,Algeria,NA
+172,Nepal,NP,NPL,524,28,84,1.3,29137000,Nepal,NA
+173,Kuwait,KW,KWT,414,29.3375,47.6581,1.3,4271000,Kuwait,NA
+174,Pakistan,PK,PAK,586,30,70,1.3,220892000,Pakistan,NA
+175,Jordan,JO,JOR,400,31,36,1.3,10203000,Jordan,NA
+176,Israel,IL,ISR,376,31.5,34.75,1.3,8656000,Israel,NA
+177,Iran (Islamic Republic of),IR,IRN,364,32,53,1.3,83993000,Iran,NA
+178,Morocco,MA,MAR,504,32,-5,1.3,36911000,Morocco,NA
+179,Occupied Palestinian Territory,PS,PSE,275,32,35.25,1.3,5101000,OccupiedPalestinianTerritory,NA
+180,Bermuda,BM,BMU,60,32.3333,-64.75,1.3,62000,Bermuda,NA
+181,Afghanistan,AF,AFG,4,33,65,1.3,38928000,Afghanistan,NA
+182,Iraq,IQ,IRQ,368,33,44,1.3,40223000,Iraq,NA
+183,Lebanon,LB,LBN,422,33.8333,35.8333,1.3,6825000,Lebanon,NA
+184,Tunisia,TN,TUN,788,34,9,1.3,11819000,Tunisia,NA
+185,Mainland China,CN,CHN,156,35,105,1.3,1439324000,China,NA
+186,Cyprus,CY,CYP,196,35,33,1.3,1207000,Cyprus,NA
+187,International cruise ship (Japan),NA,NA,NA,34,144,1.3,NA,InternationalConveyance,NA
+188,Syrian Arab Republic,SY,SYR,760,35,38,1.3,17501000,SyrianArabRepublic,NA
+189,Malta,MT,MLT,470,35.8333,14.5833,1.3,442000,Malta,NA
+190,Japan,JP,JPN,392,36,138,1.3,126476000,Japan,NA
+191,Gibraltar,GI,GIB,292,36.1833,-5.3667,1.3,34000,Gibraltar,NA
+192,"Korea, Republic of",KR,KOR,410,37,127.5,1,51269000,"Korea,Republicof",NA
+193,Republic of Korea,KR,KOR,410,37,127.5,1,51269000,RepublicofKorea,NA
+194,USA,US,USA,840,38,-97,1,331003000,UnitedStatesofAmerica,NA
+195,Greece,GR,GRC,300,39,22,1,10423000,Greece,NA
+196,Tajikistan,TJ,TJK,762,39,71,1,9538000,Tajikistan,NA
+197,Turkey,TR,TUR,792,39,35,1,84339000,Turkey,NA
+198,Portugal,PT,PRT,620,39.5,-8,1,10197000,Portugal,NA
+199,Armenia,AM,ARM,51,40,45,0.9,2963000,Armenia,NA
+200,"Korea, Democratic People's Republic of",KP,PRK,408,40,127,0.9,25779000,"Korea,DemocraticPeople'sRepublicof",NA
+201,Spain,ES,ESP,724,40,-4,0.9,46755000,Spain,NA
+202,Turkmenistan,TM,TKM,795,40,60,0.9,6031000,Turkmenistan,NA
+203,Azerbaijan,AZ,AZE,31,40.5,47.5,0.9,10139000,Azerbaijan,NA
+204,Albania,AL,ALB,8,41,20,0.9,2878000,Albania,NA
+205,Kyrgyzstan,KG,KGZ,417,41,75,0.9,6524000,Kyrgyzstan,NA
+206,Uzbekistan,UZ,UZB,860,41,64,0.9,33469000,Uzbekistan,NA
+207,North Macedonia,MK,MKD,807,41.8333,22,0.9,2083000,NorthMacedonia,NA
+208,Holy See (Vatican City State),VA,VAT,336,41.9,12.45,0.9,1000,HolySee(VaticanCityState),NA
+209,Georgia,GE,GEO,268,42,43.5,0.9,3989000,Georgia,NA
+210,Montenegro,ME,MNE,499,42,19,0.9,628000,Montenegro,NA
+211,Andorra,AD,AND,20,42.5,1.6,0.9,77000,Andorra,NA
+212,Italy,IT,ITA,380,40,15,0.9,60462000,Italy,original latitutde: 42.8333; longitude: 12.8333
+213,Bulgaria,BG,BGR,100,43,25,0.9,6948000,Bulgaria,NA
+214,Monaco,MC,MCO,492,43.7333,7.4,0.9,39000,Monaco,NA
+215,San Marino,SM,SMR,674,43.7667,12.4167,0.9,34000,SanMarino,NA
+216,Bosnia and Herzegovina,BA,BIH,70,44,18,0.9,3281000,BosniaHerzegovina,NA
+217,Serbia,RS,SRB,688,44,21,0.9,8737000,Serbia,NA
+218,Croatia,HR,HRV,191,45.1667,15.5,0.9,4105000,Croatia,NA
+219,France,FR,FRA,250,46,2,0.9,65274000,France,NA
+220,Mongolia,MN,MNG,496,46,105,0.9,3278000,Mongolia,NA
+221,Romania,RO,ROU,642,46,25,0.9,19238000,Romania,NA
+222,Slovenia,SI,SVN,705,46,15,0.9,2079000,Slovenia,NA
+223,Saint Pierre and Miquelon,PM,SPM,666,46.8333,-56.3333,0.9,6000,SaintPierreandMiquelon,NA
+224,Hungary,HU,HUN,348,47,20,0.9,9660000,Hungary,NA
+225,"Moldova, Republic of",MD,MDA,498,47,29,0.9,4034000,"Moldova,Republicof",NA
+226,Switzerland,CH,CHE,756,47,8,0.9,8655000,Switzerland,NA
+227,Liechtenstein,LI,LIE,438,47.1667,9.5333,0.9,38000,Liechtenstein,NA
+228,Austria,AT,AUT,40,47.3333,13.3333,0.9,9006000,Austria,NA
+229,Kazakhstan,KZ,KAZ,398,48,68,0.9,18777000,Kazakhstan,NA
+230,Slovakia,SK,SVK,703,48.6667,19.5,0.9,5460000,Slovakia,NA
+231,Ukraine,UA,UKR,804,49,32,0.9,43734000,Ukraine,NA
+232,Jersey,JE,JEY,832,49.21,-2.13,0.9,NA,Jersey,NA
+233,Guernsey,GG,GGY,831,49.5,-2.56,0.9,NA,Guernsey,NA
+234,Czech Republic,CZ,CZE,203,49.75,15.5,0.9,10709000,Czechia,NA
+235,Luxembourg,LU,LUX,442,49.75,6.1667,0.9,626000,Luxembourg,NA
+236,Belgium,BE,BEL,56,50.8333,4,0.8,11590000,Belgium,NA
+237,Germany,DE,DEU,276,51,9,0.8,83784000,Germany,NA
+238,Poland,PL,POL,616,52,20,0.8,37847000,Poland,NA
+239,Netherlands,NL,NLD,528,52.5,5.75,0.8,17135000,Netherlands,NA
+240,Belarus,BY,BLR,112,53,28,0.8,9449000,Belarus,NA
+241,Ireland,IE,IRL,372,53,-8,0.8,4938000,Ireland,NA
+242,UK,GB,GBR,826,54,-2,0.8,67886000,UnitedKingdom,NA
+243,Isle of Man,IM,IMN,833,54.23,-4.55,0.8,85000,IsleofMan,NA
+244,Denmark,DK,DNK,208,56,10,0.8,5792000,Denmark,NA
+245,Lithuania,LT,LTU,440,56,24,0.8,2722000,Lithuania,NA
+246,Latvia,LV,LVA,428,57,25,0.8,1886000,Latvia,NA
+247,Estonia,EE,EST,233,59,26,0.8,1327000,Estonia,NA
+248,Canada,CA,CAN,124,60,-95,0.6,37742000,Canada,NA
+249,Russia,RU,RUS,643,60,100,0.6,145934000,Russia,NA
+250,Russian Federation,RU,RUS,643,60,100,0.6,145934000,RussianFederation,NA
+251,Faroe Islands,FO,FRO,234,62,-7,0.6,49000,FaroeIslands,NA
+252,Norway,NO,NOR,578,62,10,0.6,5421000,Norway,NA
+253,Sweden,SE,SWE,752,62,15,0.6,10099000,Sweden,NA
+254,Finland,FI,FIN,246,64,26,0.6,5541000,Finland,NA
+255,Iceland,IS,ISL,352,65,-18,0.6,341000,Iceland,NA
+256,Greenland,GL,GRL,304,72,-40,0.6,57000,Greenland,NA
+257,Svalbard and Jan Mayen,SJ,SJM,744,78,20,0.6,NA,SvalbardandJanMayen,NA
+258,Saint Martin,MF,MAF,663,18.07,-63.05,1.3,39000,SaintMartin,NA
+259,Saint Barthelemy,BL,BLM,652,17.9,-62.83,1.3,10000,SaintBarthelemy,NA

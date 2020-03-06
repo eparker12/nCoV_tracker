@@ -1,0 +1,384 @@
+﻿country,country_group,date,cases,deaths
+Germany,Germany,17/03/2003,1,0
+Canada,Canada,17/03/2003,8,2
+Singapore,Singapore,17/03/2003,20,0
+Hong Kong,China,17/03/2003,95,1
+Switzerland,Switzerland,17/03/2003,2,0
+Thailand,Thailand,17/03/2003,1,0
+Vietnam,Vietnam,17/03/2003,40,1
+Canada,Canada,24/03/2003,11,3
+France,France,24/03/2003,1,0
+Germany,Germany,24/03/2003,4,0
+Hong Kong,China,24/03/2003,260,10
+Italy,Italy,24/03/2003,2,0
+Republic of Ireland,Republic of Ireland,24/03/2003,1,0
+Singapore,Singapore,24/03/2003,65,0
+Spain,Spain,24/03/2003,1,0
+Switzerland,Switzerland,24/03/2003,2,0
+Taiwan,China,24/03/2003,6,0
+Thailand,Thailand,24/03/2003,5,0
+UK,UK,24/03/2003,3,0
+USA,USA,24/03/2003,37,0
+Vietnam,Vietnam,24/03/2003,58,4
+Canada,Canada,31/03/2003,44,4
+Mainland China,China,31/03/2003,806,34
+Hong Kong,China,31/03/2003,530,13
+Taiwan,China,31/03/2003,10,0
+France,France,31/03/2003,1,0
+Germany,Germany,31/03/2003,5,0
+Italy,Italy,31/03/2003,2,0
+Republic of Ireland,Republic of Ireland,31/03/2003,2,0
+Romania,Romania,31/03/2003,3,0
+Singapore,Singapore,31/03/2003,91,2
+Switzerland,Switzerland,31/03/2003,3,0
+Thailand,Thailand,31/03/2003,5,1
+UK,UK,31/03/2003,3,0
+USA,USA,31/03/2003,59,0
+Vietnam,Vietnam,31/03/2003,58,4
+Australia,Australia,07/04/2003,1,0
+Brazil,Brazil,07/04/2003,1,0
+Canada,Canada,07/04/2003,90,9
+Mainland China,China,07/04/2003,1268,53
+Hong Kong,China,07/04/2003,883,23
+Taiwan,China,07/04/2003,21,0
+France,France,07/04/2003,3,0
+Germany,Germany,07/04/2003,5,0
+Italy,Italy,07/04/2003,3,0
+Malaysia,Malaysia,07/04/2003,1,1
+Republic of Ireland,Republic of Ireland,07/04/2003,1,0
+Romania,Romania,07/04/2003,1,0
+Singapore,Singapore,07/04/2003,106,6
+Spain,Spain,07/04/2003,1,0
+Switzerland,Switzerland,07/04/2003,1,0
+Thailand,Thailand,07/04/2003,7,2
+UK,UK,07/04/2003,5,0
+USA,USA,07/04/2003,141,0
+Vietnam,Vietnam,07/04/2003,62,4
+Brazil,Brazil,14/04/2003,2,0
+Canada,Canada,14/04/2003,100,13
+Mainland China,China,14/04/2003,1418,64
+Hong Kong,China,14/04/2003,1190,47
+Taiwan,China,14/04/2003,23,0
+France,France,14/04/2003,5,0
+Germany,Germany,14/04/2003,6,0
+Indonesia,Indonesia,14/04/2003,1,0
+Italy,Italy,14/04/2003,3,0
+Kuwait,Kuwait,14/04/2003,1,0
+Malaysia,Malaysia,14/04/2003,4,1
+Philippines,Philippines,14/04/2003,1,0
+Republic of Ireland,Republic of Ireland,14/04/2003,1,0
+Romania,Romania,14/04/2003,1,0
+Singapore,Singapore,14/04/2003,158,12
+South Africa,South Africa,14/04/2003,1,0
+Spain,Spain,14/04/2003,1,0
+Sweden,Sweden,14/04/2003,1,0
+Switzerland,Switzerland,14/04/2003,1,0
+Thailand,Thailand,14/04/2003,8,2
+UK,UK,14/04/2003,6,0
+USA,USA,14/04/2003,174,0
+Vietnam,Vietnam,14/04/2003,63,5
+Australia,Australia,21/04/2003,3,0
+Brazil,Brazil,21/04/2003,2,0
+Canada,Canada,21/04/2003,132,12
+Mainland China,China,21/04/2003,1959,86
+Hong Kong,China,21/04/2003,1402,94
+Taiwan,China,21/04/2003,29,0
+France,France,21/04/2003,5,0
+Germany,Germany,21/04/2003,6,0
+India,India,21/04/2003,1,0
+Indonesia,Indonesia,21/04/2003,1,0
+Italy,Italy,21/04/2003,3,0
+Japan,Japan,21/04/2003,5,0
+Kuwait,Kuwait,21/04/2003,1,0
+Malaysia,Malaysia,21/04/2003,6,1
+Mongolia,Mongolia,21/04/2003,3,0
+Philippines,Philippines,21/04/2003,2,1
+Republic of Ireland,Republic of Ireland,21/04/2003,1,0
+Romania,Romania,21/04/2003,1,0
+Singapore,Singapore,21/04/2003,178,16
+South Africa,South Africa,21/04/2003,1,0
+Spain,Spain,21/04/2003,1,0
+Sweden,Sweden,21/04/2003,3,0
+Switzerland,Switzerland,21/04/2003,1,0
+Thailand,Thailand,21/04/2003,7,2
+UK,UK,21/04/2003,6,0
+USA,USA,21/04/2003,39,0
+Vietnam,Vietnam,21/04/2003,63,5
+Australia,Australia,28/04/2003,4,0
+Brazil,Brazil,28/04/2003,2,0
+Bulgaria,Bulgaria,28/04/2003,1,0
+Canada,Canada,28/04/2003,142,18
+Mainland China,China,28/04/2003,2914,131
+Hong Kong,China,28/04/2003,1557,138
+Taiwan,China,28/04/2003,66,0
+France,France,28/04/2003,5,0
+Germany,Germany,28/04/2003,7,0
+India,India,28/04/2003,1,0
+Indonesia,Indonesia,28/04/2003,1,0
+Italy,Italy,28/04/2003,8,0
+Japan,Japan,28/04/2003,2,0
+Kuwait,Kuwait,28/04/2003,1,0
+Malaysia,Malaysia,28/04/2003,6,2
+Mongolia,Mongolia,28/04/2003,5,0
+Philippines,Philippines,28/04/2003,4,2
+Republic of Ireland,Republic of Ireland,28/04/2003,1,0
+Romania,Romania,28/04/2003,1,0
+Singapore,Singapore,28/04/2003,199,23
+South Africa,South Africa,28/04/2003,1,0
+Spain,Spain,28/04/2003,1,0
+Sweden,Sweden,28/04/2003,3,0
+Switzerland,Switzerland,28/04/2003,1,0
+Thailand,Thailand,28/04/2003,7,2
+UK,UK,28/04/2003,6,0
+USA,USA,28/04/2003,41,0
+Vietnam,Vietnam,28/04/2003,63,5
+Australia,Australia,05/05/2003,4,0
+Brazil,Brazil,05/05/2003,2,0
+Bulgaria,Bulgaria,05/05/2003,1,0
+Canada,Canada,05/05/2003,148,22
+Mainland China,China,05/05/2003,4280,206
+Hong Kong,China,05/05/2003,1637,187
+Macao,China,05/05/2003,1,0
+Taiwan,China,05/05/2003,116,8
+France,France,05/05/2003,5,0
+Germany,Germany,05/05/2003,7,0
+Indonesia,Indonesia,05/05/2003,2,0
+Italy,Italy,05/05/2003,9,0
+Kuwait,Kuwait,05/05/2003,1,0
+Malaysia,Malaysia,05/05/2003,7,2
+Mongolia,Mongolia,05/05/2003,8,0
+New Zealand,New Zealand,05/05/2003,1,0
+Philippines,Philippines,05/05/2003,3,2
+Poland,Poland,05/05/2003,1,0
+Republic of Ireland,Republic of Ireland,05/05/2003,1,0
+Republic of Korea,Republic of Korea,05/05/2003,1,0
+Romania,Romania,05/05/2003,1,0
+Singapore,Singapore,05/05/2003,204,26
+South Africa,South Africa,05/05/2003,1,1
+Spain,Spain,05/05/2003,1,0
+Sweden,Sweden,05/05/2003,3,0
+Switzerland,Switzerland,05/05/2003,1,0
+Thailand,Thailand,05/05/2003,7,2
+UK,UK,05/05/2003,6,0
+USA,USA,05/05/2003,61,0
+Vietnam,Vietnam,05/05/2003,63,5
+Australia,Australia,12/05/2003,6,0
+Brazil,Brazil,12/05/2003,2,0
+Bulgaria,Bulgaria,12/05/2003,1,0
+Canada,Canada,12/05/2003,143,22
+Mainland China,China,12/05/2003,5013,252
+Hong Kong,China,12/05/2003,1683,218
+Macao,China,12/05/2003,1,0
+Taiwan,China,12/05/2003,184,20
+Colombia,Colombia,12/05/2003,1,0
+Finland,Finland,12/05/2003,1,0
+France,France,12/05/2003,7,0
+Germany,Germany,12/05/2003,9,0
+India,India,12/05/2003,1,0
+Indonesia,Indonesia,12/05/2003,2,0
+Italy,Italy,12/05/2003,9,0
+Kuwait,Kuwait,12/05/2003,1,0
+Malaysia,Malaysia,12/05/2003,7,2
+Mongolia,Mongolia,12/05/2003,9,0
+New Zealand,New Zealand,12/05/2003,1,0
+Philippines,Philippines,12/05/2003,10,2
+Poland,Poland,12/05/2003,1,0
+Republic of Ireland,Republic of Ireland,12/05/2003,1,0
+Republic of Korea,Republic of Korea,12/05/2003,2,0
+Romania,Romania,12/05/2003,1,0
+Singapore,Singapore,12/05/2003,205,28
+South Africa,South Africa,12/05/2003,1,1
+Spain,Spain,12/05/2003,1,0
+Sweden,Sweden,12/05/2003,3,0
+Switzerland,Switzerland,12/05/2003,1,0
+Thailand,Thailand,12/05/2003,7,2
+UK,UK,12/05/2003,6,0
+USA,USA,12/05/2003,64,0
+Vietnam,Vietnam,12/05/2003,63,5
+Australia,Australia,19/05/2003,6,0
+Brazil,Brazil,19/05/2003,2,0
+Canada,Canada,19/05/2003,140,23
+Mainland China,China,19/05/2003,5236,289
+Hong Kong,China,19/05/2003,1714,251
+Macao,China,19/05/2003,1,0
+Taiwan,China,19/05/2003,344,40
+Colombia,Colombia,19/05/2003,1,0
+Finland,Finland,19/05/2003,1,0
+France,France,19/05/2003,7,0
+Germany,Germany,19/05/2003,9,0
+India,India,19/05/2003,3,0
+Indonesia,Indonesia,19/05/2003,2,0
+Italy,Italy,19/05/2003,9,0
+Kuwait,Kuwait,19/05/2003,1,0
+Malaysia,Malaysia,19/05/2003,7,2
+Mongolia,Mongolia,19/05/2003,9,0
+New Zealand,New Zealand,19/05/2003,1,0
+Philippines,Philippines,19/05/2003,12,2
+Republic of Ireland,Republic of Ireland,19/05/2003,1,0
+Republic of Korea,Republic of Korea,19/05/2003,3,0
+Romania,Romania,19/05/2003,1,0
+Singapore,Singapore,19/05/2003,206,28
+South Africa,South Africa,19/05/2003,1,1
+Spain,Spain,19/05/2003,1,0
+Sweden,Sweden,19/05/2003,3,0
+Switzerland,Switzerland,19/05/2003,1,0
+Thailand,Thailand,19/05/2003,8,2
+UK,UK,19/05/2003,4,0
+USA,USA,19/05/2003,67,0
+Vietnam,Vietnam,19/05/2003,63,5
+Australia,Australia,26/05/2003,6,0
+Brazil,Brazil,26/05/2003,2,0
+Canada,Canada,26/05/2003,148,26
+Mainland China,China,26/05/2003,5316,317
+Hong Kong,China,26/05/2003,1726,267
+Macao,China,26/05/2003,2,0
+Taiwan,China,26/05/2003,585,72
+Colombia,Colombia,26/05/2003,1,0
+Finland,Finland,26/05/2003,1,0
+France,France,26/05/2003,7,0
+Germany,Germany,26/05/2003,9,0
+India,India,26/05/2003,3,0
+Indonesia,Indonesia,26/05/2003,2,0
+Italy,Italy,26/05/2003,9,0
+Kuwait,Kuwait,26/05/2003,1,0
+Malaysia,Malaysia,26/05/2003,5,2
+Mongolia,Mongolia,26/05/2003,9,0
+New Zealand,New Zealand,26/05/2003,1,0
+Philippines,Philippines,26/05/2003,12,2
+Republic of Ireland,Republic of Ireland,26/05/2003,1,0
+Republic of Korea,Republic of Korea,26/05/2003,3,0
+Romania,Romania,26/05/2003,1,0
+Singapore,Singapore,26/05/2003,206,31
+South Africa,South Africa,26/05/2003,1,1
+Spain,Spain,26/05/2003,1,0
+Sweden,Sweden,26/05/2003,3,0
+Switzerland,Switzerland,26/05/2003,1,0
+Thailand,Thailand,26/05/2003,8,2
+UK,UK,26/05/2003,4,0
+USA,USA,26/05/2003,65,0
+Vietnam,Vietnam,26/05/2003,63,5
+Australia,Australia,02/06/2003,5,0
+Brazil,Brazil,02/06/2003,2,0
+Canada,Canada,02/06/2003,198,30
+Mainland China,China,02/06/2003,5328,334
+Hong Kong,China,02/06/2003,1746,282
+Macao,China,02/06/2003,1,0
+Taiwan,China,02/06/2003,684,81
+Colombia,Colombia,02/06/2003,1,0
+Finland,Finland,02/06/2003,1,0
+France,France,02/06/2003,7,0
+Germany,Germany,02/06/2003,10,0
+India,India,02/06/2003,3,0
+Indonesia,Indonesia,02/06/2003,2,0
+Italy,Italy,02/06/2003,9,0
+Kuwait,Kuwait,02/06/2003,1,0
+Malaysia,Malaysia,02/06/2003,5,2
+Mongolia,Mongolia,02/06/2003,9,0
+New Zealand,New Zealand,02/06/2003,1,0
+Philippines,Philippines,02/06/2003,12,2
+Republic of Ireland,Republic of Ireland,02/06/2003,1,0
+Republic of Korea,Republic of Korea,02/06/2003,3,0
+Romania,Romania,02/06/2003,1,0
+Russian Federation,Russian Federation,02/06/2003,1,0
+Singapore,Singapore,02/06/2003,206,31
+South Africa,South Africa,02/06/2003,1,1
+Spain,Spain,02/06/2003,1,0
+Sweden,Sweden,02/06/2003,3,0
+Switzerland,Switzerland,02/06/2003,1,0
+Thailand,Thailand,02/06/2003,8,2
+UK,UK,02/06/2003,4,0
+USA,USA,02/06/2003,66,0
+Vietnam,Vietnam,02/06/2003,63,5
+Australia,Australia,09/06/2003,5,0
+Brazil,Brazil,09/06/2003,2,0
+Canada,Canada,09/06/2003,229,32
+Mainland China,China,09/06/2003,5328,340
+Hong Kong,China,09/06/2003,1753,288
+Macao,China,09/06/2003,1,0
+Taiwan,China,09/06/2003,680,81
+Colombia,Colombia,09/06/2003,1,0
+Finland,Finland,09/06/2003,1,0
+France,France,09/06/2003,7,0
+Germany,Germany,09/06/2003,10,0
+India,India,09/06/2003,3,0
+Indonesia,Indonesia,09/06/2003,2,0
+Italy,Italy,09/06/2003,9,0
+Kuwait,Kuwait,09/06/2003,1,0
+Malaysia,Malaysia,09/06/2003,5,2
+Mongolia,Mongolia,09/06/2003,9,0
+New Zealand,New Zealand,09/06/2003,1,0
+Philippines,Philippines,09/06/2003,12,2
+Republic of Ireland,Republic of Ireland,09/06/2003,1,0
+Republic of Korea,Republic of Korea,09/06/2003,3,0
+Romania,Romania,09/06/2003,1,0
+Russian Federation,Russian Federation,09/06/2003,1,0
+Singapore,Singapore,09/06/2003,206,31
+South Africa,South Africa,09/06/2003,1,1
+Spain,Spain,09/06/2003,1,0
+Sweden,Sweden,09/06/2003,3,0
+Switzerland,Switzerland,09/06/2003,1,0
+Thailand,Thailand,09/06/2003,9,2
+UK,UK,09/06/2003,4,0
+USA,USA,09/06/2003,68,0
+Vietnam,Vietnam,09/06/2003,63,5
+Australia,Australia,16/06/2003,5,0
+Brazil,Brazil,16/06/2003,3,0
+Canada,Canada,16/06/2003,243,32
+Mainland China,China,16/06/2003,5326,346
+Hong Kong,China,16/06/2003,1755,295
+Macao,China,16/06/2003,1,0
+Taiwan,China,16/06/2003,698,83
+Colombia,Colombia,16/06/2003,1,0
+Finland,Finland,16/06/2003,1,0
+France,France,16/06/2003,7,0
+Germany,Germany,16/06/2003,10,0
+India,India,16/06/2003,3,0
+Indonesia,Indonesia,16/06/2003,2,0
+Italy,Italy,16/06/2003,9,0
+Kuwait,Kuwait,16/06/2003,1,0
+Malaysia,Malaysia,16/06/2003,5,2
+Mongolia,Mongolia,16/06/2003,9,0
+New Zealand,New Zealand,16/06/2003,1,0
+Philippines,Philippines,16/06/2003,14,2
+Republic of Ireland,Republic of Ireland,16/06/2003,1,0
+Republic of Korea,Republic of Korea,16/06/2003,3,0
+Romania,Romania,16/06/2003,1,0
+Russian Federation,Russian Federation,16/06/2003,1,0
+Singapore,Singapore,16/06/2003,206,31
+South Africa,South Africa,16/06/2003,1,1
+Spain,Spain,16/06/2003,1,0
+Sweden,Sweden,16/06/2003,3,0
+Switzerland,Switzerland,16/06/2003,1,0
+Thailand,Thailand,16/06/2003,9,2
+UK,UK,16/06/2003,4,0
+USA,USA,16/06/2003,72,0
+Vietnam,Vietnam,16/06/2003,63,5
+Australia,Australia,31/07/2003,6,0
+Canada,Canada,31/07/2003,251,43
+Mainland China,China,31/07/2003,5327,349
+Hong Kong,China,31/07/2003,1755,299
+Macao,China,31/07/2003,1,0
+Taiwan,China,31/07/2003,346,37
+France,France,31/07/2003,7,1
+Germany,Germany,31/07/2003,9,0
+India,India,31/07/2003,3,0
+Indonesia,Indonesia,31/07/2003,2,0
+Italy,Italy,31/07/2003,4,0
+Kuwait,Kuwait,31/07/2003,1,0
+Malaysia,Malaysia,31/07/2003,5,2
+Mongolia,Mongolia,31/07/2003,9,0
+New Zealand,New Zealand,31/07/2003,1,0
+Philippines,Philippines,31/07/2003,14,2
+Republic of Ireland,Republic of Ireland,31/07/2003,1,0
+Republic of Korea,Republic of Korea,31/07/2003,3,0
+Romania,Romania,31/07/2003,1,0
+Russian Federation,Russian Federation,31/07/2003,1,0
+Singapore,Singapore,31/07/2003,238,33
+South Africa,South Africa,31/07/2003,1,1
+Spain,Spain,31/07/2003,1,0
+Sweden,Sweden,31/07/2003,5,0
+Switzerland,Switzerland,31/07/2003,1,0
+Thailand,Thailand,31/07/2003,9,2
+UK,UK,31/07/2003,4,0
+USA,USA,31/07/2003,27,0
+Vietnam,Vietnam,31/07/2003,63,5

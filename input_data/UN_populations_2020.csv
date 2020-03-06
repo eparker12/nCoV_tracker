@@ -1,0 +1,236 @@
+﻿country,numeric,population
+China,156,1439324000
+India,356,1380004000
+United States of America,840,331003000
+Indonesia,360,273524000
+Pakistan,586,220892000
+Brazil,76,212559000
+Nigeria,566,206140000
+Bangladesh,50,164689000
+Russian Federation,643,145934000
+Mexico,484,128933000
+Japan,392,126476000
+Ethiopia,231,114964000
+Philippines,608,109581000
+Egypt,818,102334000
+Viet Nam,704,97339000
+Democratic Republic of the Congo,180,89561000
+Turkey,792,84339000
+Iran (Islamic Republic of),364,83993000
+Germany,276,83784000
+Thailand,764,69800000
+United Kingdom,826,67886000
+France,250,65274000
+Italy,380,60462000
+United Republic of Tanzania,834,59734000
+South Africa,710,59309000
+Myanmar,104,54410000
+Kenya,404,53771000
+Republic of Korea,410,51269000
+Colombia,170,50883000
+Spain,724,46755000
+Uganda,800,45741000
+Argentina,32,45196000
+Algeria,12,43851000
+Sudan,729,43849000
+Ukraine,804,43734000
+Iraq,368,40223000
+Afghanistan,4,38928000
+Poland,616,37847000
+Canada,124,37742000
+Morocco,504,36911000
+Saudi Arabia,682,34814000
+Uzbekistan,860,33469000
+Peru,604,32972000
+Angola,24,32866000
+Malaysia,458,32366000
+Mozambique,508,31255000
+Ghana,288,31073000
+Yemen,887,29826000
+Nepal,524,29137000
+Venezuela (Bolivarian Republic of),862,28436000
+Madagascar,450,27691000
+Cameroon,120,26546000
+Côte d'Ivoire,384,26378000
+Dem. People's Republic of Korea,408,25779000
+Australia,36,25500000
+Niger,562,24207000
+"China, Taiwan Province of China",158,23817000
+Sri Lanka,144,21413000
+Burkina Faso,854,20903000
+Mali,466,20251000
+Romania,642,19238000
+Malawi,454,19130000
+Chile,152,19116000
+Kazakhstan,398,18777000
+Zambia,894,18384000
+Guatemala,320,17916000
+Ecuador,218,17643000
+Syrian Arab Republic,760,17501000
+Netherlands,528,17135000
+Senegal,686,16744000
+Cambodia,116,16719000
+Chad,148,16426000
+Somalia,706,15893000
+Zimbabwe,716,14863000
+Guinea,324,13133000
+Rwanda,646,12952000
+Benin,204,12123000
+Burundi,108,11891000
+Tunisia,788,11819000
+Bolivia (Plurinational State of),68,11673000
+Belgium,56,11590000
+Haiti,332,11403000
+Cuba,192,11327000
+South Sudan,728,11194000
+Dominican Republic,214,10848000
+Czechia,203,10709000
+Greece,300,10423000
+Jordan,400,10203000
+Portugal,620,10197000
+Azerbaijan,31,10139000
+Sweden,752,10099000
+Honduras,340,9905000
+United Arab Emirates,784,9890000
+Hungary,348,9660000
+Tajikistan,762,9538000
+Belarus,112,9449000
+Austria,40,9006000
+Papua New Guinea,598,8947000
+Serbia,688,8737000
+Israel,376,8656000
+Switzerland,756,8655000
+Togo,768,8279000
+Sierra Leone,694,7977000
+"China, Hong Kong SAR",344,7497000
+Lao People's Democratic Republic,418,7276000
+Paraguay,600,7133000
+Bulgaria,100,6948000
+Libya,434,6871000
+Lebanon,422,6825000
+Nicaragua,558,6625000
+Kyrgyzstan,417,6524000
+El Salvador,222,6486000
+Turkmenistan,795,6031000
+Singapore,702,5850000
+Denmark,208,5792000
+Finland,246,5541000
+Congo,178,5518000
+Slovakia,703,5460000
+Norway,578,5421000
+Oman,512,5107000
+State of Palestine,275,5101000
+Costa Rica,188,5094000
+Liberia,430,5058000
+Ireland,372,4938000
+Central African Republic,140,4830000
+New Zealand,554,4822000
+Mauritania,478,4650000
+Panama,591,4315000
+Kuwait,414,4271000
+Croatia,191,4105000
+Republic of Moldova,498,4034000
+Georgia,268,3989000
+Eritrea,232,3546000
+Uruguay,858,3474000
+Bosnia and Herzegovina,70,3281000
+Mongolia,496,3278000
+Armenia,51,2963000
+Jamaica,388,2961000
+Qatar,634,2881000
+Albania,8,2878000
+Puerto Rico,630,2861000
+Lithuania,440,2722000
+Namibia,516,2541000
+Gambia,270,2417000
+Botswana,72,2352000
+Gabon,266,2226000
+Lesotho,426,2142000
+North Macedonia,807,2083000
+Slovenia,705,2079000
+Guinea-Bissau,624,1968000
+Latvia,428,1886000
+Bahrain,48,1702000
+Equatorial Guinea,226,1403000
+Trinidad and Tobago,780,1399000
+Estonia,233,1327000
+Timor-Leste,626,1318000
+Mauritius,480,1272000
+Cyprus,196,1207000
+Eswatini,748,1160000
+Djibouti,262,988000
+Fiji,242,896000
+Réunion,638,895000
+Comoros,174,870000
+Guyana,328,787000
+Bhutan,64,772000
+Solomon Islands,90,687000
+"China, Macao SAR",446,649000
+Montenegro,499,628000
+Luxembourg,442,626000
+Western Sahara,732,597000
+Suriname,740,587000
+Cabo Verde,132,556000
+Maldives,462,541000
+Malta,470,442000
+Brunei Darussalam,96,437000
+Guadeloupe,312,400000
+Belize,84,398000
+Bahamas,44,393000
+Martinique,474,375000
+Iceland,352,341000
+Vanuatu,548,307000
+French Guiana,254,299000
+Barbados,52,287000
+New Caledonia,540,285000
+French Polynesia,258,281000
+Mayotte,175,273000
+Sao Tome and Principe,678,219000
+Samoa,882,198000
+Saint Lucia,662,184000
+Channel Islands,830,174000
+Guam,316,169000
+Curaçao,531,164000
+Kiribati,296,119000
+Micronesia (Fed. States of),583,115000
+Grenada,308,113000
+Saint Vincent and the Grenadines,670,111000
+Aruba,533,107000
+Tonga,776,106000
+United States Virgin Islands,850,104000
+Seychelles,690,98000
+Antigua and Barbuda,28,98000
+Isle of Man,833,85000
+Andorra,20,77000
+Dominica,212,72000
+Cayman Islands,136,66000
+Bermuda,60,62000
+Marshall Islands,584,59000
+Northern Mariana Islands,580,58000
+Greenland,304,57000
+American Samoa,16,55000
+Saint Kitts and Nevis,659,53000
+Faroe Islands,234,49000
+Sint Maarten (Dutch part),534,43000
+Saint Martin (French part),663,39000
+Turks and Caicos Islands,796,39000
+Monaco,492,39000
+Liechtenstein,438,38000
+Gibraltar,292,34000
+San Marino,674,34000
+British Virgin Islands,92,30000
+"Bonaire, Sint Eustatius and Saba",535,26000
+Palau,585,18000
+Cook Islands,184,18000
+Anguilla,660,15000
+Tuvalu,798,12000
+Nauru,520,11000
+Wallis and Futuna Islands,876,11000
+Saint Barthélemy,652,10000
+Saint Helena,654,6000
+Saint Pierre and Miquelon,666,6000
+Montserrat,500,5000
+Falkland Islands (Malvinas),238,3000
+Niue,570,2000
+Tokelau,772,1000
+Holy See,336,1000
