@@ -17,7 +17,7 @@ write.csv(WHO_cases, "input_data/who_data.csv")
 china_region_deaths = as.data.frame(data.table::fread("input_data/china_region_deaths.csv"),row.names = 1) # use when testing script offline
 if (all(china_region_deaths$SituationReport == WHO_cases$SituationReport)) {
   WHO_cases = cbind(WHO_cases, china_region_deaths[,c("China-Taipei-deaths","China-HongKongSAR-deaths","China-Macao-deaths")])
-}
+} else { stop("Error: data incomplete for Hong Kong, Macao, and Taiwan") }
 
 # load exsiting dataset
 cv_cases = read.csv("input_data/coronavirus.csv", check.names = F, encoding = "UTF-8", stringsAsFactors = F)
@@ -54,7 +54,7 @@ if (length(new_report)!=0) {
     
     # stop script if there is country in the WHO database without mapping reference data
     if (all(colnames(new_WHO_cases) %in% countries$WHO_ID)==FALSE) {
-      stop("Error: one or more countries lack mapping data")
+      stop(paste0("Error: mapping data lacking for the following countries: ",colnames(new_WHO_cases)[colnames(new_WHO_cases) %in% countries$WHO_ID==FALSE]))
     }
     
     # loop to update cases
@@ -116,6 +116,10 @@ if (length(new_report)!=0) {
     # recalculate mainland China new_cases and new_deaths based on updated values
     new_data$new_cases[which(new_data$country == "Mainland China")] = new_data$cases[which(new_data$country == "Mainland China")] - old_data$cases[which(old_data$country == "Mainland China")]
     new_data$new_deaths[which(new_data$country == "Mainland China")] = new_data$deaths[which(new_data$country == "Mainland China")] - old_data$deaths[which(old_data$country == "Mainland China")]
+    
+    # allow for repatriation or reassigned cases without negative new_cases and new_deaths counts
+    new_data$new_cases[new_data$new_cases<0] = 0
+    new_data$new_deaths[new_data$new_deaths<0] = 0
     
     # merge new data with existing one
     cv_cases = rbind(cv_cases, new_data)

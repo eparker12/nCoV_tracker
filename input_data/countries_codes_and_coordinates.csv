@@ -205,7 +205,7 @@
 205,Kyrgyzstan,KG,KGZ,417,41,75,0.9,6524000,Kyrgyzstan,NA
 206,Uzbekistan,UZ,UZB,860,41,64,0.9,33469000,Uzbekistan,NA
 207,North Macedonia,MK,MKD,807,41.8333,22,0.9,2083000,NorthMacedonia,NA
-208,Holy See (Vatican City State),VA,VAT,336,41.9,12.45,0.9,1000,HolySee(VaticanCityState),NA
+208,Holy See (Vatican City),VA,VAT,336,41.9,12.45,0.9,1000,HolySee,NA
 209,Georgia,GE,GEO,268,42,43.5,0.9,3989000,Georgia,NA
 210,Montenegro,ME,MNE,499,42,19,0.9,628000,Montenegro,NA
 211,Andorra,AD,AND,20,42.5,1.6,0.9,77000,Andorra,NA
@@ -222,7 +222,7 @@
 222,Slovenia,SI,SVN,705,46,15,0.9,2079000,Slovenia,NA
 223,Saint Pierre and Miquelon,PM,SPM,666,46.8333,-56.3333,0.9,6000,SaintPierreandMiquelon,NA
 224,Hungary,HU,HUN,348,47,20,0.9,9660000,Hungary,NA
-225,"Moldova, Republic of",MD,MDA,498,47,29,0.9,4034000,"Moldova,Republicof",NA
+225,"Moldova, Republic of",MD,MDA,498,47,29,0.9,4034000,RepublicofMoldova,NA
 226,Switzerland,CH,CHE,756,47,8,0.9,8655000,Switzerland,NA
 227,Liechtenstein,LI,LIE,438,47.1667,9.5333,0.9,38000,Liechtenstein,NA
 228,Austria,AT,AUT,40,47.3333,13.3333,0.9,9006000,Austria,NA
