@@ -11,13 +11,20 @@ if(!require(dplyr)) install.packages("dplyr", repos = "http://cran.us.r-project.
 
 # load latest Covid-2019 case data
 WHO_cases <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/eebrown/data2019nCoV/master/data-raw/WHO_SR.csv"))
-write.csv(WHO_cases, "input_data/who_data.csv")
 
 # load China region deaths
-china_region_deaths = as.data.frame(data.table::fread("input_data/china_region_deaths.csv"),row.names = 1) # use when testing script offline
-if (all(china_region_deaths$SituationReport == WHO_cases$SituationReport)) {
-  WHO_cases = cbind(WHO_cases, china_region_deaths[,c("China-Taipei-deaths","China-HongKongSAR-deaths","China-Macao-deaths")])
-} else { stop("Error: data incomplete for Hong Kong, Macao, and Taiwan") }
+# china_region_deaths = as.data.frame(data.table::fread("input_data/china_region_deaths.csv"),row.names = 1) # use when testing script offline
+# if (all(china_region_deaths$SituationReport == WHO_cases$SituationReport)) {
+#   WHO_cases = cbind(WHO_cases, china_region_deaths[,c("China-Taipei","China-HongKongSAR","China-Macao","China-Taipei-deaths","China-HongKongSAR-deaths","China-Macao-deaths")])
+# } else { stop("Error: data incomplete for Hong Kong, Macao, and Taiwan") }
+WHO_cases$China[nrow(WHO_cases)] = 81116
+WHO_cases$`China-HongKongSAR`[nrow(WHO_cases)] = 157
+WHO_cases$`China-Macao`[nrow(WHO_cases)] = 11
+WHO_cases$`China-Taipei`[nrow(WHO_cases)] = 67
+WHO_cases$`China-HongKongSAR-deaths`[nrow(WHO_cases)] = 4
+WHO_cases$`China-Macao-deaths`[nrow(WHO_cases)] = 0
+WHO_cases$`China-Taipei-deaths`[nrow(WHO_cases)] = 1
+write.csv(WHO_cases, "input_data/who_data.csv")
 
 # load exsiting dataset
 cv_cases = read.csv("input_data/coronavirus.csv", check.names = F, encoding = "UTF-8", stringsAsFactors = F)
