@@ -354,8 +354,8 @@ ui <- navbarPage(theme = shinytheme("flatly"), collapsible = TRUE,
                                             span(h4(textOutput("reactive_recovered_count"), align = "right"), style="color:#006d2c"),
                                             span(h4(textOutput("reactive_active_count"), align = "right"), style="color:#cc4c02"),
                                             h6(textOutput("clean_date_reactive"), align = "right"),
-                                            tags$i(h6("Updated once daily. For more regular updates, refer to: ", tags$a(href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6", "Johns Hopkins COVID-19 dashboard"))),
                                             h6(textOutput("reactive_country_count"), align = "right"),
+                                            tags$i(h6("Updated once daily. For more regular updates, refer to: ", tags$a(href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6", "Johns Hopkins COVID-19 dashboard"))),
                                             plotOutput("epi_curve", height="130px", width="100%"),
                                             plotOutput("cumulative_plot", height="130px", width="100%"),
                                             span(h6(textOutput("reactive_case_count_China"), align = "right"), style="color:#cc4c02"),
@@ -389,7 +389,7 @@ ui <- navbarPage(theme = shinytheme("flatly"), collapsible = TRUE,
                             sidebarPanel(
                               
                               pickerInput("outcome_select", "Outcome:",   
-                                          choices = c("Cases", "Deaths"), 
+                                          choices = c("Cases", "Deaths", "Recovered"), 
                                           selected = c("Cases"),
                                           multiple = FALSE),
                               
@@ -447,7 +447,7 @@ ui <- navbarPage(theme = shinytheme("flatly"), collapsible = TRUE,
                           )
                  ),
                  
-                 tabPanel("Summary",
+                 tabPanel("Outbreak comparisons",
                           
                           sidebarLayout(
                             sidebarPanel(
@@ -468,10 +468,11 @@ ui <- navbarPage(theme = shinytheme("flatly"), collapsible = TRUE,
                  tabPanel("About this site",
                           tags$div(
                             tags$h4("Last updated"), 
-                            paste0(update),tags$br(),
-                            "This site is updated once daily. At this time of rapid escalation of the COVID-19 outbreak, the following resources offer the latest case numbers:",tags$br(),
+                            h6(paste0(update)),
+                            "This site is updated once daily. At this time of rapid escalation of the COVID-19 outbreak, the following resources are updated more regularly with the latest case numbers:",tags$br(),
                             tags$a(href="https://experience.arcgis.com/experience/685d0ace521648f8a5beeeee1b9125cd", "WHO COVID-19 dashboard"),tags$br(),
                             tags$a(href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6", "Johns Hopkins University COVID-19 dashboard"),tags$br(),
+                            "The aim of this site is to provide several interactive features not currently available elsewhere, including the timeline function, the ability to overlay past outbreaks, and the flexible country-specific plots.",tags$br(),
                             tags$h4("Background"), 
                             "In December 2019, cases of severe respiratory illness began to be reported across the city of Wuhan in China. 
                             These were caused by a new type of coronavirus, now commonly referred to as COVID-19.
@@ -488,8 +489,7 @@ ui <- navbarPage(theme = shinytheme("flatly"), collapsible = TRUE,
                             tags$h4("Code"),
                             "Code and input data used to generate this Shiny mapping tool are available on ",tags$a(href="https://github.com/eparker12/nCoV_tracker", "Github."),
                             tags$h4("Sources"),
-                            tags$b("2019-Covid cases: "), tags$a(href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series", "Johns Hopkins Center for Systems Science and Engineering github page,")," with additional information from the ",tags$a(href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/situation-reports", "WHO COVID-19 situation reports"),
-                            " Data are accessed from a ",tags$a(href="https://github.com/eebrown/data2019nCoV", "Github repository")," that is updated daily.",tags$br(),
+                            tags$b("2019-Covid cases: "), tags$a(href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series", "Johns Hopkins Center for Systems Science and Engineering github page,")," with additional information from the ",tags$a(href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/situation-reports", "WHO COVID-19 situation reports"),tags$br(),
                             tags$b("2003-SARS cases: "), tags$a(href="https://www.who.int/csr/sars/country/en/", "WHO situation reports"),tags$br(),
                             tags$b("2009-H1N1 confirmed deaths: "), tags$a(href="https://www.who.int/csr/disease/swineflu/updates/en/", "WHO situation reports"),tags$br(),
                             tags$b("2009-H1N1 projected deaths: "), "Model estimates from ", tags$a(href="https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1001558", "GLaMOR Project"),tags$br(),
@@ -766,6 +766,10 @@ server = function(input, output) {
       cv_cases$outcome = cv_cases$deaths 
       cv_cases$new_outcome = cv_cases$new_deaths 
     }
+    if (input$outcome_select=="Recovered") { 
+      cv_cases$outcome = cv_cases$recovered 
+      cv_cases$new_outcome = cv_cases$new_recovered
+    }
     cv_cases %>% filter(country %in% input$country_select)
   })
   
@@ -786,7 +790,7 @@ server = function(input, output) {
   
 }
 
-runApp(shinyApp(ui, server), launch.browser = TRUE)
-#shinyApp(ui, server)
+#runApp(shinyApp(ui, server), launch.browser = TRUE)
+shinyApp(ui, server)
 #library(rsconnect)
 #deployApp(account="vac-lshtm")
