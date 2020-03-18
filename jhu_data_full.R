@@ -39,14 +39,17 @@ update_jhu = function(input_df, tag) {
 
 # load latest Covid-2019 data: confirmed cases
 jhu_cases <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"))
+jhu_cases[is.na(jhu_cases)]=0
 jhu_cases = update_jhu(jhu_cases, "cases")
 
 # load latest Covid-2019 data: deaths
 jhu_deaths <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv"))
+jhu_deaths[is.na(jhu_deaths)]=0
 jhu_deaths = update_jhu(jhu_deaths, "deaths")
 
 # load latest Covid-2019 data: recovered
 jhu_rec <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv"))
+jhu_rec[is.na(jhu_rec)]=0
 jhu_rec = update_jhu(jhu_rec, "recovered")
 
 # merge dataframes 
