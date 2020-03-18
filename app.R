@@ -123,10 +123,10 @@ basemap = leaflet(plot_map) %>%
     options = layersControlOptions(collapsed = FALSE)) %>% 
   hideGroup(c("2019-COVID (new)", "2019-COVID (cumulative)", "2003-SARS", "2009-H1N1 (swine flu)", "2014-Ebola"))  %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
-  fitBounds(~-100,-50,~80,80) %>%
+  #fitBounds(~-100,-50,~80,80) %>%
   addLegend("bottomright", pal = cv_pal, values = ~cv_large_countries$per100k,
-            title = "<small>Active cases per 100,000</small>")
-  # fitBounds(0,-25,90,65) # alternative coordinates for closer zoom
+            title = "<small>Active cases per 100,000</small>") %>%
+  fitBounds(0,-25,90,65) # alternative coordinates for closer zoom
 
 # select polygons for sars base map
 sars_large_countries = sars_final %>% filter(country %in% country_geoms$countries_present)
@@ -751,7 +751,7 @@ server = function(input, output) {
   # add footnote for cases
   output$epi_notes_1 <- renderText({
     if(input$comparison_metric=="cases") { paste0("Note that the axis is on a log10 scale so moves in 10-fold increments.
-                                                  The 60.8 million estimated cases of H1N1 dwarf all other outbreaks of plotted on a standard scale.") }
+                                                  The 60.8 million estimated cases of H1N1 dwarf all other outbreaks of plotted on a standard linear scale.") }
   })
   
   # add footnote for deaths
