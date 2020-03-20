@@ -66,6 +66,19 @@ cv_cases$per100k = as.numeric(format(round(cv_cases$cases/(cv_cases$population/1
 cv_cases$newper100k = as.numeric(format(round(cv_cases$new_cases/(cv_cases$population/100000),1),nsmall=1))
 cv_cases$activeper100k = as.numeric(format(round(cv_cases$active_cases/(cv_cases$population/100000),1),nsmall=1))
 cv_cases$million_pop = as.numeric(cv_cases$population>1e6)
+
+# add variable for days since 100th case and 1st death
+cv_cases$days_since_case100 = cv_cases$days_since_death1 = 0
+for (i in 1:length(unique(cv_cases$country))) {
+  country_name = as.character(unique(cv_cases$country))[i]
+  country_db = subset(cv_cases, country==country_name)
+  country_db$days_since_case100[country_db$cases>=100] = 1:sum(country_db$cases>=100)
+  country_db$days_since_death1[country_db$deaths>=1] = 1:sum(country_db$deaths>=1)
+  cv_cases$days_since_case100[cv_cases$country==country_name] = country_db$days_since_case100
+  cv_cases$days_since_death1[cv_cases$country==country_name] = country_db$days_since_death1
+}
+
+# creat variable for today's data
 cv_today = subset(cv_cases, date==current_date) 
 current_case_count = sum(cv_today$cases)
 current_case_count_China = sum(cv_today$cases[cv_today$country=="Mainland China"])
@@ -75,7 +88,8 @@ current_death_count = sum(cv_today$deaths)
 # write current day's data
 write.csv(cv_today %>% select(c(country, date, update, cases, new_cases, deaths, new_deaths,
                                 recovered, new_recovered, active_cases, 
-                                per100k, newper100k, activeper100k)), "input_data/coronavirus_today.csv")
+                                per100k, newper100k, activeper100k,
+                                days_since_case100, days_since_death1)), "input_data/coronavirus_today.csv")
 
 ### plot of cases per 100k
 # cv_sub = read.csv("input_data/coronavirus_per100k.csv")
@@ -160,9 +174,9 @@ sars_basemap = leaflet(sars_plot_map) %>%
                style = list("font-weight" = "normal", padding = "3px 8px", "color" = sars_col),
                textsize = "15px", direction = "auto")) %>%
   
-  addCircles(data = cv_today, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(cases)^(1/4)*3.5e4*penalty,
+  addCircles(data = cv_today, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(cases)^(1/4)*2.5e4*penalty,
              fillOpacity = 0.2, color = covid_col, group = "2019-COVID",
-             label = sprintf("<strong>%s (cumulative cases)</strong><br/>Confirmed COVID cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g", cv_today$country, cv_today$cases, cv_today$deaths, cv_today$recovered, cv_today$per100k) %>% lapply(htmltools::HTML),
+             label = sprintf("<strong>%s (cumulative)</strong><br/>Confirmed cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g", cv_today$country, cv_today$cases, cv_today$deaths, cv_today$recovered, cv_today$per100k) %>% lapply(htmltools::HTML),
              labelOptions = labelOptions(
                style = list("font-weight" = "normal", padding = "3px 8px", "color" = covid_col),
                textsize = "15px", direction = "auto"))  %>%
@@ -608,21 +622,21 @@ server = function(input, output) {
       
       addCircles(data = reactive_db_last24h(), lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(new_cases)^(1/4)*2.5e4*penalty, 
                  fillOpacity = 0.1, color = covid_col, group = "2019-COVID (new)",
-                 label = sprintf("<strong>%s (cases in past 24h)</strong><br/>Confirmed COVID cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g", reactive_db_last24h()$country, reactive_db_last24h()$new_cases, reactive_db_last24h()$new_deaths, reactive_db_last24h()$new_recovered, reactive_db_last24h()$newper100k) %>% lapply(htmltools::HTML),
+                 label = sprintf("<strong>%s (past 24h)</strong><br/>Confirmed cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g", reactive_db_last24h()$country, reactive_db_last24h()$new_cases, reactive_db_last24h()$new_deaths, reactive_db_last24h()$new_recovered, reactive_db_last24h()$newper100k) %>% lapply(htmltools::HTML),
                  labelOptions = labelOptions(
                    style = list("font-weight" = "normal", padding = "3px 8px", "color" = covid_col),
                    textsize = "15px", direction = "auto")) %>%
       
       addCircles(data = reactive_db(), lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(cases)^(1/4)*2.5e4*penalty, 
                  fillOpacity = 0.1, color = covid_col, group = "2019-COVID (cumulative)",
-                 label = sprintf("<strong>%s (cumulative cases)</strong><br/>Confirmed COVID cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g", reactive_db()$country, reactive_db()$cases, reactive_db()$deaths,reactive_db()$recovered, reactive_db()$per100k) %>% lapply(htmltools::HTML),
+                 label = sprintf("<strong>%s (cumulative)</strong><br/>Confirmed cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g", reactive_db()$country, reactive_db()$cases, reactive_db()$deaths,reactive_db()$recovered, reactive_db()$per100k) %>% lapply(htmltools::HTML),
                  labelOptions = labelOptions(
                    style = list("font-weight" = "normal", padding = "3px 8px", "color" = covid_col),
                    textsize = "15px", direction = "auto")) %>%
 
       addCircles(data = reactive_db(), lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(active_cases)^(1/4)*2.5e4*penalty, 
                  fillOpacity = 0.1, color = covid_col, group = "2019-COVID (active)",
-                 label = sprintf("<strong>%s (active cases)</strong><br/>Confirmed COVID cases: %g<br/>Cases per 100,000: %g<br/><i><small>Excludes individuals known to have<br/>recovered (%g) or died (%g).</small></i>", reactive_db()$country, reactive_db()$active_cases, reactive_db()$activeper100k, reactive_db()$recovered, reactive_db()$deaths) %>% lapply(htmltools::HTML),
+                 label = sprintf("<strong>%s (active)</strong><br/>Confirmed cases: %g<br/>Cases per 100,000: %g<br/><i><small>Excludes individuals known to have<br/>recovered (%g) or died (%g).</small></i>", reactive_db()$country, reactive_db()$active_cases, reactive_db()$activeper100k, reactive_db()$recovered, reactive_db()$deaths) %>% lapply(htmltools::HTML),
                  labelOptions = labelOptions(
                    style = list("font-weight" = "normal", padding = "3px 8px", "color" = covid_col),
                    textsize = "15px", direction = "auto"))  %>%
@@ -715,7 +729,7 @@ server = function(input, output) {
       
       addCircles(data = cv_today, lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(cases)^(1/4)*2.5e4*penalty,
                  fillOpacity = 0.1, color = covid_col, group = "2019-COVID",
-                 label = sprintf("<strong>%s (cumulative)</strong><br/>Confirmed COVID cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g", cv_today$country, cv_today$cases, cv_today$deaths, cv_today$recovered, cv_today$per100k) %>% lapply(htmltools::HTML),
+                 label = sprintf("<strong>%s (cumulative)</strong><br/>Confirmed cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g", cv_today$country, cv_today$cases, cv_today$deaths, cv_today$recovered, cv_today$per100k) %>% lapply(htmltools::HTML),
                  labelOptions = labelOptions(
                    style = list("font-weight" = "normal", padding = "3px 8px", "color" = covid_col),
                    textsize = "15px", direction = "auto"))  %>%
