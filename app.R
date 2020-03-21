@@ -85,6 +85,9 @@ current_case_count_China = sum(cv_today$cases[cv_today$country=="Mainland China"
 current_case_count_other = sum(cv_today$cases[cv_today$country!="Mainland China"])
 current_death_count = sum(cv_today$deaths)
 
+# create subset for countries with at least 100 cases
+cv_today_100 = subset(cv_today, cases>=100)
+
 # write current day's data
 write.csv(cv_today %>% select(c(country, date, update, cases, new_cases, deaths, new_deaths,
                                 recovered, new_recovered, active_cases, 
@@ -124,7 +127,7 @@ if (all(cv_large_countries$alpha3 %in% worldcountry$id)==FALSE) { print("Error: 
 cv_large_countries = cv_large_countries[order(cv_large_countries$alpha3),]
 
 # create plotting parameters for map
-bins = c(0,1,10,20,50,100)
+bins = c(0,1,10,50,100,500)
 cv_pal <- colorBin("Oranges", domain = cv_large_countries$per100k, bins = bins)
 plot_map <- worldcountry[worldcountry$id %in% cv_large_countries$alpha3, ]
 
@@ -137,10 +140,10 @@ basemap = leaflet(plot_map) %>%
     options = layersControlOptions(collapsed = FALSE)) %>% 
   hideGroup(c("2019-COVID (new)", "2019-COVID (cumulative)", "2003-SARS", "2009-H1N1 (swine flu)", "2014-Ebola"))  %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
-  #fitBounds(~-100,-50,~80,80) %>%
+  fitBounds(~-100,-50,~80,80) %>%
   addLegend("bottomright", pal = cv_pal, values = ~cv_large_countries$per100k,
-            title = "<small>Active cases per 100,000</small>") %>%
-  fitBounds(0,-25,90,65) # alternative coordinates for closer zoom
+            title = "<small>Active cases per 100,000</small>") #%>%
+  #fitBounds(0,-25,90,65) # alternative coordinates for closer zoom
 
 # select polygons for sars base map
 sars_large_countries = sars_final %>% filter(country %in% country_geoms$countries_present)
@@ -411,11 +414,11 @@ ui <- navbarPage(theme = shinytheme("flatly"), collapsible = TRUE,
                                           multiple = FALSE),
                               
                               pickerInput("country_select", "Country:",   
-                                          choices = as.character(cv_today[order(-cv_today$cases),]$country), 
+                                          choices = as.character(cv_today_100[order(-cv_today_100$cases),]$country), 
                                           options = list(`actions-box` = TRUE),
-                                          selected = cv_today$country,
+                                          selected = cv_today_100$country,
                                           multiple = TRUE), 
-                              "Select outcome and countries from drop-down menues to update plots."
+                              "Select outcome and countries from drop-down menues to update plots. Countries with at least 100 confirmed cases are included."
                             ),
                             
                             mainPanel(
@@ -572,29 +575,29 @@ server = function(input, output) {
   })
   
   output$reactive_case_count <- renderText({
-    paste0(formatC(sum(reactive_db()$cases), big.mark=","), " cases")
+    paste0(prettyNum(sum(reactive_db()$cases), big.mark=","), " cases")
   })
   
   output$reactive_death_count <- renderText({
-    paste0(formatC(sum(reactive_db()$death), big.mark=","), " deaths")
+    paste0(prettyNum(sum(reactive_db()$death), big.mark=","), " deaths")
   })
   
   output$reactive_recovered_count <- renderText({
-    paste0(formatC(sum(reactive_db()$recovered), big.mark=","), " recovered")
+    paste0(prettyNum(sum(reactive_db()$recovered), big.mark=","), " recovered")
   })
   
   output$reactive_active_count <- renderText({
-    paste0(formatC(sum(reactive_db()$active_cases), big.mark=","), " active cases")
+    paste0(prettyNum(sum(reactive_db()$active_cases), big.mark=","), " active cases")
   })
   
   output$reactive_case_count_China <- renderText({
-    paste0("Mainland China: ", formatC(sum(subset(reactive_db(), country=="Mainland China")$cases), big.mark=",")," (",
-           formatC((cv_aggregated %>% filter(date == input$plot_date & region=="Mainland China"))$new, big.mark=",")," new)")
+    paste0("Mainland China: ", prettyNum(sum(subset(reactive_db(), country=="Mainland China")$cases), big.mark=",")," (",
+           prettyNum((cv_aggregated %>% filter(date == input$plot_date & region=="Mainland China"))$new, big.mark=",")," new)")
   })
   
   output$reactive_case_count_row <- renderText({
-    paste0("Other: ", formatC(sum(subset(reactive_db(), country!="Mainland China")$cases), big.mark=",")," (",
-           formatC((cv_aggregated %>% filter(date == input$plot_date & region=="Other"))$new, big.mark=",")," new)")
+    paste0("Other: ", prettyNum(sum(subset(reactive_db(), country!="Mainland China")$cases), big.mark=",")," (",
+           prettyNum((cv_aggregated %>% filter(date == input$plot_date & region=="Other"))$new, big.mark=",")," new)")
   })
   
   output$reactive_country_count <- renderText({
