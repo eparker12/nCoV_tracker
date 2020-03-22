@@ -46,7 +46,7 @@
 45,Brazil,BR,BRA,76,-10,-55,1.3,212559000,Brazil,NA
 46,Peru,PE,PER,604,-10,-76,1.3,32972000,Peru,NA
 47,Tokelau,TK,TKL,772,-9,-172,1.3,1000,Tokelau,NA
-48,Timor-Leste,TL,TLS,626,-8.55,125.5167,1.3,1318000,Timor-Leste,NA
+48,Timor-Leste,TL,TLS,626,-8.55,125.5167,1.3,1318000,EastTimor,NA
 49,Solomon Islands,SB,SLB,90,-8,159,1.3,687000,SolomonIslands,NA
 50,Tuvalu,TV,TUV,798,-8,178,1.3,12000,Tuvalu,NA
 51,British Indian Ocean Territory,IO,IOT,86,-6,71.5,1.3,NA,BritishIndianOceanTerritory,NA
@@ -126,7 +126,7 @@
 125,Northern Mariana Islands,MP,MNP,580,15.2,145.75,1.3,58000,NorthernMarianaIslands,NA
 126,Dominica,DM,DMA,212,15.4167,-61.3333,1.3,72000,Dominica,NA
 127,Guatemala,GT,GTM,320,15.5,-90.25,1.3,17916000,Guatemala,NA
-128,Cabo Verde,CV,CPV,132,16,-24,1.3,556000,CaboVerde,NA
+128,Cape Verde,CV,CPV,132,16,-24,1.3,556000,CapeVerde,NA
 129,Niger,NE,NER,562,16,8,1.3,24207000,Niger,NA
 130,Viet Nam,VN,VNM,704,16,106,1.3,97339000,VietNam,NA
 131,Vietnam,VN,VNM,704,16,106,1.3,97339000,Vietnam,NA

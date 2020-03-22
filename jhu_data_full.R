@@ -22,6 +22,7 @@ update_jhu = function(input_df, tag) {
   input_df$Country[input_df$Country=="Cruise Ship"] = "Diamond Princess Cruise Ship"
   input_df$Country[input_df$Country=="Gambia, The"] = "TheGambia"
   input_df$Country[input_df$Country=="Bahamas, The"] = "TheBahamas"
+  input_df$Country[input_df$Country=="Cabo Verde"] = "CapeVerde"
   input_df$Country = input_df$Country %>% str_replace_all(., " ", "") 
   dates = names(input_df)[which(names(input_df)=="1/22/20"):ncol(input_df)]
   input_df = input_df %>% 
@@ -43,6 +44,7 @@ update_jhu = function(input_df, tag) {
 jhu_cases <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"))
 total_cases <- sum(jhu_cases[,ncol(jhu_cases)])
 jhu_cases[is.na(jhu_cases)]=0
+#write.csv(jhu_cases, "input_data/jhu_cases_unformatted.csv")
 #write.csv(unique(jhu_cases$`Country/Region`) %>% str_replace_all(.,"_cases",""), "input_data/jhu_names.csv")
 jhu_cases = update_jhu(jhu_cases, "cases")
 if (total_cases!=sum(jhu_cases[nrow(jhu_cases),1:(ncol(jhu_cases)-1)])) { 
