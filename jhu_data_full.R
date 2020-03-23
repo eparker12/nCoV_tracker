@@ -23,6 +23,7 @@ update_jhu = function(input_df, tag) {
   input_df$Country[input_df$Country=="Gambia, The"] = "TheGambia"
   input_df$Country[input_df$Country=="Bahamas, The"] = "TheBahamas"
   input_df$Country[input_df$Country=="Cabo Verde"] = "CapeVerde"
+  input_df$Country[input_df$Country=="Timor-Leste"] = "TimorLeste"
   input_df$Country = input_df$Country %>% str_replace_all(., " ", "") 
   dates = names(input_df)[which(names(input_df)=="1/22/20"):ncol(input_df)]
   input_df = input_df %>% 
@@ -44,8 +45,8 @@ update_jhu = function(input_df, tag) {
 jhu_cases <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"))
 total_cases <- sum(jhu_cases[,ncol(jhu_cases)])
 jhu_cases[is.na(jhu_cases)]=0
+unique(jhu_cases$`Country/Region`)
 #write.csv(jhu_cases, "input_data/jhu_cases_unformatted.csv")
-#write.csv(unique(jhu_cases$`Country/Region`) %>% str_replace_all(.,"_cases",""), "input_data/jhu_names.csv")
 jhu_cases = update_jhu(jhu_cases, "cases")
 if (total_cases!=sum(jhu_cases[nrow(jhu_cases),1:(ncol(jhu_cases)-1)])) { 
   stop(paste0("Error: incorrect processing - total counts do not match"))
@@ -74,10 +75,11 @@ jhu_merge = merge(jhu_cases, jhu_deaths, by = "Date")
 jhu_merge = merge(jhu_merge, jhu_rec, by = "Date")
 jhu_merge$Date = as.Date(jhu_merge$Date, format="%Y-%m-%d")
 jhu_merge$update = 1:nrow(jhu_merge)
+# remove Timor Leste as this duplicates East Timor data
+jhu_merge = jhu_merge %>% select(-c(TimorLeste_cases, TimorLeste_deaths, TimorLeste_recovered))
 write.csv(jhu_merge, "input_data/jhu_data.csv")
 
 # load country data
-cv_cases = read.csv("input_data/coronavirus.csv")
 countries = read.csv("input_data/countries_codes_and_coordinates.csv")
 
 # check all jhu country names have corresponding country data
