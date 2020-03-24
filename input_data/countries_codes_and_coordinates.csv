@@ -46,7 +46,7 @@
 45,Brazil,BR,BRA,76,-10,-55,1.3,212559000,Brazil,NA
 46,Peru,PE,PER,604,-10,-76,1.3,32972000,Peru,NA
 47,Tokelau,TK,TKL,772,-9,-172,1.3,1000,Tokelau,NA
-48,Timor-Leste,TL,TLS,626,-8.55,125.5167,1.3,1318000,EastTimor,NA
+48,Timor-Leste,TL,TLS,626,-8.55,125.5167,1.3,1318000,TimorLeste,NA
 49,Solomon Islands,SB,SLB,90,-8,159,1.3,687000,SolomonIslands,NA
 50,Tuvalu,TV,TUV,798,-8,178,1.3,12000,Tuvalu,NA
 51,British Indian Ocean Territory,IO,IOT,86,-6,71.5,1.3,NA,BritishIndianOceanTerritory,NA
@@ -111,7 +111,7 @@
 110,Saint Vincent & the Grenadines,VC,VCT,670,13.25,-61.2,1.3,111000,SaintVincent&theGrenadines,NA
 111,Saint Vincent and the Grenadines,VC,VCT,670,13.25,-61.2,1.3,111000,SaintVincentandtheGrenadines,NA
 112,St. Vincent and the Grenadines,VC,VCT,670,13.25,-61.2,1.3,111000,St.VincentandtheGrenadines,NA
-113,The Gambia,GM,GMB,270,13.4667,-16.5667,1.3,2417000,TheGambia,NA
+113,The Gambia,GM,GMB,270,13.4667,-16.5667,1.3,2417000,Gambia,NA
 114,Guam,GU,GUM,316,13.4667,144.7833,1.3,169000,Guam,NA
 115,El Salvador,SV,SLV,222,13.8333,-88.9167,1.3,6486000,ElSalvador,NA
 116,Saint Lucia,LC,LCA,662,13.8833,-61.1333,1.3,184000,SaintLucia,NA
@@ -159,7 +159,7 @@
 158,Taiwan,TW,TWN,158,23.5,121,1.3,23817000,Taiwan,NA
 160,Bangladesh,BD,BGD,50,24,90,1.3,164689000,Bangladesh,NA
 161,United Arab Emirates,AE,ARE,784,24,54,1.3,9890000,UnitedArabEmirates,NA
-162,The Bahamas,BS,BHS,44,24.25,-76,1.3,393000,TheBahamas,NA
+162,The Bahamas,BS,BHS,44,24.25,-76,1.3,393000,Bahamas,NA
 163,Western Sahara,EH,ESH,732,24.5,-13,1.3,597000,WesternSahara,NA
 164,Libya,LY,LBY,434,25,17,1.3,6871000,Libya,NA
 165,Libyan Arab Jamahiriya,LY,LBY,434,25,17,1.3,6871000,LibyanArabJamahiriya,NA
