@@ -19,7 +19,6 @@ update_jhu = function(input_df, tag) {
   input_df$Country[input_df$Country=="Congo (Brazzaville)" | input_df$Country=="Republic of the Congo"] = "Congo"
   input_df$Country[input_df$Country=="Congo (Kinshasa)"] = "Democratic Republic of the Congo"
   input_df$Country[input_df$Country=="Cote d'Ivoire"] = "CotedIvoire"
-  input_df$Country[input_df$Country=="Cruise Ship"] = "Diamond Princess Cruise Ship"
   input_df$Country[input_df$Country=="Gambia, The"] = "TheGambia"
   input_df$Country[input_df$Country=="Bahamas, The"] = "TheBahamas"
   input_df$Country[input_df$Country=="Cabo Verde"] = "CapeVerde"

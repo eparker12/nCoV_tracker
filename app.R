@@ -242,7 +242,7 @@ new_cases_plot = function(cv_aggregated, plot_date) {
     ylab("new cases") + theme_bw() + 
     scale_fill_manual(values=c(covid_col, covid_other_col)) +
     xlim(c(cv_min_date,current_date)) + 
-    scale_y_continuous(limits=c(0,20000), labels = function(l) {trans = l / 1000; paste0(trans, "K")}) +
+    scale_y_continuous(labels = function(l) {trans = l / 1000; paste0(trans, "K")}) +
     theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10), 
           plot.margin = margin(5, 12, 5, 5))
     g1
