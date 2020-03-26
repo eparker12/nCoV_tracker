@@ -99,7 +99,7 @@
 98,Trinidad & Tobago,TT,TTO,780,11,-61,1.3,1399000,Trinidad&Tobago,NA
 99,Trinidad and Tobago,TT,TTO,780,11,-61,1.3,1399000,TrinidadandTobago,NA
 100,Djibouti,DJ,DJI,262,11.5,43,1.3,988000,Djibouti,NA
-101,Guinea Bissau,GW,GNB,624,12,-15,1.3,1968000,Guinea-Bissau,NA
+101,Guinea-Bissau,GW,GNB,624,12,-15,1.3,1968000,GuineaBissau,NA
 102,Grenada,GD,GRD,308,12.1167,-61.6667,1.3,113000,Grenada,NA
 103,Netherlands Antilles,AN,ANT,530,12.25,-68.75,1.3,NA,NetherlandsAntilles,NA
 104,Aruba,AW,ABW,533,12.5,-69.9667,1.3,107000,Aruba,NA
@@ -260,3 +260,4 @@
 260,Curacao,CW,CUW,531,12.2,-69,1.3,164000,Curacao,NA
 261,Eswatini,SZ,SWZ,748,-26.5,31.5,1.3,1160000,Eswatini,NA
 262,Kosovo,XK,XKX,NA,42.6,20.9,0.9,1800000,Kosovo,NA
+263,West Bank and Gaza,NA,NA,NA,31.9522,35.2332,1.3,4800000,WestBankandGaza,NA

@@ -23,6 +23,7 @@ update_jhu = function(input_df, tag) {
   input_df$Country[input_df$Country=="Bahamas, The"] = "TheBahamas"
   input_df$Country[input_df$Country=="Cabo Verde"] = "CapeVerde"
   input_df$Country[input_df$Country=="Timor-Leste"] = "TimorLeste"
+  input_df$Country[input_df$Country=="Guinea-Bissau"] = "GuineaBissau"
   input_df$Country = input_df$Country %>% str_replace_all(., " ", "") 
   dates = names(input_df)[which(names(input_df)=="1/22/20"):ncol(input_df)]
   input_df = input_df %>% 
