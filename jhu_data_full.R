@@ -138,7 +138,7 @@ collated_data$new_cases[collated_data$new_cases<0] = 0
 collated_data$new_deaths[collated_data$new_deaths<0] = 0
 
 # update country names
-collated_data = merge(collated_data, countries[,c("jhu_ID", "country")], by = "jhu_ID")
+collated_data = merge(collated_data, countries[,c("jhu_ID", "country", "global_level", "continent_level")], by = "jhu_ID")
 
 # re-order
 collated_data = collated_data[order(as.Date(collated_data$date, format="%Y-%m-%d"), -collated_data$cases, collated_data$country),]
