@@ -6,9 +6,9 @@
 5,Falkland Islands,FK,FLK,238,-51.75,-59,0.8,3000,FalklandIslands(Malvinas),Global,South America,NA
 6,French Southern and Antarctic Lands,TF,ATF,260,-43,67,0.9,NA,FrenchSouthernTerritories,Global,Antarctica,NA
 7,New Zealand,NZ,NZL,554,-41,174,0.9,4822000,NewZealand,Global,Oceania,NA
-8,Argentina,AR,ARG,32,-34,-64,1.3,45196000,Argentina,Global,South America,NA
-9,Uruguay,UY,URY,858,-33,-56,1.3,3474000,Uruguay,Global,South America,NA
-10,Chile,CL,CHL,152,-30,-71,1.3,19116000,Chile,Global,South America,NA
+8,Argentina,AR,ARG,32,-34,-64,1.1,45196000,Argentina,Global,South America,NA
+9,Uruguay,UY,URY,858,-33,-56,1.1,3474000,Uruguay,Global,South America,NA
+10,Chile,CL,CHL,152,-30,-71,1.1,19116000,Chile,Global,South America,NA
 11,Lesotho,LS,LSO,426,-29.5,28.5,1.3,2142000,Lesotho,Global,Africa,NA
 12,Norfolk Island,NF,NFK,574,-29.0333,167.95,1.3,NA,NorfolkIsland,Global,Oceania,NA
 13,South Africa,ZA,ZAF,710,-29,24,1.3,59309000,SouthAfrica,Global,Africa,NA
@@ -175,19 +175,19 @@
 172,Nepal,NP,NPL,524,28,84,1.3,29137000,Nepal,Global,Asia,NA
 171,Algeria,DZ,DZA,12,28,3,1.3,43851000,Algeria,Global,Africa,NA
 173,Kuwait,KW,KWT,414,29.3375,47.6581,1.3,4271000,Kuwait,Global,Asia,NA
-174,Pakistan,PK,PAK,586,30,70,1.3,220892000,Pakistan,Global,Asia,NA
-175,Jordan,JO,JOR,400,31,36,1.3,10203000,Jordan,Global,Asia,NA
-176,Israel,IL,ISR,376,31.5,34.75,1.3,8656000,Israel,Global,Asia,NA
-263,West Bank and Gaza,NA,NA,NA,31.9522,35.2332,1.3,4800000,WestBankandGaza,Global,Asia,NA
-179,Occupied Palestinian Territory,PS,PSE,275,32,35.25,1.3,5101000,occupiedPalestinianterritory,Global,Asia,NA
-177,Iran (Islamic Republic of),IR,IRN,364,32,53,1.3,83993000,Iran,Global,Asia,NA
-178,Morocco,MA,MAR,504,32,-5,1.3,36911000,Morocco,Global,Africa,NA
-180,Bermuda,BM,BMU,60,32.3333,-64.75,1.3,62000,Bermuda,Global,North America,NA
-181,Afghanistan,AF,AFG,4,33,65,1.3,38928000,Afghanistan,Global,Asia,NA
-182,Iraq,IQ,IRQ,368,33,44,1.3,40223000,Iraq,Global,Asia,NA
-183,Lebanon,LB,LBN,422,33.8333,35.8333,1.3,6825000,Lebanon,Global,Asia,NA
-187,Diamond Princess Cruise Ship,NA,NA,NA,34,144,1.3,NA,DiamondPrincess,Global,NA,NA
-184,Tunisia,TN,TUN,788,34,9,1.3,11819000,Tunisia,Global,Africa,NA
+174,Pakistan,PK,PAK,586,30,70,1.1,220892000,Pakistan,Global,Asia,NA
+175,Jordan,JO,JOR,400,31,36,1.1,10203000,Jordan,Global,Asia,NA
+176,Israel,IL,ISR,376,31.5,34.75,1.1,8656000,Israel,Global,Asia,NA
+263,West Bank and Gaza,NA,NA,NA,31.9522,35.2332,1.1,4800000,WestBankandGaza,Global,Asia,NA
+179,Occupied Palestinian Territory,PS,PSE,275,32,35.25,1.1,5101000,occupiedPalestinianterritory,Global,Asia,NA
+177,Iran (Islamic Republic of),IR,IRN,364,32,53,1.1,83993000,Iran,Global,Asia,NA
+178,Morocco,MA,MAR,504,32,-5,1.1,36911000,Morocco,Global,Africa,NA
+180,Bermuda,BM,BMU,60,32.3333,-64.75,1.1,62000,Bermuda,Global,North America,NA
+181,Afghanistan,AF,AFG,4,33,65,1.1,38928000,Afghanistan,Global,Asia,NA
+182,Iraq,IQ,IRQ,368,33,44,1.1,40223000,Iraq,Global,Asia,NA
+183,Lebanon,LB,LBN,422,33.8333,35.8333,1.1,6825000,Lebanon,Global,Asia,NA
+187,Diamond Princess Cruise Ship,NA,NA,NA,34,144,1.1,NA,DiamondPrincess,Global,NA,NA
+184,Tunisia,TN,TUN,788,34,9,1.1,11819000,Tunisia,Global,Africa,NA
 185,Mainland China,CN,CHN,156,35,105,1.1,1439324000,China,Global,Asia,NA
 186,Cyprus,CY,CYP,196,35,33,1.1,1207000,Cyprus,Global,Europe,NA
 188,Syria,SY,SYR,760,35,38,1.1,17501000,Syria,Global,Asia,NA
