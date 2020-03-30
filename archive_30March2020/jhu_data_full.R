@@ -19,11 +19,11 @@ update_jhu = function(input_df, tag) {
   input_df$Country[input_df$Country=="Congo (Brazzaville)" | input_df$Country=="Republic of the Congo"] = "Congo"
   input_df$Country[input_df$Country=="Congo (Kinshasa)"] = "Democratic Republic of the Congo"
   input_df$Country[input_df$Country=="Cote d'Ivoire"] = "CotedIvoire"
-  input_df$Country[input_df$Country=="Cruise Ship"] = "Diamond Princess Cruise Ship"
   input_df$Country[input_df$Country=="Gambia, The"] = "TheGambia"
   input_df$Country[input_df$Country=="Bahamas, The"] = "TheBahamas"
   input_df$Country[input_df$Country=="Cabo Verde"] = "CapeVerde"
   input_df$Country[input_df$Country=="Timor-Leste"] = "TimorLeste"
+  input_df$Country[input_df$Country=="Guinea-Bissau"] = "GuineaBissau"
   input_df$Country = input_df$Country %>% str_replace_all(., " ", "") 
   dates = names(input_df)[which(names(input_df)=="1/22/20"):ncol(input_df)]
   input_df = input_df %>% 
@@ -42,41 +42,28 @@ update_jhu = function(input_df, tag) {
 }
 
 # load latest Covid-2019 data: confirmed cases
-jhu_cases <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"))
-jhu_cases[is.na(jhu_cases)]=0
+jhu_cases <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"))
 total_cases <- sum(jhu_cases[,ncol(jhu_cases)])
-unique(jhu_cases$`Country/Region`)
 #write.csv(jhu_cases, "input_data/jhu_cases_unformatted.csv")
+#write.csv(unique(jhu_cases$`Country/Region`), "input_data/jhu_cases_names.csv")
 jhu_cases = update_jhu(jhu_cases, "cases")
 if (total_cases!=sum(jhu_cases[nrow(jhu_cases),1:(ncol(jhu_cases)-1)])) { 
   stop(paste0("Error: incorrect processing - total counts do not match"))
 }
 
 # load latest Covid-2019 data: deaths
-jhu_deaths <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv"))
-jhu_deaths[is.na(jhu_deaths)]=0
+jhu_deaths <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"))
+#jhu_deaths[is.na(jhu_deaths)]=0
 total_deaths <- sum(jhu_deaths[,ncol(jhu_deaths)])
 jhu_deaths = update_jhu(jhu_deaths, "deaths")
 if (total_deaths!=sum(jhu_deaths[nrow(jhu_deaths),1:(ncol(jhu_deaths)-1)])) { 
   stop(paste0("Error: incorrect processing - total counts do not match"))
 }
 
-# load latest Covid-2019 data: recovered
-jhu_rec <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv"))
-jhu_rec[is.na(jhu_rec)]=0
-total_rec <- sum(jhu_rec[,ncol(jhu_rec)])
-jhu_rec = update_jhu(jhu_rec, "recovered")
-if (total_rec!=sum(jhu_rec[nrow(jhu_rec),1:(ncol(jhu_rec)-1)])) { 
-  stop(paste0("Error: incorrect processing - total counts do not match"))
-}
-
 # merge dataframes 
 jhu_merge = merge(jhu_cases, jhu_deaths, by = "Date")
-jhu_merge = merge(jhu_merge, jhu_rec, by = "Date")
 jhu_merge$Date = as.Date(jhu_merge$Date, format="%Y-%m-%d")
 jhu_merge$update = 1:nrow(jhu_merge)
-# remove Timor Leste as this duplicates East Timor data
-jhu_merge = jhu_merge %>% select(-c(TimorLeste_cases, TimorLeste_deaths, TimorLeste_recovered))
 write.csv(jhu_merge, "input_data/jhu_data.csv")
 
 # load country data
@@ -96,28 +83,24 @@ for (i in c(1:nrow(jhu_merge))) {
   jhu_subset_cases = jhu_subset[,which(grepl("_cases", names(jhu_subset)))]
   jhu_subset_cases = jhu_subset_cases[,colSums(jhu_subset_cases)>0]
   jhu_subset_deaths = jhu_subset[,which(grepl("_deaths", names(jhu_subset)))]
-  jhu_subset_rec = jhu_subset[,which(grepl("_recovered", names(jhu_subset)))]
-  
+
   # build new dataframe to add updated data
   new_data = data.frame(jhu_ID = names(jhu_subset_cases) %>% str_replace_all(., "_cases", ""),
                         date = format(as.Date(jhu_subset$Date[1],"%Y-%m-%d")),
                         update = i,
                         cases = NA, new_cases = 0,
-                        deaths = 0, new_deaths = 0,
-                        recovered = 0, new_recovered = 0)
+                        deaths = 0, new_deaths = 0)
   
   # update column names in new_jhu dataframes to include country names only
   colnames(jhu_subset_cases) = colnames(jhu_subset_cases) %>% str_replace_all(., "_cases", "") 
   colnames(jhu_subset_deaths) = colnames(jhu_subset_deaths) %>% str_replace_all(., "_deaths", "") 
-  colnames(jhu_subset_rec) = colnames(jhu_subset_rec) %>% str_replace_all(., "_recovered", "")
-  
+
   # loop to update cases
   for (j in 1:nrow(new_data)) {
     # update case numbers
     country_name = as.character(new_data$jhu_ID[j])
     new_data$cases[j] = jhu_subset_cases[,country_name]
     new_data$deaths[j] = jhu_subset_deaths[,country_name]
-    new_data$recovered[j] = jhu_subset_rec[,country_name]
   }
   
   # append new data to collated dataframe
@@ -128,7 +111,6 @@ for (i in c(1:nrow(jhu_merge))) {
   if (i == 1) {
     collated_data$new_cases = collated_data$cases
     collated_data$new_deaths = collated_data$deaths
-    collated_data$new_recovered = collated_data$recovered
   }
   
   if (i > 1) {
@@ -143,12 +125,10 @@ for (i in c(1:nrow(jhu_merge))) {
       if (country_name %in% yesterday$jhu_ID) {
         collated_data$new_cases[collated_data$jhu_ID==country_name & collated_data$update==i] = today$cases[today$jhu_ID==country_name] - yesterday$cases[yesterday$jhu_ID==country_name] 
         collated_data$new_deaths[collated_data$jhu_ID==country_name & collated_data$update==i] = today$deaths[today$jhu_ID==country_name] - yesterday$deaths[yesterday$jhu_ID==country_name] 
-        collated_data$new_recovered[collated_data$jhu_ID==country_name & collated_data$update==i] = today$recovered[today$jhu_ID==country_name] - yesterday$recovered[yesterday$jhu_ID==country_name] 
       } else {
         # if absent from yesterday's data, new observations = total observations
         collated_data$new_cases[collated_data$jhu_ID==country_name & collated_data$update==i] = today$cases[today$jhu_ID==country_name] 
         collated_data$new_deaths[collated_data$jhu_ID==country_name & collated_data$update==i] = today$deaths[today$jhu_ID==country_name]  
-        collated_data$new_recovered[collated_data$jhu_ID==country_name & collated_data$update==i] = today$recovered[today$jhu_ID==country_name] 
       }
     }
   }
@@ -156,13 +136,9 @@ for (i in c(1:nrow(jhu_merge))) {
 # allow for repatriation or reassigned cases without negative new_cases, new_deaths and new_recovered counts
 collated_data$new_cases[collated_data$new_cases<0] = 0
 collated_data$new_deaths[collated_data$new_deaths<0] = 0
-collated_data$new_recovered[collated_data$new_recovered<0] = 0
-
-# add active case data (total cases - deaths/recovered)
-collated_data$active_cases = collated_data$cases - (collated_data$deaths + collated_data$recovered)
 
 # update country names
-collated_data = merge(collated_data, countries[,c("jhu_ID", "country")], by = "jhu_ID")
+collated_data = merge(collated_data, countries[,c("jhu_ID", "country", "global_level", "continent_level")], by = "jhu_ID")
 
 # re-order
 collated_data = collated_data[order(as.Date(collated_data$date, format="%Y-%m-%d"), -collated_data$cases, collated_data$country),]
