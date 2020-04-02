@@ -5363,4 +5363,186 @@
 "PapuaNewGuinea","2020-03-31",70,1,0,0,0,0,0,1,"Papua New Guinea",NA
 "SaintVincentandtheGrenadines","2020-03-31",70,1,0,0,0,1,0,0,"Saint Vincent and the Grenadines",NA
 "SierraLeone","2020-03-31",70,1,1,0,0,0,0,1,"Sierra Leone",NA
-"TimorLeste","2020-03-31",70,1,0,0,0,0,0,1,"Timor-Leste","01 April 07:00 GMT"
+"TimorLeste","2020-03-31",70,1,0,0,0,0,0,1,"Timor-Leste",NA
+"US","2020-04-01",71,213372,25200,4757,884,8474,1450,200141,"USA",NA
+"Italy","2020-04-01",71,110574,4782,13155,727,16847,1118,80572,"Italy",NA
+"Spain","2020-04-01",71,104118,8195,9387,923,22647,3388,72084,"Spain",NA
+"China","2020-04-01",71,81555,31,3312,7,76248,180,1995,"Mainland China",NA
+"Germany","2020-04-01",71,77872,6064,920,145,18700,2600,58252,"Germany",NA
+"France","2020-04-01",71,57749,4922,4043,511,11053,1540,42653,"France",NA
+"Iran","2020-04-01",71,47593,2988,3036,138,15473,817,29084,"Iran (Islamic Republic of)",NA
+"UnitedKingdom","2020-04-01",71,29865,4384,2357,564,179,0,27329,"UK",NA
+"Switzerland","2020-04-01",71,17768,1163,488,55,2967,1144,14313,"Switzerland",NA
+"Turkey","2020-04-01",71,15679,2148,277,63,333,90,15069,"Turkey",NA
+"Belgium","2020-04-01",71,13964,1189,828,123,2132,436,11004,"Belgium",NA
+"Netherlands","2020-04-01",71,13696,1029,1175,135,260,7,12261,"Netherlands",NA
+"Austria","2020-04-01",71,10711,531,146,18,1436,341,9129,"Austria",NA
+"RepublicofKorea","2020-04-01",71,9887,101,165,3,5567,159,4155,"Republic of Korea",NA
+"Canada","2020-04-01",71,9560,1033,109,8,1324,0,8127,"Canada",NA
+"Portugal","2020-04-01",71,8251,808,187,27,43,0,8021,"Portugal",NA
+"Brazil","2020-04-01",71,6836,1119,240,39,127,0,6469,"Brazil",NA
+"Israel","2020-04-01",71,6092,734,26,6,241,17,5825,"Israel",NA
+"Sweden","2020-04-01",71,4947,512,239,59,103,87,4605,"Sweden",NA
+"Norway","2020-04-01",71,4863,222,44,5,13,0,4806,"Norway",NA
+"Australia","2020-04-01",71,4862,303,20,2,422,64,4420,"Australia",NA
+"Czechia","2020-04-01",71,3508,200,39,8,61,16,3408,"Czech Republic",NA
+"Ireland","2020-04-01",71,3447,212,85,14,5,0,3357,"Ireland",NA
+"Denmark","2020-04-01",71,3290,251,104,14,971,894,2215,"Denmark",NA
+"Chile","2020-04-01",71,3031,293,16,4,234,78,2781,"Chile",NA
+"Malaysia","2020-04-01",71,2908,142,45,2,645,108,2218,"Malaysia",NA
+"Russia","2020-04-01",71,2777,440,24,7,190,69,2563,"Russia",NA
+"Ecuador","2020-04-01",71,2748,508,93,18,58,4,2597,"Ecuador",NA
+"Poland","2020-04-01",71,2554,243,43,10,47,40,2464,"Poland",NA
+"Romania","2020-04-01",71,2460,215,92,10,252,32,2116,"Romania",NA
+"Luxembourg","2020-04-01",71,2319,141,29,6,80,0,2210,"Luxembourg",NA
+"Philippines","2020-04-01",71,2311,227,96,8,50,1,2165,"Philippines",NA
+"Japan","2020-04-01",71,2178,225,57,1,472,48,1649,"Japan",NA
+"Pakistan","2020-04-01",71,2118,180,27,1,94,18,1997,"Pakistan",NA
+"India","2020-04-01",71,1998,601,58,23,148,25,1792,"India",NA
+"Thailand","2020-04-01",71,1771,120,12,2,505,163,1254,"Thailand",NA
+"SaudiArabia","2020-04-01",71,1720,157,16,6,264,99,1440,"Saudi Arabia",NA
+"Indonesia","2020-04-01",71,1677,149,157,21,103,22,1417,"Indonesia",NA
+"Finland","2020-04-01",71,1446,28,17,0,10,0,1419,"Finland",NA
+"Greece","2020-04-01",71,1415,101,50,1,52,0,1313,"Greece",NA
+"SouthAfrica","2020-04-01",71,1380,27,5,0,50,19,1325,"South Africa",NA
+"Peru","2020-04-01",71,1323,258,38,8,394,0,891,"Peru",NA
+"DominicanRepublic","2020-04-01",71,1284,175,57,6,9,4,1218,"Dominican Republic",NA
+"Iceland","2020-04-01",71,1220,85,2,0,225,27,993,"Iceland",NA
+"Mexico","2020-04-01",71,1215,121,29,1,35,0,1151,"Mexico",NA
+"Panama","2020-04-01",71,1181,0,30,0,9,0,1142,"Panama",NA
+"Colombia","2020-04-01",71,1065,159,17,1,39,8,1009,"Colombia",NA
+"Serbia","2020-04-01",71,1060,160,28,12,0,0,1032,"Serbia",NA
+"Argentina","2020-04-01",71,1054,0,28,1,248,8,778,"Argentina",NA
+"Singapore","2020-04-01",71,1000,74,3,0,245,5,752,"Singapore",NA
+"Croatia","2020-04-01",71,963,96,6,0,73,6,884,"Croatia",NA
+"Algeria","2020-04-01",71,847,131,58,14,61,15,728,"Algeria",NA
+"Slovenia","2020-04-01",71,841,39,15,0,10,0,816,"Slovenia",NA
+"Qatar","2020-04-01",71,835,54,2,0,71,9,762,"Qatar",NA
+"UnitedArabEmirates","2020-04-01",71,814,150,8,2,61,0,745,"United Arab Emirates",NA
+"Ukraine","2020-04-01",71,794,149,20,3,13,3,761,"Ukraine",NA
+"Egypt","2020-04-01",71,779,69,52,6,179,22,548,"Egypt",NA
+"Estonia","2020-04-01",71,779,34,5,1,33,7,741,"Estonia",NA
+"HongKong","2020-04-01",71,765,51,4,0,147,19,614,"Hong Kong",NA
+"Iraq","2020-04-01",71,728,34,52,2,182,12,494,"Iraq",NA
+"DiamondPrincess","2020-04-01",71,712,0,11,1,603,0,98,"Diamond Princess Cruise Ship",NA
+"NewZealand","2020-04-01",71,708,61,1,0,83,9,624,"New Zealand",NA
+"Morocco","2020-04-01",71,654,37,39,3,29,5,586,"Morocco",NA
+"Lithuania","2020-04-01",71,581,44,8,0,7,0,566,"Lithuania",NA
+"Armenia","2020-04-01",71,571,39,4,1,31,1,536,"Armenia",NA
+"Bahrain","2020-04-01",71,569,2,4,0,337,42,228,"Bahrain",NA
+"Hungary","2020-04-01",71,525,33,20,4,40,3,465,"Hungary",NA
+"Lebanon","2020-04-01",71,479,9,14,2,43,6,422,"Lebanon",NA
+"BosniaandHerzegovina","2020-04-01",71,459,39,13,0,19,2,427,"Bosnia and Herzegovina",NA
+"Latvia","2020-04-01",71,446,48,0,0,1,0,445,"Latvia",NA
+"Moldova","2020-04-01",71,423,70,5,1,23,5,395,"Moldova, Republic of",NA
+"Tunisia","2020-04-01",71,423,29,12,2,5,2,406,"Tunisia",NA
+"Bulgaria","2020-04-01",71,422,23,10,2,20,3,392,"Bulgaria",NA
+"Slovakia","2020-04-01",71,400,37,1,1,3,0,396,"Slovakia",NA
+"Andorra","2020-04-01",71,390,14,14,2,10,0,366,"Andorra",NA
+"Kazakhstan","2020-04-01",71,380,37,3,1,26,2,351,"Kazakhstan",NA
+"CostaRica","2020-04-01",71,375,28,2,0,4,0,369,"Costa Rica",NA
+"Azerbaijan","2020-04-01",71,359,61,5,0,26,0,328,"Azerbaijan",NA
+"NorthMacedonia","2020-04-01",71,354,25,11,2,17,5,326,"North Macedonia",NA
+"Uruguay","2020-04-01",71,338,0,2,1,41,0,295,"Uruguay",NA
+"Taiwan","2020-04-01",71,329,7,5,0,39,0,285,"Taiwan",NA
+"Cyprus","2020-04-01",71,320,58,9,1,28,5,283,"Cyprus",NA
+"Kuwait","2020-04-01",71,317,28,0,0,80,7,237,"Kuwait",NA
+"BurkinaFaso","2020-04-01",71,282,21,16,2,46,14,220,"Burkina Faso",NA
+"Jordan","2020-04-01",71,278,4,5,0,36,6,237,"Jordan",NA
+"Albania","2020-04-01",71,259,16,15,0,67,15,177,"Albania",NA
+"Afghanistan","2020-04-01",71,237,63,4,0,5,0,228,"Afghanistan",NA
+"SanMarino","2020-04-01",71,236,0,26,0,13,0,197,"San Marino",NA
+"Cameroon","2020-04-01",71,233,40,6,0,10,5,217,"Cameroon",NA
+"Vietnam","2020-04-01",71,218,6,0,0,63,5,155,"Vietnam",NA
+"Cuba","2020-04-01",71,212,26,6,0,12,4,194,"Cuba",NA
+"Oman","2020-04-01",71,210,18,1,0,34,0,175,"Oman",NA
+"Ghana","2020-04-01",71,195,34,5,0,31,0,159,"Ghana",NA
+"CotedIvoire","2020-04-01",71,190,11,1,0,9,2,180,"Cote d'Ivoire",NA
+"Senegal","2020-04-01",71,190,15,1,1,45,5,144,"Senegal",NA
+"Malta","2020-04-01",71,188,19,0,0,2,0,186,"Malta",NA
+"Uzbekistan","2020-04-01",71,181,9,2,0,12,5,167,"Uzbekistan",NA
+"Nigeria","2020-04-01",71,174,39,2,0,9,1,163,"Nigeria",NA
+"Honduras","2020-04-01",71,172,31,10,3,3,0,159,"Honduras",NA
+"Belarus","2020-04-01",71,163,11,2,1,53,6,108,"Belarus",NA
+"Mauritius","2020-04-01",71,161,18,6,1,0,0,155,"Mauritius",NA
+"SriLanka","2020-04-01",71,146,3,3,1,21,4,122,"Sri Lanka",NA
+"Venezuela","2020-04-01",71,143,8,3,0,41,2,99,"Venezuela",NA
+"WestBankandGaza","2020-04-01",71,134,15,1,0,18,0,115,"West Bank and Gaza",NA
+"Brunei","2020-04-01",71,131,2,1,0,52,7,78,"Brunei",NA
+"Kosovo","2020-04-01",71,125,13,1,0,10,4,114,"Kosovo",NA
+"Montenegro","2020-04-01",71,123,14,2,0,0,0,121,"Montenegro",NA
+"Georgia","2020-04-01",71,117,7,0,0,23,2,94,"Georgia",NA
+"Bolivia","2020-04-01",71,115,8,7,1,1,1,107,"Bolivia",NA
+"Kyrgyzstan","2020-04-01",71,111,4,0,0,3,0,108,"Kyrgyzstan",NA
+"Cambodia","2020-04-01",71,109,0,0,0,25,2,84,"Cambodia",NA
+"DemocraticRepublicoftheCongo","2020-04-01",71,109,11,9,1,3,1,97,"Democratic Republic of the Congo",NA
+"TrinidadandTobago","2020-04-01",71,90,3,5,2,1,0,84,"Trinidad and Tobago",NA
+"Rwanda","2020-04-01",71,82,7,0,0,0,0,82,"Rwanda",NA
+"Kenya","2020-04-01",71,81,22,1,0,3,2,77,"Kenya",NA
+"Niger","2020-04-01",71,74,47,5,2,0,0,69,"Niger",NA
+"Paraguay","2020-04-01",71,69,4,3,0,1,0,65,"Paraguay",NA
+"Liechtenstein","2020-04-01",71,68,0,0,0,0,0,68,"Liechtenstein",NA
+"Madagascar","2020-04-01",71,57,0,0,0,0,0,57,"Madagascar",NA
+"Monaco","2020-04-01",71,55,3,1,0,2,0,52,"Monaco",NA
+"Bangladesh","2020-04-01",71,54,3,6,1,25,0,23,"Bangladesh",NA
+"Jamaica","2020-04-01",71,44,8,3,2,2,0,39,"Jamaica",NA
+"Uganda","2020-04-01",71,44,0,0,0,0,0,44,"Uganda",NA
+"Macao","2020-04-01",71,41,0,0,0,10,0,31,"Macao",NA
+"Guatemala","2020-04-01",71,39,1,1,0,12,0,26,"Guatemala",NA
+"Togo","2020-04-01",71,36,2,2,1,10,0,24,"Togo",NA
+"Zambia","2020-04-01",71,36,1,0,0,0,0,36,"Zambia",NA
+"Barbados","2020-04-01",71,34,0,0,0,0,0,34,"Barbados",NA
+"Djibouti","2020-04-01",71,33,3,0,0,0,0,33,"Djibouti",NA
+"ElSalvador","2020-04-01",71,32,0,1,0,0,0,31,"El Salvador",NA
+"Mali","2020-04-01",71,31,3,3,1,0,0,28,"Mali",NA
+"Guinea","2020-04-01",71,30,8,0,0,0,0,30,"Guinea",NA
+"Ethiopia","2020-04-01",71,29,3,0,0,2,0,27,"Ethiopia",NA
+"Bahamas","2020-04-01",71,21,7,1,1,1,0,19,"The Bahamas",NA
+"Tanzania","2020-04-01",71,20,1,1,0,1,0,18,"Tanzania, United Republic of",NA
+"Guyana","2020-04-01",71,19,7,2,0,0,0,17,"Guyana",NA
+"Maldives","2020-04-01",71,19,1,0,0,13,0,6,"Maldives",NA
+"Congo","2020-04-01",71,19,0,0,0,0,0,19,"Republic of the Congo",NA
+"Gabon","2020-04-01",71,18,2,1,0,0,0,17,"Gabon",NA
+"Haiti","2020-04-01",71,16,1,0,0,1,0,15,"Haiti",NA
+"Burma","2020-04-01",71,15,0,1,0,0,0,14,"Burma",NA
+"EquatorialGuinea","2020-04-01",71,15,3,0,0,1,0,14,"Equatorial Guinea",NA
+"Eritrea","2020-04-01",71,15,0,0,0,0,0,15,"Eritrea",NA
+"Mongolia","2020-04-01",71,14,2,0,0,2,0,12,"Mongolia",NA
+"Namibia","2020-04-01",71,14,3,0,0,2,0,12,"Namibia",NA
+"Benin","2020-04-01",71,13,4,0,0,1,0,12,"Benin",NA
+"SaintLucia","2020-04-01",71,13,0,0,0,1,0,12,"Saint Lucia",NA
+"Dominica","2020-04-01",71,12,0,0,0,0,0,12,"Dominica",NA
+"Laos","2020-04-01",71,10,1,0,0,0,0,10,"Lao People's Democratic Republic",NA
+"Libya","2020-04-01",71,10,0,0,0,0,0,10,"Libya",NA
+"Mozambique","2020-04-01",71,10,2,0,0,0,0,10,"Mozambique",NA
+"Seychelles","2020-04-01",71,10,0,0,0,0,0,10,"Seychelles",NA
+"Suriname","2020-04-01",71,10,1,0,0,0,0,10,"Suriname",NA
+"Syria","2020-04-01",71,10,0,2,0,0,0,8,"Syria",NA
+"Eswatini","2020-04-01",71,9,0,0,0,0,0,9,"Eswatini",NA
+"Grenada","2020-04-01",71,9,0,0,0,0,0,9,"Grenada",NA
+"GuineaBissau","2020-04-01",71,9,1,0,0,0,0,9,"Guinea-Bissau",NA
+"MSZaandam","2020-04-01",71,9,7,2,2,0,0,7,"MS Zaandam Cruise Ship",NA
+"Angola","2020-04-01",71,8,1,2,0,1,0,5,"Angola",NA
+"SaintKittsandNevis","2020-04-01",71,8,0,0,0,0,0,8,"Saint Kitts and Nevis",NA
+"Zimbabwe","2020-04-01",71,8,0,1,0,0,0,7,"Zimbabwe",NA
+"AntiguaandBarbuda","2020-04-01",71,7,0,0,0,0,0,7,"Antigua and Barbuda",NA
+"Chad","2020-04-01",71,7,0,0,0,0,0,7,"Chad",NA
+"Sudan","2020-04-01",71,7,0,2,0,2,1,3,"Sudan",NA
+"CapeVerde","2020-04-01",71,6,0,1,0,0,0,5,"Cape Verde",NA
+"HolySee","2020-04-01",71,6,0,0,0,0,0,6,"Holy See (Vatican City)",NA
+"Liberia","2020-04-01",71,6,3,0,0,0,0,6,"Liberia",NA
+"Mauritania","2020-04-01",71,6,0,1,0,2,0,3,"Mauritania",NA
+"Fiji","2020-04-01",71,5,0,0,0,0,0,5,"Fiji",NA
+"Nepal","2020-04-01",71,5,0,0,0,1,0,4,"Nepal",NA
+"Nicaragua","2020-04-01",71,5,0,1,0,0,0,4,"Nicaragua",NA
+"Somalia","2020-04-01",71,5,0,0,0,1,0,4,"Somalia",NA
+"Bhutan","2020-04-01",71,4,0,0,0,0,0,4,"Bhutan",NA
+"Botswana","2020-04-01",71,4,0,1,0,0,0,3,"Botswana",NA
+"Gambia","2020-04-01",71,4,0,1,0,2,2,1,"The Gambia",NA
+"Belize","2020-04-01",71,3,0,0,0,0,0,3,"Belize",NA
+"CentralAfricanRepublic","2020-04-01",71,3,0,0,0,0,0,3,"Central African Republic",NA
+"Burundi","2020-04-01",71,2,0,0,0,0,0,2,"Burundi",NA
+"SierraLeone","2020-04-01",71,2,1,0,0,0,0,2,"Sierra Leone",NA
+"PapuaNewGuinea","2020-04-01",71,1,0,0,0,0,0,1,"Papua New Guinea",NA
+"SaintVincentandtheGrenadines","2020-04-01",71,1,0,0,0,1,0,0,"Saint Vincent and the Grenadines",NA
+"TimorLeste","2020-04-01",71,1,0,0,0,0,0,1,"Timor-Leste","02 April 07:00 GMT"
