@@ -5,6 +5,6 @@ account: vac-lshtm
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1770050
-bundleId: 2963167
+bundleId: 2967683
 url: https://vac-lshtm.shinyapps.io/ncov_tracker/
-when: 1585899641.75114
+when: 1585987764.52341
