@@ -304,9 +304,9 @@ basemap = leaflet(plot_map) %>%
     options = layersControlOptions(collapsed = FALSE)) %>% 
   hideGroup(c("2019-COVID (new)", "2019-COVID (cumulative)", "2003-SARS", "2009-H1N1 (swine flu)", "2014-Ebola"))  %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
-  fitBounds(~-100,-50,~80,80) #%>%
-  #addLegend("bottomright", pal = cv_pal, values = ~cv_large_countries$per100k,
-  #          title = "<small>Active cases per 100,000</small>") #%>%
+  fitBounds(~-100,-50,~80,80) %>%
+  addLegend("bottomright", pal = cv_pal, values = ~cv_large_countries$per100k,
+            title = "<small>Active cases per 100,000</small>") #%>%
 #fitBounds(0,-25,90,65) # alternative coordinates for closer zoom
 
 # sum cv case counts by date
@@ -644,7 +644,7 @@ server = function(input, output, session) {
   
   reactive_db = reactive({
     cv_cases %>% filter(date == input$plot_date)
-    #reactive = cv_cases %>% filter(date == "2020-04-05")
+  #  reactive = cv_cases %>% filter(date == "2020-04-07")
   })
   
   reactive_db_last24h = reactive({
@@ -654,7 +654,8 @@ server = function(input, output, session) {
   reactive_db_large = reactive({
     large_countries = reactive_db() %>% filter(alpha3 %in% worldcountry$id)
    #large_countries = reactive %>% filter(alpha3 %in% worldcountry$id)
-    large_countries = large_countries[order(large_countries$alpha3),]
+    worldcountry_subset = worldcountry[worldcountry$id %in% large_countries$alpha3, ]
+    large_countries = large_countries[match(worldcountry_subset$id, large_countries$alpha3),]
     large_countries
   })
   
@@ -714,11 +715,11 @@ server = function(input, output, session) {
     leafletProxy("mymap") %>% 
     clearMarkers() %>%
     clearShapes() %>%
-    #addPolygons(data = reactive_polygons(), stroke = FALSE, smoothFactor = 0.1, fillOpacity = 0.15, fillColor = ~cv_pal(reactive_db_large()$activeper100k)) %>% #group = "2019-COVID (cumulative)",
-                  #label = sprintf("<strong>%s (cumulative)</strong><br/>Confirmed COVID cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g", reactive_db_large()$country, reactive_db_large()$cases, reactive_db_large()$deaths, reactive_db_large()$recovered, reactive_db_large()$per100k) %>% lapply(htmltools::HTML),
-                  #labelOptions = labelOptions(
-                  #             style = list("font-weight" = "normal", padding = "3px 8px", "color" = covid_col),
-                  #            textsize = "15px", direction = "auto") %>%
+    addPolygons(data = reactive_polygons(), stroke = FALSE, smoothFactor = 0.1, fillOpacity = 0.15, fillColor = ~cv_pal(reactive_db_large()$activeper100k)) %>% #group = "2019-COVID (cumulative)",
+                #  label = sprintf("<strong>%s (cumulative)</strong><br/>Confirmed COVID cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g", reactive_db_large()$country, reactive_db_large()$cases, reactive_db_large()$deaths, reactive_db_large()$recovered, reactive_db_large()$per100k) %>% lapply(htmltools::HTML),
+                #  labelOptions = labelOptions(
+                #               style = list("font-weight" = "normal", padding = "3px 8px", "color" = covid_col),
+                #              textsize = "15px", direction = "auto") %>%
       
       addCircleMarkers(data = reactive_db_last24h(), lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(new_cases)^(1/5), 
                  fillOpacity = 0.1, color = covid_col, group = "2019-COVID (new)",
