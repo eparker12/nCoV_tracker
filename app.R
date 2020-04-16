@@ -25,7 +25,7 @@ if(!require(shinydashboard)) install.packages("shinydashboard", repos = "http://
 if(!require(shinythemes)) install.packages("shinythemes", repos = "http://cran.us.r-project.org")
 
 # update data with automated script
-source("jhu_data_full.R")
+#source("jhu_data_full.R") # run locally to update numbers, but not live on Rstudio server (to avoid possible errors on auto-updates)
 
 # set mapping colour for each outbreak
 covid_col = "#cc4c02"
