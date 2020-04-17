@@ -28,6 +28,7 @@ Several resources proved invaluable when building this app, including:
 
 ## Authors
 Dr Edward Parker, The Vaccine Centre, London School of Hygiene & Tropical Medicine
+
 Quentin Leclerc, Department of Infectious Disease Epidemiology, London School of Hygiene & Tropical Medicine
 
 ## Contact
