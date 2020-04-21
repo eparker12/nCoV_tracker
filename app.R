@@ -40,7 +40,7 @@ sars_cases = read.csv("input_data/sars.csv")
 countries = read.csv("input_data/countries_codes_and_coordinates.csv")
 ebola_cases = read.csv("input_data/ebola.csv")
 h1n1_cases = read.csv("input_data/h1n1.csv")
-worldcountry = geojson_read("input_data/countries.geo.json", what = "sp")
+worldcountry = geojson_read("input_data/50m.geojson", what = "sp")
 country_geoms = read.csv("input_data/country_geoms.csv")
 
 
@@ -286,14 +286,14 @@ cv_cases_global$days_since_case100 = cv_cases_global$days_since_death10 = 1:nrow
 write.csv(cv_cases_global, "input_data/coronavirus_global.csv")
 
 # select large countries for mapping polygons
-cv_large_countries = cv_today %>% filter(alpha3 %in% worldcountry$id)
-if (all(cv_large_countries$alpha3 %in% worldcountry$id)==FALSE) { print("Error: inconsistent country names")}
+cv_large_countries = cv_today %>% filter(alpha3 %in% worldcountry$ADM0_A3)
+if (all(cv_large_countries$alpha3 %in% worldcountry$ADM0_A3)==FALSE) { print("Error: inconsistent country names")}
 cv_large_countries = cv_large_countries[order(cv_large_countries$alpha3),]
 
 # create plotting parameters for map
-bins = c(0,1,10,50,100,500)
+bins = c(0,1,10,50,100,500,1000,Inf)
 cv_pal <- colorBin("Oranges", domain = cv_large_countries$per100k, bins = bins)
-plot_map <- worldcountry[worldcountry$id %in% cv_large_countries$alpha3, ]
+plot_map <- worldcountry[worldcountry$ADM0_A3 %in% cv_large_countries$alpha3, ]
 
 # creat cv base map 
 basemap = leaflet(plot_map) %>% 
@@ -351,7 +351,7 @@ sars_final_case_count = sum(sars_final$cases)
 # select polygons for sars base map
 sars_large_countries = sars_final %>% filter(country %in% country_geoms$countries_present)
 sars_large_countries = sars_large_countries[order(sars_large_countries$alpha3),]
-sars_plot_map <- worldcountry[worldcountry$id %in% sars_large_countries$alpha3, ]
+sars_plot_map <- worldcountry[worldcountry$ADM0_A3 %in% sars_large_countries$alpha3, ]
 
 # create plotting parameters for sars map
 sars_pal <- colorBin("Blues", domain = sars_large_countries$per100k, bins = bins)
@@ -367,7 +367,7 @@ sars_basemap = leaflet(sars_plot_map) %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   fitBounds(~-100,-50,~80,80) %>%
   
-  addPolygons(stroke = FALSE, smoothFactor = 0.2, fillOpacity = 0.1, fillColor = ~sars_pal(sars_large_countries$per100k), group = "2003-SARS (cumulative)",
+  addPolygons(stroke = FALSE, smoothFactor = 0.2, fillOpacity = 0.4, fillColor = ~sars_pal(sars_large_countries$per100k), group = "2003-SARS (cumulative)",
               label = sprintf("<strong>%s</strong><br/>SARS cases: %g<br/>Deaths: %d<br/>Cases per 100,000: %g", sars_large_countries$country, sars_large_countries$cases, sars_large_countries$deaths, sars_large_countries$per100k) %>% lapply(htmltools::HTML),
               labelOptions = labelOptions(
                 style = list("font-weight" = "normal", padding = "3px 8px", "color" = sars_col),
@@ -465,7 +465,7 @@ ui <- bootstrapPage(
                                                     max = as.Date(current_date,"%Y-%m-%d"),
                                                     value = as.Date(current_date),
                                                     timeFormat = "%d %b", 
-                                                    animate=animationOptions(interval = 2000, loop = FALSE))
+                                                    animate=animationOptions(interval = 3000, loop = FALSE))
                           ),
                           
                           absolutePanel(id = "logo", class = "card", bottom = 20, left = 60, width = 80, fixed=TRUE, draggable = FALSE, height = "auto",
@@ -542,7 +542,7 @@ ui <- bootstrapPage(
                                                         choices = format(unique(sars_cases$date), "%d %b %y"),
                                                         selected = format(sars_max_date, "%d %b %y"),
                                                         grid = TRUE,
-                                                        animate=animationOptions(interval = 2000, loop = FALSE))
+                                                        animate=animationOptions(interval = 3000, loop = FALSE))
                           ),
                           
                           absolutePanel(id = "logo", class = "card", bottom = 20, left = 60, width = 80, fixed=TRUE, draggable = FALSE, height = "auto",
@@ -616,7 +616,7 @@ ui <- bootstrapPage(
                         substantial variation in case fatality rate estimates for the H1N1 pandemic. However, most were in the range of 10 to 100 per 100,000 symptomatic cases (0.01 to 0.1%).
                         The upper limit of this range is used for illustrative purposes in the Outbreak comarisons tab.",tags$br(),
                         tags$b("2014-Ebola cases: "), tags$a(href="https://www.cdc.gov/flu/pandemic-resources/2009-h1n1-pandemic.html", "CDC"),tags$br(),
-                        tags$b("Country mapping coordinates: "), tags$a(href="https://gist.github.com/tadast/8827699", "Github"),tags$br(),
+                        tags$b("Country mapping coordinates: "), tags$a(href="https://github.com/martynafford/natural-earth-geojson", "Martyn Afford's Github repository"),tags$br(),
                         tags$br(),tags$br(),tags$h4("Authors"),
                         "Dr Edward Parker, The Vaccine Centre, London School of Hygiene & Tropical Medicine",tags$br(),
                         "Quentin Leclerc, Department of Infectious Disease Epidemiology, London School of Hygiene & Tropical Medicine",tags$br(),
@@ -644,7 +644,7 @@ server = function(input, output, session) {
   
   reactive_db = reactive({
     cv_cases %>% filter(date == input$plot_date)
-  #  reactive = cv_cases %>% filter(date == "2020-04-07")
+  # reactive = cv_cases %>% filter(date == "2020-04-07")
   })
   
   reactive_db_last24h = reactive({
@@ -652,25 +652,25 @@ server = function(input, output, session) {
   })
   
   reactive_db_large = reactive({
-    large_countries = reactive_db() %>% filter(alpha3 %in% worldcountry$id)
-   #large_countries = reactive %>% filter(alpha3 %in% worldcountry$id)
-    worldcountry_subset = worldcountry[worldcountry$id %in% large_countries$alpha3, ]
-    large_countries = large_countries[match(worldcountry_subset$id, large_countries$alpha3),]
+    large_countries = reactive_db() %>% filter(alpha3 %in% worldcountry$ADM0_A3)
+   #large_countries = reactive %>% filter(alpha3 %in% worldcountry$ADM0_A3)
+    worldcountry_subset = worldcountry[worldcountry$ADM0_A3 %in% large_countries$alpha3, ]
+    large_countries = large_countries[match(worldcountry_subset$ADM0_A3, large_countries$alpha3),]
     large_countries
   })
   
   reactive_db_large_last24h = reactive({
-    large_countries = reactive_db_last24h() %>% filter(alpha3 %in% worldcountry$id)
+    large_countries = reactive_db_last24h() %>% filter(alpha3 %in% worldcountry$ADM0_A3)
     large_countries = large_countries[order(large_countries$alpha3),]
     large_countries
   })
   
   reactive_polygons = reactive({
-    worldcountry[worldcountry$id %in% reactive_db_large()$alpha3, ]
+    worldcountry[worldcountry$ADM0_A3 %in% reactive_db_large()$alpha3, ]
   })
   
   reactive_polygons_last24h = reactive({
-    worldcountry[worldcountry$id %in% reactive_db_large_last24h()$alpha3, ]
+    worldcountry[worldcountry$ADM0_A3 %in% reactive_db_large_last24h()$alpha3, ]
   })
   
   output$reactive_case_count <- renderText({
@@ -792,7 +792,7 @@ server = function(input, output, session) {
   })
   
   sars_reactive_polygons = reactive({
-    worldcountry[worldcountry$id %in% sars_reactive_db_large()$alpha3, ]
+    worldcountry[worldcountry$ADM0_A3 %in% sars_reactive_db_large()$alpha3, ]
   })
   
   output$sars_reactive_case_count <- renderText({
