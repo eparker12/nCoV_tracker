@@ -1,5 +1,5 @@
 ## COVID-2019 interactive mapping tool
-## Edward Parker, London School of Hygiene & Tropical Medicine (edward.parker@lshtm.ac.uk), February 2020
+## Edward Parker, London School of Hygiene & Tropical Medicine (edward.parker@lshtm.ac.uk), last updated April 2020
 
 ## includes code adapted from the following sources:
 # https://github.com/rstudio/shiny-examples/blob/master/087-crandash/
@@ -8,6 +8,7 @@
 
 # update data with automated script
 #source("jhu_data_full.R") # run locally to update numbers, but not live on Rstudio server (to avoid possible errors on auto-updates)
+#source("ny_data_us.R") # run locally to update numbers, but not live on Rstudio server (to avoid possible errors on auto-updates)
 
 # load required packages
 if(!require(magrittr)) install.packages("magrittr", repos = "http://cran.us.r-project.org")
@@ -42,6 +43,7 @@ ebola_cases = read.csv("input_data/ebola.csv")
 h1n1_cases = read.csv("input_data/h1n1.csv")
 worldcountry = geojson_read("input_data/50m.geojson", what = "sp")
 country_geoms = read.csv("input_data/country_geoms.csv")
+cv_states = read.csv("input_data/coronavirus_states.csv")
 
 
 
@@ -236,14 +238,16 @@ cv_cases$per100k = as.numeric(format(round(cv_cases$cases/(cv_cases$population/1
 cv_cases$newper100k = as.numeric(format(round(cv_cases$new_cases/(cv_cases$population/100000),1),nsmall=1))
 cv_cases$activeper100k = as.numeric(format(round(cv_cases$active_cases/(cv_cases$population/100000),1),nsmall=1))
 cv_cases$million_pop = as.numeric(cv_cases$population>1e6)
+cv_cases$deathsper100k = as.numeric(format(round(cv_cases$deaths/(cv_cases$population/100000),1),nsmall=1))
+cv_cases$newdeathsper100k = as.numeric(format(round(cv_cases$new_deaths/(cv_cases$population/100000),1),nsmall=1))
 
 # add variable for days since 100th case and 10th death
 cv_cases$days_since_case100 = cv_cases$days_since_death10 = 0
 for (i in 1:length(unique(cv_cases$country))) {
   country_name = as.character(unique(cv_cases$country))[i]
   country_db = subset(cv_cases, country==country_name)
-  country_db$days_since_case100[country_db$cases>=100] = 1:sum(country_db$cases>=100)
-  country_db$days_since_death10[country_db$deaths>=10] = 1:sum(country_db$deaths>=10)
+  country_db$days_since_case100[country_db$cases>=100] = 0:(sum(country_db$cases>=100)-1)
+  country_db$days_since_death10[country_db$deaths>=10] = 0:(sum(country_db$deaths>=10)-1)
   cv_cases$days_since_case100[cv_cases$country==country_name] = country_db$days_since_case100
   cv_cases$days_since_death10[cv_cases$country==country_name] = country_db$days_since_death10
 }
@@ -255,13 +259,20 @@ current_case_count_China = sum(cv_today$cases[cv_today$country=="Mainland China"
 current_case_count_other = sum(cv_today$cases[cv_today$country!="Mainland China"])
 current_death_count = sum(cv_today$deaths)
 
+# create subset of state data for today's data
+if (any(grepl("/", cv_states$date))) { 
+  cv_states$date = format(as.Date(cv_states$date, format="%d/%m/%Y"),"%Y-%m-%d") 
+} else { cv_states$date = as.Date(cv_states$date, format="%Y-%m-%d") }
+cv_states_today = subset(cv_states, date==max(cv_states$date))
+
 # create subset for countries with at least 100 cases
-cv_today_100 = subset(cv_today, cases>=100)
+cv_today_1000 = subset(cv_today, cases>=1000)
 
 # write current day's data
 write.csv(cv_today %>% select(c(country, date, update, cases, new_cases, deaths, new_deaths,
                                 recovered, new_recovered, active_cases, 
                                 per100k, newper100k, activeper100k,
+                                deathsper100k, newdeathsper100k,
                                 days_since_case100, days_since_death10)), "input_data/coronavirus_today.csv")
 
 # aggregate at continent level
@@ -273,16 +284,38 @@ cv_cases_continent$continent = cv_cases_continent$continent_level
 for (i in 1:length(unique(cv_cases_continent$continent))) {
   continent_name = as.character(unique(cv_cases_continent$continent))[i]
   continent_db = subset(cv_cases_continent, continent==continent_name)
-  continent_db$days_since_case100[continent_db$cases>=100] = 1:sum(continent_db$cases>=100)
-  continent_db$days_since_death10[continent_db$deaths>=10] = 1:sum(continent_db$deaths>=10)
+  continent_db$days_since_case100[continent_db$cases>=100] = 0:(sum(continent_db$cases>=100)-1)
+  continent_db$days_since_death10[continent_db$deaths>=10] = 0:(sum(continent_db$deaths>=10)-1)
   cv_cases_continent$days_since_case100[cv_cases_continent$continent==continent_name] = continent_db$days_since_case100
   cv_cases_continent$days_since_death10[cv_cases_continent$continent==continent_name] = continent_db$days_since_death10
 }
+
+# add continent populations
+cv_cases_continent$pop = NA
+cv_cases_continent$pop[cv_cases_continent$continent=="Africa"] = 1.2e9
+cv_cases_continent$pop[cv_cases_continent$continent=="Asia"] = 4.5e9
+cv_cases_continent$pop[cv_cases_continent$continent=="Europe"] = 7.4e8
+cv_cases_continent$pop[cv_cases_continent$continent=="North America"] = 5.8e8
+cv_cases_continent$pop[cv_cases_continent$continent=="Oceania"] = 3.8e7
+cv_cases_continent$pop[cv_cases_continent$continent=="South America"] = 4.2e8
+
+# add normalised counts
+cv_cases_continent$per100k =  as.numeric(format(round(cv_cases_continent$cases/(cv_cases_continent$pop/100000),1),nsmall=1))
+cv_cases_continent$newper100k =  as.numeric(format(round(cv_cases_continent$new_cases/(cv_cases_continent$pop/100000),1),nsmall=1))
+cv_cases_continent$deathsper100k =  as.numeric(format(round(cv_cases_continent$deaths/(cv_cases_continent$pop/100000),1),nsmall=1))
+cv_cases_continent$newdeathsper100k =  as.numeric(format(round(cv_cases_continent$new_deaths/(cv_cases_continent$pop/100000),1),nsmall=1))
 write.csv(cv_cases_continent, "input_data/coronavirus_continent.csv")
 
 # aggregate at global level
 cv_cases_global = cv_cases %>% select(c(cases, new_cases, deaths, new_deaths, date, global_level)) %>% group_by(global_level, date) %>% summarise_each(funs(sum)) %>% data.frame()
-cv_cases_global$days_since_case100 = cv_cases_global$days_since_death10 = 1:nrow(cv_cases_global)
+cv_cases_global$days_since_case100 = cv_cases_global$days_since_death10 = 0:(nrow(cv_cases_global)-1)
+
+# add normalised counts
+cv_cases_global$pop = 7.6e9
+cv_cases_global$per100k =  as.numeric(format(round(cv_cases_global$cases/(cv_cases_global$pop/100000),1),nsmall=1))
+cv_cases_global$newper100k =  as.numeric(format(round(cv_cases_global$new_cases/(cv_cases_global$pop/100000),1),nsmall=1))
+cv_cases_global$deathsper100k =  as.numeric(format(round(cv_cases_global$deaths/(cv_cases_global$pop/100000),1),nsmall=1))
+cv_cases_global$newdeathsper100k =  as.numeric(format(round(cv_cases_global$new_deaths/(cv_cases_global$pop/100000),1),nsmall=1))
 write.csv(cv_cases_global, "input_data/coronavirus_global.csv")
 
 # select large countries for mapping polygons
@@ -291,7 +324,7 @@ if (all(cv_large_countries$alpha3 %in% worldcountry$ADM0_A3)==FALSE) { print("Er
 cv_large_countries = cv_large_countries[order(cv_large_countries$alpha3),]
 
 # create plotting parameters for map
-bins = c(0,1,10,50,100,500,1000,Inf)
+bins = c(0,1,5,10,50,100,Inf)
 cv_pal <- colorBin("Oranges", domain = cv_large_countries$per100k, bins = bins)
 plot_map <- worldcountry[worldcountry$ADM0_A3 %in% cv_large_countries$alpha3, ]
 
@@ -300,13 +333,13 @@ basemap = leaflet(plot_map) %>%
   addTiles() %>% 
   addLayersControl(
     position = "bottomright",
-    overlayGroups = c("2019-COVID (active)", "2019-COVID (new)", "2019-COVID (cumulative)", "2003-SARS", "2009-H1N1 (swine flu)", "2014-Ebola"),
+    overlayGroups = c("2019-COVID (cumulative)", "2019-COVID (active)", "2019-COVID (new)", "2003-SARS", "2009-H1N1 (swine flu)", "2014-Ebola"),
     options = layersControlOptions(collapsed = FALSE)) %>% 
-  hideGroup(c("2019-COVID (new)", "2019-COVID (cumulative)", "2003-SARS", "2009-H1N1 (swine flu)", "2014-Ebola"))  %>%
+  hideGroup(c("2019-COVID (active)", "2019-COVID (new)", "2003-SARS", "2009-H1N1 (swine flu)", "2014-Ebola"))  %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
   fitBounds(~-100,-50,~80,80) %>%
-  addLegend("bottomright", pal = cv_pal, values = ~cv_large_countries$per100k,
-            title = "<small>Active cases per 100,000</small>") #%>%
+  addLegend("bottomright", pal = cv_pal, values = ~cv_large_countries$deathsper100k,
+            title = "<small>Deaths per 100,000</small>") #%>%
 #fitBounds(0,-25,90,65) # alternative coordinates for closer zoom
 
 # sum cv case counts by date
@@ -324,8 +357,8 @@ cv_aggregated$region = "Global"
 cv_aggregated$date = as.Date(cv_aggregated$date,"%Y-%m-%d")
 
 # assign colours to countries to ensure consistency between plots 
-cls = rep(c(brewer.pal(8,"Dark2"), brewer.pal(10, "Paired"), brewer.pal(12, "Set3"), brewer.pal(8,"Set2"), brewer.pal(9, "Set1"), brewer.pal(8, "Accent"),  brewer.pal(9, "Pastel1"),  brewer.pal(8, "Pastel2")),3)
-cls_names = c(as.character(unique(cv_cases$country)), as.character(unique(cv_cases_continent$continent)),"Global")
+cls = rep(c(brewer.pal(8,"Dark2"), brewer.pal(10, "Paired"), brewer.pal(12, "Set3"), brewer.pal(8,"Set2"), brewer.pal(9, "Set1"), brewer.pal(8, "Accent"),  brewer.pal(9, "Pastel1"),  brewer.pal(8, "Pastel2")),4)
+cls_names = c(as.character(unique(cv_cases$country)), as.character(unique(cv_cases_continent$continent)), as.character(unique(cv_states$state)),"Global")
 country_cols = cls[1:length(cls_names)]
 names(country_cols) = cls_names
 
@@ -445,9 +478,10 @@ ui <- bootstrapPage(
                           leafletOutput("mymap", width="100%", height="100%"),
                           
                           absolutePanel(id = "controls", class = "panel panel-default",
-                                        top = 80, left = 20, width = 250, fixed=TRUE,
+                                        top = 120, left = 20, width = 250, fixed=TRUE,
                                         draggable = TRUE, height = "auto",
                                         
+                                        span(tags$i(h6("Reported cases are subject to significant variation in testing policy and capacity between countries.")), style="color:#045a8d"),
                                         h3(textOutput("reactive_case_count"), align = "right"),
                                         h4(textOutput("reactive_death_count"), align = "right"),
                                         span(h4(textOutput("reactive_recovered_count"), align = "right"), style="color:#006d2c"),
@@ -455,7 +489,6 @@ ui <- bootstrapPage(
                                         h6(textOutput("clean_date_reactive"), align = "right"),
                                         h6(textOutput("reactive_country_count"), align = "right"),
                                         tags$i(h6("Updated once daily. For more regular updates, refer to: ", tags$a(href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6", "Johns Hopkins COVID-19 dashboard."))),
-                                        tags$i(h6("Reported cases are subject to significant variation in testing capacity between countries.")),
                                         plotOutput("epi_curve", height="130px", width="100%"),
                                         plotOutput("cumulative_plot", height="130px", width="100%"),
                                         
@@ -485,20 +518,22 @@ ui <- bootstrapPage(
                       sidebarLayout(
                         sidebarPanel(
                           
+                          span(tags$i(h6("Reported cases are subject to significant variation in testing policy and capacity between countries.")), style="color:#045a8d"),
+
                           pickerInput("level_select", "Level:",   
-                                      choices = c("Global", "Continent", "Country"), 
+                                      choices = c("Global", "Continent", "Country", "US state"), 
                                       selected = c("Country"),
                                       multiple = FALSE),
                           
                           pickerInput("region_select", "Country/Region:",   
-                                      choices = as.character(cv_today_100[order(-cv_today_100$cases),]$country), 
+                                      choices = as.character(cv_today_1000[order(-cv_today_1000$cases),]$country), 
                                       options = list(`actions-box` = TRUE, `none-selected-text` = "Please make a selection!"),
-                                      selected = cv_today_100$country,
+                                      selected = cv_today_1000$country,
                                       multiple = TRUE), 
                           
                           pickerInput("outcome_select", "Outcome:",   
-                                      choices = c("Cases", "Deaths"), 
-                                      selected = c("Cases"),
+                                      choices = c("Deaths per 100,000", "Cases per 100,000", "Cases (total)", "Deaths (total)"), 
+                                      selected = c("Deaths per 100,000"),
                                       multiple = FALSE),
                           
                           pickerInput("start_date", "Plotting start date:",   
@@ -506,7 +541,7 @@ ui <- bootstrapPage(
                                       options = list(`actions-box` = TRUE),
                                       selected = "Date",
                                       multiple = FALSE), 
-                          "Select outcome, regions, and plotting start date from drop-down menues to update plots. Countries with at least 100 confirmed cases are included."
+                          "Select outcome, regions, and plotting start date from drop-down menues to update plots. Countries with at least 1000 confirmed cases are included."
                         ),
                         
                         mainPanel(
@@ -608,6 +643,7 @@ ui <- bootstrapPage(
                         tags$br(),tags$br(),tags$h4("Sources"),
                         tags$b("2019-COVID cases: "), tags$a(href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series", "Johns Hopkins Center for Systems Science and Engineering github page,")," with additional information from the ",tags$a(href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/situation-reports", "WHO's COVID-19 situation reports."),
                         " In previous versions of this site (up to 17th March 2020), updates were based solely on the WHO's situation reports.",tags$br(),
+                        tags$b("US state-level case data: "), tags$a(href="https://github.com/nytimes/covid-19-data", "New York Times github page,"),
                         tags$b("2003-SARS cases: "), tags$a(href="https://www.who.int/csr/sars/country/en/", "WHO situation reports"),tags$br(),
                         tags$b("2009-H1N1 confirmed deaths: "), tags$a(href="https://www.who.int/csr/disease/swineflu/updates/en/", "WHO situation reports"),tags$br(),
                         tags$b("2009-H1N1 projected deaths: "), "Model estimates from ", tags$a(href="https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1001558", "GLaMOR Project"),tags$br(),
@@ -644,7 +680,7 @@ server = function(input, output, session) {
   
   reactive_db = reactive({
     cv_cases %>% filter(date == input$plot_date)
-  # reactive = cv_cases %>% filter(date == "2020-04-07")
+  # reactive = cv_cases %>% filter(date == "2020-04-25")
   })
   
   reactive_db_last24h = reactive({
@@ -678,7 +714,7 @@ server = function(input, output, session) {
   })
   
   output$reactive_death_count <- renderText({
-    paste0(prettyNum(sum(reactive_db()$death), big.mark=","), " deaths")
+    paste0(prettyNum(sum(reactive_db()$deaths), big.mark=","), " deaths")
   })
   
   output$reactive_recovered_count <- renderText({
@@ -715,7 +751,8 @@ server = function(input, output, session) {
     leafletProxy("mymap") %>% 
     clearMarkers() %>%
     clearShapes() %>%
-    addPolygons(data = reactive_polygons(), stroke = FALSE, smoothFactor = 0.1, fillOpacity = 0.15, fillColor = ~cv_pal(reactive_db_large()$activeper100k)) %>% #group = "2019-COVID (cumulative)",
+    addPolygons(data = reactive_polygons(), stroke = FALSE, smoothFactor = 0.1, fillOpacity = 0.15, fillColor = ~cv_pal(reactive_db_large()$deathsper100k)) %>%
+               # label = sprintf("<strong>%s", reactive_db_large()$country)) %>% #group = "2019-COVID (cumulative)",
                 #  label = sprintf("<strong>%s (cumulative)</strong><br/>Confirmed COVID cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g", reactive_db_large()$country, reactive_db_large()$cases, reactive_db_large()$deaths, reactive_db_large()$recovered, reactive_db_large()$per100k) %>% lapply(htmltools::HTML),
                 #  labelOptions = labelOptions(
                 #               style = list("font-weight" = "normal", padding = "3px 8px", "color" = covid_col),
@@ -723,14 +760,14 @@ server = function(input, output, session) {
       
       addCircleMarkers(data = reactive_db_last24h(), lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(new_cases)^(1/5), 
                  fillOpacity = 0.1, color = covid_col, group = "2019-COVID (new)",
-                 label = sprintf("<strong>%s (past 24h)</strong><br/>Confirmed cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g", reactive_db_last24h()$country, reactive_db_last24h()$new_cases, reactive_db_last24h()$new_deaths, reactive_db_last24h()$new_recovered, reactive_db_last24h()$newper100k) %>% lapply(htmltools::HTML),
+                 label = sprintf("<strong>%s (past 24h)</strong><br/>Confirmed cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g<br/>Deaths per 100,000: %g", reactive_db_last24h()$country, reactive_db_last24h()$new_cases, reactive_db_last24h()$new_deaths, reactive_db_last24h()$new_recovered, reactive_db_last24h()$newper100k, reactive_db_last24h()$newdeathsper100k) %>% lapply(htmltools::HTML),
                  labelOptions = labelOptions(
                    style = list("font-weight" = "normal", padding = "3px 8px", "color" = covid_col),
                    textsize = "15px", direction = "auto")) %>%
       
       addCircleMarkers(data = reactive_db(), lat = ~ latitude, lng = ~ longitude, weight = 1, radius = ~(cases)^(1/5), 
                  fillOpacity = 0.1, color = covid_col, group = "2019-COVID (cumulative)",
-                 label = sprintf("<strong>%s (cumulative)</strong><br/>Confirmed cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g", reactive_db()$country, reactive_db()$cases, reactive_db()$deaths,reactive_db()$recovered, reactive_db()$per100k) %>% lapply(htmltools::HTML),
+                 label = sprintf("<strong>%s (cumulative)</strong><br/>Confirmed cases: %g<br/>Deaths: %d<br/>Recovered: %d<br/>Cases per 100,000: %g<br/>Deaths per 100,000: %g", reactive_db()$country, reactive_db()$cases, reactive_db()$deaths,reactive_db()$recovered, reactive_db()$per100k, reactive_db()$deathsper100k) %>% lapply(htmltools::HTML),
                  labelOptions = labelOptions(
                    style = list("font-weight" = "normal", padding = "3px 8px", "color" = covid_col),
                    textsize = "15px", direction = "auto")) %>%
@@ -800,7 +837,7 @@ server = function(input, output, session) {
   })
   
   output$sars_reactive_death_count <- renderText({
-    paste0(sum(sars_reactive_db()$death), " deaths")
+    paste0(sum(sars_reactive_db()$deaths), " deaths")
   })
   
   
@@ -897,10 +934,16 @@ server = function(input, output, session) {
                         selected = c("Africa", "Asia", "Europe", "North America", "South America"))
     }
     
+    if (input$level_select=="US state") {
+      updatePickerInput(session = session, inputId = "region_select", 
+                        choices = as.character(cv_states_today[order(-cv_states_today$cases),]$state), 
+                        selected = cv_states_today$state)
+    }
+    
     if (input$level_select=="Country") {
       updatePickerInput(session = session, inputId = "region_select", 
-                        choices = as.character(cv_today_100[order(-cv_today_100$cases),]$country), 
-                        selected = cv_today_100$country)
+                        choices = as.character(cv_today_1000[order(-cv_today_1000$cases),]$country), 
+                        selected = cv_today_1000$country)
     }
   }, ignoreInit = TRUE)
   
@@ -918,15 +961,29 @@ server = function(input, output, session) {
       db = cv_cases
       db$region = db$country
     }
+    if (input$level_select=="US state") { 
+      db = cv_states
+      db$region = db$state
+    }
     
-    if (input$outcome_select=="Cases") { 
+    if (input$outcome_select=="Cases (total)") { 
       db$outcome = db$cases
       db$new_outcome = db$new_cases
     }
     
-    if (input$outcome_select=="Deaths") { 
+    if (input$outcome_select=="Deaths (total)") { 
       db$outcome = db$deaths 
       db$new_outcome = db$new_deaths 
+    }
+    
+    if (input$outcome_select=="Cases per 100,000") { 
+      db$outcome = db$per100k 
+      db$new_outcome = db$newper100k 
+    }
+    
+    if (input$outcome_select=="Deaths per 100,000") { 
+      db$outcome = db$deathsper100k 
+      db$new_outcome = db$newdeathsper100k 
     }
     
     db %>% filter(region %in% input$region_select)
