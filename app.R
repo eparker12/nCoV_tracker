@@ -488,7 +488,7 @@ ui <- bootstrapPage(
                                         span(h4(textOutput("reactive_active_count"), align = "right"), style="color:#cc4c02"),
                                         h6(textOutput("clean_date_reactive"), align = "right"),
                                         h6(textOutput("reactive_country_count"), align = "right"),
-                                        tags$i(h6("Updated once daily. For more regular updates, refer to: ", tags$a(href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6", "Johns Hopkins COVID-19 dashboard."))),
+                                        #tags$i(h6("Updated once daily. For more regular updates, refer to: ", tags$a(href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6", "Johns Hopkins COVID-19 dashboard."))),
                                         plotOutput("epi_curve", height="130px", width="100%"),
                                         plotOutput("cumulative_plot", height="130px", width="100%"),
                                         
@@ -546,8 +546,8 @@ ui <- bootstrapPage(
                         
                         mainPanel(
                           tabsetPanel(
-                            tabPanel("New", plotlyOutput("country_plot")),
                             tabPanel("Cumulative", plotlyOutput("country_plot_cumulative")),
+                            tabPanel("New", plotlyOutput("country_plot")),
                             tabPanel("Cumulative (log10)", plotlyOutput("country_plot_cumulative_log"))
                           )
                         )
