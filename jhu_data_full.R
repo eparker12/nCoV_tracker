@@ -160,7 +160,7 @@ collated_data = collated_data[order(as.Date(collated_data$date, format="%Y-%m-%d
 
 # update time stamp
 collated_data$last_update = NA
-collated_data$last_update[nrow(collated_data)] = paste(format(as.POSIXlt(Sys.time(), "GMT"), "%d %B %H:00"), "GMT")
+collated_data$last_update[nrow(collated_data)] = paste(format(as.POSIXlt(Sys.time(), "GMT"), "%d %B %Y"))
 
 # save file
 write.csv(collated_data, "input_data/coronavirus.csv", row.names=F)
