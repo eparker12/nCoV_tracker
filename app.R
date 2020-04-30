@@ -103,11 +103,11 @@ sars_new_cases_plot = function(sars_aggregated, plot_date) {
 }
 
 # function to plot new cases by region
-country_cases_plot = function(cv_cases, start_point=c("Date", "Day of 100th confirmed case", "Day of 10th death")) {
+country_cases_plot = function(cv_cases, start_point=c("Date", "Day of 100th confirmed case", "Day of 10th death"), plot_start_date) {
   if (start_point=="Date") {
     g = ggplot(cv_cases, aes(x = date, y = new_outcome, fill = region, 
                              text = paste0(format(date, "%d %B %Y"), "\n", region, ": ",new_outcome))) + 
-      xlim(c(cv_min_date,current_date+1)) +
+      xlim(c(plot_start_date,current_date+1)) +
       xlab("Date")
   }
   
@@ -134,11 +134,11 @@ country_cases_plot = function(cv_cases, start_point=c("Date", "Day of 100th conf
 }
 
 # function to plot cumulative cases by region
-country_cases_cumulative = function(cv_cases, start_point=c("Date", "Day of 100th confirmed case", "Day of 10th death")) {
+country_cases_cumulative = function(cv_cases, start_point=c("Date", "Day of 100th confirmed case", "Day of 10th death"), plot_start_date) {
   if (start_point=="Date") {
     g = ggplot(cv_cases, aes(x = date, y = outcome, colour = region, group = 1,
                              text = paste0(format(date, "%d %B %Y"), "\n", region, ": ",outcome))) +
-      xlim(c(cv_min_date,current_date+1)) + xlab("Date")
+      xlim(c(plot_start_date,current_date+1)) + xlab("Date")
   }
   
   if (start_point=="Day of 100th confirmed case") {
@@ -163,11 +163,11 @@ country_cases_cumulative = function(cv_cases, start_point=c("Date", "Day of 100t
 }
 
 # function to plot cumulative cases by region on log10 scale
-country_cases_cumulative_log = function(cv_cases, start_point=c("Date", "Day of 100th confirmed case", "Day of 10th death"))  {
+country_cases_cumulative_log = function(cv_cases, start_point=c("Date", "Day of 100th confirmed case", "Day of 10th death"), plot_start_date)  {
   if (start_point=="Date") {
     g = ggplot(cv_cases, aes(x = date, y = outcome, colour = region, group = 1,
                              text = paste0(format(date, "%d %B %Y"), "\n", region, ": ",outcome))) +
-      xlim(c(cv_min_date,current_date+1)) +
+      xlim(c(plot_start_date,current_date+1)) +
       xlab("Date")
   }
   
@@ -541,6 +541,14 @@ ui <- bootstrapPage(
                                       options = list(`actions-box` = TRUE),
                                       selected = "Date",
                                       multiple = FALSE), 
+                          
+                          sliderInput("minimum_date",
+                                      "Minimum date:",
+                                      min = as.Date(cv_min_date,"%Y-%m-%d"),
+                                      max = as.Date(current_date,"%Y-%m-%d"),
+                                      value=as.Date(cv_min_date),
+                                      timeFormat="%d %b"),
+                          
                           "Select outcome, regions, and plotting start date from drop-down menues to update plots. Countries with at least 1000 confirmed cases are included."
                         ),
                         
@@ -991,17 +999,17 @@ server = function(input, output, session) {
   
   # country-specific plots
   output$country_plot <- renderPlotly({
-    country_cases_plot(country_reactive_db(), start_point=input$start_date)
+    country_cases_plot(country_reactive_db(), start_point=input$start_date, input$minimum_date)
   })
   
   # country-specific plots
   output$country_plot_cumulative <- renderPlotly({
-    country_cases_cumulative(country_reactive_db(), start_point=input$start_date)
+    country_cases_cumulative(country_reactive_db(), start_point=input$start_date, input$minimum_date)
   })
   
   # country-specific plots
   output$country_plot_cumulative_log <- renderPlotly({
-    country_cases_cumulative_log(country_reactive_db(), start_point=input$start_date)
+    country_cases_cumulative_log(country_reactive_db(), start_point=input$start_date, input$minimum_date)
   })
   
   # output to download data
