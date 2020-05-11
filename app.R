@@ -107,7 +107,7 @@ country_cases_plot = function(cv_cases, start_point=c("Date", "Day of 100th conf
   if (start_point=="Date") {
     g = ggplot(cv_cases, aes(x = date, y = new_outcome, fill = region, 
                              text = paste0(format(date, "%d %B %Y"), "\n", region, ": ",new_outcome))) + 
-      xlim(c(plot_start_date,current_date+1)) +
+      xlim(c(plot_start_date,current_date)) +
       xlab("Date")
   }
   
@@ -138,7 +138,7 @@ country_cases_cumulative = function(cv_cases, start_point=c("Date", "Day of 100t
   if (start_point=="Date") {
     g = ggplot(cv_cases, aes(x = date, y = outcome, colour = region, group = 1,
                              text = paste0(format(date, "%d %B %Y"), "\n", region, ": ",outcome))) +
-      xlim(c(plot_start_date,current_date+1)) + xlab("Date")
+      xlim(c(plot_start_date,current_date)) + xlab("Date")
   }
   
   if (start_point=="Day of 100th confirmed case") {
@@ -167,7 +167,7 @@ country_cases_cumulative_log = function(cv_cases, start_point=c("Date", "Day of 
   if (start_point=="Date") {
     g = ggplot(cv_cases, aes(x = date, y = outcome, colour = region, group = 1,
                              text = paste0(format(date, "%d %B %Y"), "\n", region, ": ",outcome))) +
-      xlim(c(plot_start_date,current_date+1)) +
+      xlim(c(plot_start_date,current_date)) +
       xlab("Date")
   }
   
@@ -265,8 +265,8 @@ if (any(grepl("/", cv_states$date))) {
 } else { cv_states$date = as.Date(cv_states$date, format="%Y-%m-%d") }
 cv_states_today = subset(cv_states, date==max(cv_states$date))
 
-# create subset for countries with at least 100 cases
-cv_today_1000 = subset(cv_today, cases>=1000)
+# create subset for countries with at least 5000 cases
+cv_today_reduced = subset(cv_today, cases>=5000)
 
 # write current day's data
 write.csv(cv_today %>% select(c(country, date, update, cases, new_cases, deaths, new_deaths,
@@ -478,7 +478,7 @@ ui <- bootstrapPage(
                           leafletOutput("mymap", width="100%", height="100%"),
                           
                           absolutePanel(id = "controls", class = "panel panel-default",
-                                        top = 120, left = 20, width = 250, fixed=TRUE,
+                                        top = 75, left = 55, width = 250, fixed=TRUE,
                                         draggable = TRUE, height = "auto",
                                         
                                         span(tags$i(h6("Reported cases are subject to significant variation in testing policy and capacity between countries.")), style="color:#045a8d"),
@@ -526,9 +526,9 @@ ui <- bootstrapPage(
                                       multiple = FALSE),
                           
                           pickerInput("region_select", "Country/Region:",   
-                                      choices = as.character(cv_today_1000[order(-cv_today_1000$cases),]$country), 
+                                      choices = as.character(cv_today_reduced[order(-cv_today_reduced$cases),]$country), 
                                       options = list(`actions-box` = TRUE, `none-selected-text` = "Please make a selection!"),
-                                      selected = cv_today_1000$country,
+                                      selected = cv_today_reduced$country,
                                       multiple = TRUE), 
                           
                           pickerInput("outcome_select", "Outcome:",   
@@ -549,7 +549,7 @@ ui <- bootstrapPage(
                                       value=as.Date(cv_min_date),
                                       timeFormat="%d %b"),
                           
-                          "Select outcome, regions, and plotting start date from drop-down menues to update plots. Countries with at least 1000 confirmed cases are included."
+                          "Select outcome, regions, and plotting start date from drop-down menues to update plots. Countries with at least 5000 confirmed cases are included."
                         ),
                         
                         mainPanel(
@@ -568,7 +568,7 @@ ui <- bootstrapPage(
                           leafletOutput("sars_map", width="100%", height="100%"),
                           
                           absolutePanel(id = "controls", class = "panel panel-default",
-                                        top = 80, left = 20, width = 250, fixed=TRUE,
+                                        top = 75, left = 55, width = 250, fixed=TRUE,
                                         draggable = TRUE, height = "auto",
                                         
                                         h3(textOutput("sars_reactive_case_count"), align = "right"),
@@ -588,10 +588,10 @@ ui <- bootstrapPage(
                                                         animate=animationOptions(interval = 3000, loop = FALSE))
                           ),
                           
-                          absolutePanel(id = "logo", class = "card", bottom = 20, left = 60, width = 80, fixed=TRUE, draggable = FALSE, height = "auto",
+                          absolutePanel(id = "logo", class = "card", bottom = 15, left = 60, width = 80, fixed=TRUE, draggable = FALSE, height = "auto",
                                         tags$a(href='https://www.lshtm.ac.uk', tags$img(src='lshtm_dark.png',height='40',width='80'))),
                           
-                          absolutePanel(id = "logo", class = "card", bottom = 20, left = 20, width = 30, fixed=TRUE, draggable = FALSE, height = "auto",
+                          absolutePanel(id = "logo", class = "card", bottom = 15, left = 20, width = 30, fixed=TRUE, draggable = FALSE, height = "auto",
                                         actionButton("twitter_share", label = "", icon = icon("twitter"),style='padding:5px',
                                                      onclick = sprintf("window.open('%s')", 
                                                                        "https://twitter.com/intent/tweet?text=%20@LSHTM_Vaccines%20outbreak%20mapper&url=https://bit.ly/2uBvnds&hashtags=coronavirus")))
@@ -950,8 +950,8 @@ server = function(input, output, session) {
     
     if (input$level_select=="Country") {
       updatePickerInput(session = session, inputId = "region_select", 
-                        choices = as.character(cv_today_1000[order(-cv_today_1000$cases),]$country), 
-                        selected = cv_today_1000$country)
+                        choices = as.character(cv_today_reduced[order(-cv_today_reduced$cases),]$country), 
+                        selected = cv_today_reduced$country)
     }
   }, ignoreInit = TRUE)
   
@@ -1020,7 +1020,7 @@ server = function(input, output, session) {
     content = function(file) {
       write.csv(cv_cases %>% select(c(country, date, cases, new_cases, deaths, new_deaths,
                                        recovered, new_recovered, active_cases, 
-                                       per100k, newper100k, activeper100k)), file)
+                                       per100k, newper100k, activeper100k, deathsper100k, newdeathsper100k)), file)
     }
   )
   
@@ -1028,7 +1028,7 @@ server = function(input, output, session) {
     orig <- options(width = 1000)
     print(tail(cv_cases %>% select(c(country, date, cases, new_cases, deaths, new_deaths,
                                      recovered, new_recovered, active_cases, 
-                                     per100k, newper100k, activeper100k)), input$maxrows), row.names = FALSE)
+                                     per100k, newper100k, activeper100k, deathsper100k, newdeathsper100k)), input$maxrows), row.names = FALSE)
     options(orig)
   })
   
