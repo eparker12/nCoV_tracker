@@ -265,8 +265,8 @@ if (any(grepl("/", cv_states$date))) {
 } else { cv_states$date = as.Date(cv_states$date, format="%Y-%m-%d") }
 cv_states_today = subset(cv_states, date==max(cv_states$date))
 
-# create subset for countries with at least 5000 cases
-cv_today_reduced = subset(cv_today, cases>=5000)
+# create subset for countries with at least 1000 cases
+cv_today_reduced = subset(cv_today, cases>=1000)
 
 # write current day's data
 write.csv(cv_today %>% select(c(country, date, update, cases, new_cases, deaths, new_deaths,
@@ -549,7 +549,7 @@ ui <- bootstrapPage(
                                       value=as.Date(cv_min_date),
                                       timeFormat="%d %b"),
                           
-                          "Select outcome, regions, and plotting start date from drop-down menues to update plots. Countries with at least 5000 confirmed cases are included."
+                          "Select outcome, regions, and plotting start date from drop-down menues to update plots. Countries with at least 1000 confirmed cases are included."
                         ),
                         
                         mainPanel(
