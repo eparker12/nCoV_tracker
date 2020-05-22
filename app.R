@@ -105,22 +105,21 @@ sars_new_cases_plot = function(sars_aggregated, plot_date) {
 # function to plot new cases by region
 country_cases_plot = function(cv_cases, start_point=c("Date", "Day of 100th confirmed case", "Day of 10th death"), plot_start_date) {
   if (start_point=="Date") {
-    g = ggplot(cv_cases, aes(x = date, y = new_outcome, fill = region, 
+    g = ggplot(cv_cases, aes(x = date, y = new_outcome, fill = region, group = 1,
                              text = paste0(format(date, "%d %B %Y"), "\n", region, ": ",new_outcome))) + 
-      xlim(c(plot_start_date,current_date)) +
-      xlab("Date")
+      xlim(c(plot_start_date,(current_date+1))) + xlab("Date")
   }
   
   if (start_point=="Day of 100th confirmed case") {
     cv_cases = subset(cv_cases, days_since_case100>0)
-    g = ggplot(cv_cases, aes(x = days_since_case100, y = new_outcome, fill = region, 
+    g = ggplot(cv_cases, aes(x = days_since_case100, y = new_outcome, fill = region, group = 1,
                              text = paste0("Day ",days_since_case100, "\n", region, ": ",new_outcome)))+
       xlab("Days since 100th confirmed case")
   }
   
   if (start_point=="Day of 10th death") {
     cv_cases = subset(cv_cases, days_since_death10>0)
-    g = ggplot(cv_cases, aes(x = days_since_death10, y = new_outcome, fill = region, 
+    g = ggplot(cv_cases, aes(x = days_since_death10, y = new_outcome, fill = region, group = 1,
                              text = paste0("Day ",days_since_death10, "\n", region, ": ",new_outcome))) +
       xlab("Days since 10th death")
   }
@@ -138,7 +137,7 @@ country_cases_cumulative = function(cv_cases, start_point=c("Date", "Day of 100t
   if (start_point=="Date") {
     g = ggplot(cv_cases, aes(x = date, y = outcome, colour = region, group = 1,
                              text = paste0(format(date, "%d %B %Y"), "\n", region, ": ",outcome))) +
-      xlim(c(plot_start_date,current_date)) + xlab("Date")
+      xlim(c(plot_start_date,(current_date+1))) + xlab("Date")
   }
   
   if (start_point=="Day of 100th confirmed case") {
@@ -167,8 +166,7 @@ country_cases_cumulative_log = function(cv_cases, start_point=c("Date", "Day of 
   if (start_point=="Date") {
     g = ggplot(cv_cases, aes(x = date, y = outcome, colour = region, group = 1,
                              text = paste0(format(date, "%d %B %Y"), "\n", region, ": ",outcome))) +
-      xlim(c(plot_start_date,current_date)) +
-      xlab("Date")
+      xlim(c(plot_start_date,(current_date+1))) + xlab("Date")
   }
   
   if (start_point=="Day of 100th confirmed case") {
