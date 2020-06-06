@@ -1,6 +1,6 @@
 ## COVID-19 interactive mapping tool
 
-This github page contains the code and input data for the [interactive COVID-19 mapping tool available](https://vac-lshtm.shinyapps.io/ncov_tracker/) developed by the Vaccine Centre at the London School of Hygiene and Tropical Medicine.
+This github page contains the code and input data for the [interactive COVID-19 mapping tool](https://vac-lshtm.shinyapps.io/ncov_tracker/) developed by the Vaccine Centre at the London School of Hygiene and Tropical Medicine.
 
 Input data are obtained from the [Johns Hopkins Center for Systems Science and Engineering github page](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series).
 
