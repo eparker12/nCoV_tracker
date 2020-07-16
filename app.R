@@ -517,7 +517,8 @@ ui <- bootstrapPage(
                         sidebarPanel(
                           
                           span(tags$i(h6("Reported cases are subject to significant variation in testing policy and capacity between countries.")), style="color:#045a8d"),
-
+                          span(tags$i(h6("Occasional anomalies (e.g. spikes in daily case counts) are generally caused by changes in case definitions.")), style="color:#045a8d"),
+                          
                           pickerInput("level_select", "Level:",   
                                       choices = c("Global", "Continent", "Country", "US state"), 
                                       selected = c("Country"),
