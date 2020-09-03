@@ -24,6 +24,8 @@ Key elements of the analysis code are as follows:
 
 From 1st May 2020 onwards, this github page will no longer be updated daily. The [Shiny app](https://vac-lshtm.shinyapps.io/ncov_tracker/) automatically updates itself based on the code in *jhu_data_full.R* and *ny_data_us.R* and updated case data can be downloaded directly from the app via the 'Data' tab. To create up-to-date versions of the input data, users can clone this repository and run *jhu_data_full.R* and *ny_data_us.R* locally. Updated input data will also be uploaded to this github page at regular intervals.
 
+From 3rd September onwards, the numbers of recovered cases are no longer plotted owing to large discrepancies in reporting rates among countries.
+
 ## Other resources
 
 Several resources proved invaluable when building this app, including:
