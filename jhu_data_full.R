@@ -43,6 +43,7 @@ update_jhu = function(input_df, tag) {
 
 # load latest Covid-2019 data: confirmed cases
 jhu_cases <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"))
+jhu_cases = subset(jhu_cases, !is.na(Lat))
 jhu_cases[is.na(jhu_cases)]=0
 total_cases <- sum(jhu_cases[,ncol(jhu_cases)])
 jhu_cases = update_jhu(jhu_cases, "cases")
@@ -50,6 +51,7 @@ if (total_cases!=sum(jhu_cases[nrow(jhu_cases),1:(ncol(jhu_cases)-1)])) { stop(p
 
 # load latest Covid-2019 data: deaths
 jhu_deaths <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"))
+jhu_deaths = subset(jhu_deaths, !is.na(Lat))
 jhu_deaths[is.na(jhu_deaths)]=0
 total_deaths <- sum(jhu_deaths[,ncol(jhu_deaths)])
 jhu_deaths = update_jhu(jhu_deaths, "deaths")
@@ -57,6 +59,7 @@ if (total_deaths!=sum(jhu_deaths[nrow(jhu_deaths),1:(ncol(jhu_deaths)-1)])) { st
 
 # load latest Covid-2019 data: recovered
 jhu_rec <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"))
+jhu_rec = subset(jhu_rec, !is.na(Lat))
 jhu_rec[is.na(jhu_rec)]=0
 total_rec <- sum(jhu_rec[,ncol(jhu_rec)])
 jhu_rec = update_jhu(jhu_rec, "recovered")
@@ -161,6 +164,37 @@ collated_data = collated_data[order(as.Date(collated_data$date, format="%Y-%m-%d
 # update time stamp
 collated_data$last_update = NA
 collated_data$last_update[nrow(collated_data)] = paste(format(as.POSIXlt(Sys.time(), "GMT"), "%d %B %Y"))
+
+# add rolling 7-day and 30-day averages for new cases and new deaths
+collated_data$new_deaths_rolling30 = collated_data$new_deaths_rolling7 = collated_data$new_cases_rolling30  = collated_data$new_cases_rolling7 = NA
+country_list = unique(collated_data$jhu_ID)
+
+for (i in 1:length(country_list)) {
+  country_sub = subset(collated_data, jhu_ID==country_list[i])
+
+  # add rolling 7-day average from 7th day onwards
+  if (nrow(country_sub)>=7) {
+    for (j in 7:nrow(country_sub)) {
+      country_sub$new_cases_rolling7[j] = round(mean(country_sub[(j-6):j,"new_cases"]),0)
+      country_sub$new_deaths_rolling7[j] = round(mean(country_sub[(j-6):j,"new_deaths"]),0)
+    }
+  }
+  
+  if (nrow(country_sub)>=30) {
+    for (j in 30:nrow(country_sub)) {
+      country_sub$new_cases_rolling30[j] = round(mean(country_sub[(j-29):j,"new_cases"]),0)
+      country_sub$new_deaths_rolling30[j] = round(mean(country_sub[(j-29):j,"new_deaths"]),0)
+    }
+  }
+  
+  # integrate with parent dataframe
+  collated_data$new_cases_rolling7[collated_data$jhu_ID==country_list[i]] = country_sub$new_cases_rolling7
+  collated_data$new_deaths_rolling7[collated_data$jhu_ID==country_list[i]] = country_sub$new_deaths_rolling7
+  collated_data$new_cases_rolling30[collated_data$jhu_ID==country_list[i]] = country_sub$new_cases_rolling30
+  collated_data$new_deaths_rolling30[collated_data$jhu_ID==country_list[i]] = country_sub$new_deaths_rolling30
+  
+}
+  
 
 # save file
 write.csv(collated_data, "input_data/coronavirus.csv", row.names=F)
