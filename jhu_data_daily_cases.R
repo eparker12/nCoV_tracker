@@ -57,17 +57,20 @@ total_deaths <- sum(jhu_deaths[,ncol(jhu_deaths)])
 jhu_deaths = update_jhu(jhu_deaths, "deaths")
 if (total_deaths!=sum(jhu_deaths[nrow(jhu_deaths),1:(ncol(jhu_deaths)-1)])) { stop(paste0("Error: incorrect processing - total counts do not match")) }
 
+# load latest Covid-2019 data: recovered
+jhu_rec <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"))
+jhu_rec = subset(jhu_rec, !is.na(Lat))
+jhu_rec[is.na(jhu_rec)]=0
+total_rec <- sum(jhu_rec[,ncol(jhu_rec)])
+jhu_rec = update_jhu(jhu_rec, "recovered")
+if (total_rec!=sum(jhu_rec[nrow(jhu_rec),1:(ncol(jhu_rec)-1)])) { stop(paste0("Error: incorrect processing - total counts do not match")) }
+
 # merge dataframes 
 jhu_merge = merge(jhu_cases, jhu_deaths, by = "Date")
+jhu_merge = merge(jhu_merge, jhu_rec, by = "Date")
 jhu_merge$Date = as.Date(jhu_merge$Date, format="%Y-%m-%d")
 jhu_merge$update = 1:nrow(jhu_merge)
 write.csv(jhu_merge, "input_data/jhu_data.csv")
-
-# shift from daily to weekly updates in collated_data
-weekly_ind = seq(1, nrow(jhu_merge), 7)
-ind_plus = nrow(jhu_merge) - max(weekly_ind)
-if (ind_plus>0) { weekly_ind = c(1,weekly_ind+ind_plus) } 
-jhu_merge = jhu_merge[weekly_ind,]
 
 # load country data
 countries = read.csv("input_data/countries_codes_and_coordinates.csv")
@@ -87,34 +90,39 @@ for (i in c(1:nrow(jhu_merge))) {
   jhu_subset_cases = jhu_subset[,which(grepl("_cases", names(jhu_subset)))]
   jhu_subset_cases = jhu_subset_cases[,colSums(jhu_subset_cases)>0]
   jhu_subset_deaths = jhu_subset[,which(grepl("_deaths", names(jhu_subset)))]
-
+  jhu_subset_rec = jhu_subset[,which(grepl("_recovered", names(jhu_subset)))]
+  
   # build new dataframe to add updated data
   new_data = data.frame(jhu_ID = names(jhu_subset_cases) %>% str_replace_all(., "_cases", ""),
                         date = format(as.Date(jhu_subset$Date[1],"%Y-%m-%d")),
                         update = i,
                         cases = NA, new_cases = 0,
-                        deaths = 0, new_deaths = 0)
+                        deaths = 0, new_deaths = 0,
+                        recovered = 0, new_recovered = 0)
   
   # update column names in new_jhu dataframes to include country names only
   colnames(jhu_subset_cases) = colnames(jhu_subset_cases) %>% str_replace_all(., "_cases", "") 
   colnames(jhu_subset_deaths) = colnames(jhu_subset_deaths) %>% str_replace_all(., "_deaths", "") 
-
+  colnames(jhu_subset_rec) = colnames(jhu_subset_rec) %>% str_replace_all(., "_recovered", "")
+  
   # loop to update cases
   for (j in 1:nrow(new_data)) {
     # update case numbers
     country_name = as.character(new_data$jhu_ID[j])
     new_data$cases[j] = jhu_subset_cases[,country_name]
     new_data$deaths[j] = jhu_subset_deaths[,country_name]
+    new_data$recovered[j] = jhu_subset_rec[,country_name]
   }
   
   # append new data to collated dataframe
   collated_data = rbind(collated_data, new_data)
   collated_data$jhu_ID = as.character(collated_data$jhu_ID)
   
-  # calculate new cases and deaths
+  # calculate new cases, deaths and recoveries
   if (i == 1) {
     collated_data$new_cases = collated_data$cases
     collated_data$new_deaths = collated_data$deaths
+    collated_data$new_recovered = collated_data$recovered
   }
   
   if (i > 1) {
@@ -129,17 +137,23 @@ for (i in c(1:nrow(jhu_merge))) {
       if (country_name %in% yesterday$jhu_ID) {
         collated_data$new_cases[collated_data$jhu_ID==country_name & collated_data$update==i] = today$cases[today$jhu_ID==country_name] - yesterday$cases[yesterday$jhu_ID==country_name] 
         collated_data$new_deaths[collated_data$jhu_ID==country_name & collated_data$update==i] = today$deaths[today$jhu_ID==country_name] - yesterday$deaths[yesterday$jhu_ID==country_name] 
+        collated_data$new_recovered[collated_data$jhu_ID==country_name & collated_data$update==i] = today$recovered[today$jhu_ID==country_name] - yesterday$recovered[yesterday$jhu_ID==country_name] 
       } else {
         # if absent from yesterday's data, new observations = total observations
         collated_data$new_cases[collated_data$jhu_ID==country_name & collated_data$update==i] = today$cases[today$jhu_ID==country_name] 
         collated_data$new_deaths[collated_data$jhu_ID==country_name & collated_data$update==i] = today$deaths[today$jhu_ID==country_name]  
+        collated_data$new_recovered[collated_data$jhu_ID==country_name & collated_data$update==i] = today$recovered[today$jhu_ID==country_name] 
       }
     }
   }
 }
-# allow for repatriation or reassigned cases without negative new_cases and new_deaths counts
+# allow for repatriation or reassigned cases without negative new_cases, new_deaths and new_recovered counts
 collated_data$new_cases[collated_data$new_cases<0] = 0
 collated_data$new_deaths[collated_data$new_deaths<0] = 0
+collated_data$new_recovered[collated_data$new_recovered<0] = 0
+
+# add active case data (total cases - deaths/recovered)
+collated_data$active_cases = collated_data$cases - (collated_data$deaths + collated_data$recovered)
 
 # update country names
 collated_data = merge(collated_data, countries[,c("jhu_ID", "country")], by = "jhu_ID")
@@ -152,27 +166,41 @@ collated_data$last_update = NA
 collated_data$last_update[nrow(collated_data)] = paste(format(as.POSIXlt(Sys.time(), "GMT"), "%d %B %Y"))
 
 # add rolling 7-day and 30-day averages for new cases and new deaths
-collated_data$new_deaths_rolling7  = collated_data$new_cases_rolling7 = NA
+collated_data$new_deaths_rolling30 = collated_data$new_deaths_rolling7 = collated_data$new_cases_rolling30  = collated_data$new_cases_rolling7 = NA
 country_list = unique(collated_data$jhu_ID)
 
 for (i in 1:length(country_list)) {
   country_sub = subset(collated_data, jhu_ID==country_list[i])
-
+  
   # add rolling 7-day average from 7th day onwards
-  if (nrow(country_sub)>1) {
-    for (j in 2:nrow(country_sub)) {
-      country_sub$new_cases_rolling7[j] = round(country_sub$new_cases[j]/7,0)
-      country_sub$new_deaths_rolling7[j] = round(country_sub$new_deaths[j]/7,0)
+  if (nrow(country_sub)>=7) {
+    for (j in 7:nrow(country_sub)) {
+      country_sub$new_cases_rolling7[j] = round(mean(country_sub[(j-6):j,"new_cases"]),0)
+      country_sub$new_deaths_rolling7[j] = round(mean(country_sub[(j-6):j,"new_deaths"]),0)
+    }
+  }
+  
+  if (nrow(country_sub)>=30) {
+    for (j in 30:nrow(country_sub)) {
+      country_sub$new_cases_rolling30[j] = round(mean(country_sub[(j-29):j,"new_cases"]),0)
+      country_sub$new_deaths_rolling30[j] = round(mean(country_sub[(j-29):j,"new_deaths"]),0)
     }
   }
   
   # integrate with parent dataframe
   collated_data$new_cases_rolling7[collated_data$jhu_ID==country_list[i]] = country_sub$new_cases_rolling7
   collated_data$new_deaths_rolling7[collated_data$jhu_ID==country_list[i]] = country_sub$new_deaths_rolling7
+  collated_data$new_cases_rolling30[collated_data$jhu_ID==country_list[i]] = country_sub$new_cases_rolling30
+  collated_data$new_deaths_rolling30[collated_data$jhu_ID==country_list[i]] = country_sub$new_deaths_rolling30
   
 }
 
+# shift from daily to weekly updates in collated_data
+weekly_ind = seq(1, tail(collated_data$update,1), 7)
+ind_plus = tail(collated_data$update,1) - max(weekly_ind)
+if (ind_plus>0) { weekly_ind = c(1,weekly_ind+ind_plus) } 
+collated_reduced = collated_data[collated_data$update %in% weekly_ind,]
+
 # save file
-#write.csv(collated_data, "input_data/coronavirus_full.csv", row.names=F)
-write.csv(collated_data, "input_data/coronavirus.csv", row.names=F)
+write.csv(collated_reduced, "input_data/coronavirus.csv", row.names=F)
 rm(list = ls())
