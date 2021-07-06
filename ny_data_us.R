@@ -12,7 +12,8 @@ if(!require(dplyr)) install.packages("dplyr", repos = "http://cran.us.r-project.
 
 # load nyt case data
 ny_cases <- as.data.frame(data.table::fread("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-states.csv"))
-state_pops <- read.csv("input_data/us_state_pop.csv")
+state_pops <- read.csv("input_data/us_state_pop.csv", encoding = "UTF-8")
+colnames(state_pops) <- c("state", "population")
 ny_cases <- merge(ny_cases, state_pops, by="state")
 
 # add data for new cases, new deaths, days since 100th case, and days since 10th death
