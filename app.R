@@ -8,20 +8,20 @@
 
 # update data with automated script
 #source("jhu_data_daily_cases.R") # option to update daily cases
-source("jhu_data_weekly_cases.R") # run locally to update numbers, but not live on Rstudio server /Users/epp11/Dropbox (VERG)/GitHub/nCoV_tracker/app.R(to avoid possible errors on auto-updates)
-source("ny_data_us.R") # run locally to update numbers, but not live on Rstudio server (to avoid possible errors on auto-updates)
+# source("jhu_data_weekly_cases.R") # run locally to update numbers, but not live on Rstudio server /Users/epp11/Dropbox (VERG)/GitHub/nCoV_tracker/app.R(to avoid possible errors on auto-updates)
+# source("ny_data_us.R") # run locally to update numbers, but not live on Rstudio server (to avoid possible errors on auto-updates)
 
 # load required packages
 if(!require(magrittr)) install.packages("magrittr", repos = "http://cran.us.r-project.org")
 if(!require(rvest)) install.packages("rvest", repos = "http://cran.us.r-project.org")
 if(!require(readxl)) install.packages("readxl", repos = "http://cran.us.r-project.org")
 if(!require(dplyr)) install.packages("dplyr", repos = "http://cran.us.r-project.org")
-if(!require(maps)) install.packages("maps", repos = "http://cran.us.r-project.org")
+# if(!require(maps)) install.packages("maps", repos = "http://cran.us.r-project.org")
 if(!require(ggplot2)) install.packages("ggplot2", repos = "http://cran.us.r-project.org")
 if(!require(reshape2)) install.packages("reshape2", repos = "http://cran.us.r-project.org")
 if(!require(ggiraph)) install.packages("ggiraph", repos = "http://cran.us.r-project.org")
 if(!require(RColorBrewer)) install.packages("RColorBrewer", repos = "http://cran.us.r-project.org")
-if(!require(leaflet)) install.packages("leaflet", repos = "http://cran.us.r-project.org")
+# if(!require(leaflet)) install.packages("leaflet", repos = "http://cran.us.r-project.org")
 if(!require(plotly)) install.packages("plotly", repos = "http://cran.us.r-project.org")
 if(!require(geojsonio)) install.packages("geojsonio", repos = "http://cran.us.r-project.org")
 if(!require(shiny)) install.packages("shiny", repos = "http://cran.us.r-project.org")
@@ -32,76 +32,14 @@ if(!require(shinythemes)) install.packages("shinythemes", repos = "http://cran.u
 # set mapping colour for each outbreak
 covid_col = "#cc4c02"
 covid_other_col = "#662506"
-sars_col = "#045a8d"
-h1n1_col = "#4d004b"
-ebola_col = "#016c59"
 
 # import data
 cv_cases = read.csv("input_data/coronavirus.csv")
-sars_cases = read.csv("input_data/sars.csv")
 countries = read.csv("input_data/countries_codes_and_coordinates.csv")
-ebola_cases = read.csv("input_data/ebola.csv")
-h1n1_cases = read.csv("input_data/h1n1.csv")
 worldcountry = geojson_read("input_data/50m.geojson", what = "sp")
 country_geoms = read.csv("input_data/country_geoms.csv")
 cv_states = read.csv("input_data/coronavirus_states.csv")
 
-
-
-
-
-### MAP FUNCTIONS ###
-# function to plot cumulative COVID cases by date
-cumulative_plot = function(cv_aggregated, plot_date) {
-  plot_df = subset(cv_aggregated, date<=plot_date)
-  g1 = ggplot(plot_df, aes(x = date, y = cases, color = region)) + geom_line() + geom_point(size = 1, alpha = 0.8) +
-    ylab("Cumulative cases") +  xlab("Date") + theme_bw() + 
-    scale_colour_manual(values=c(covid_col)) +
-    scale_y_continuous(labels = function(l) {trans = l / 1000000; paste0(trans, "M")}) +
-    theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10), 
-          plot.margin = margin(5, 12, 5, 5))
-  g1
-}
-
-# function to plot new COVID cases by date
-new_cases_plot = function(cv_aggregated, plot_date) {
-  plot_df_new = subset(cv_aggregated, date<=plot_date)
-  g1 = ggplot(plot_df_new, aes(x = date, y = new, colour = region)) + geom_line() + geom_point(size = 1, alpha = 0.8) +
-    # geom_bar(position="stack", stat="identity") + 
-    ylab("New cases (weekly)") + xlab("Date") + theme_bw() + 
-    scale_colour_manual(values=c(covid_col)) +
-    scale_y_continuous(labels = function(l) {trans = l / 1000000; paste0(trans, "M")}) +
-    theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10), 
-          plot.margin = margin(5, 12, 5, 5))
-  g1
-}
-
-# test function
-#cumulative_plot(cv_aggregated, current_date)
-#new_cases_plot(cv_aggregated, current_date)
-
-# function to plot cumulative sars cases by date
-sars_cumulative_plot = function(sars_aggregated, sars_date) {
-  plot_df = subset(sars_aggregated, date<=as.Date(sars_date, format="%Y-%m-%d"))
-  ggplot(plot_df, aes(x = date, y = cases)) + geom_line(colour = sars_col) + geom_point(size = 1, alpha = 0.8, colour = sars_col) +
-    ylab("Cumulative cases") + xlab("Date") + theme_bw() + 
-    scale_colour_manual(values=c(sars_col)) + scale_x_date(date_labels = "%b", limits=c(sars_min_date,sars_max_date)) +
-    scale_y_continuous(limits=c(0,10000), labels = function(l) {trans = l / 1000000; paste0(trans, "M")}) +
-    theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10), 
-          plot.margin = margin(5, 5, 5, 5))
-}
-
-# function to plot new cases by date
-sars_new_cases_plot = function(sars_aggregated, plot_date) {
-  plot_df_new = subset(sars_aggregated, date<=plot_date)
-  ggplot(plot_df_new, aes(x = date, y = new)) + 
-    geom_bar(position="stack", stat="identity", fill = sars_col) + 
-    ylab("New cases") +  xlab("Date") + theme_bw() + ylim(0,2000) + 
-    scale_fill_manual(values=c(sars_col)) +
-    xlim(c(sars_min_date,sars_max_date)) + scale_x_date(date_labels = "%b", limits=c(sars_min_date,sars_max_date)) +
-    theme(legend.title = element_blank(), legend.position = "", plot.title = element_text(size=10), 
-          plot.margin = margin(5, 5, 5, 5))
-}
 
 # function to plot new cases by region
 country_cases_plot = function(cv_cases, start_point=c("Date", "Week of 100th confirmed case", "Week of 10th death"), plot_start_date) {
@@ -192,38 +130,18 @@ country_cases_cumulative_log = function(cv_cases, start_point=c("Date", "Week of
   ggplotly(g1, tooltip = c("text")) %>% layout(legend = list(font = list(size=11)))
 }
 
-# function to render plotly of epidemic comparison depending on selected outcome
-comparison_plot = function(epi_comp, comparison) {
-  epi_comp$outcome = epi_comp[,comparison] 
-  epi_comp = epi_comp[order(epi_comp$outcome),]
-  epi_comp$outbreak = factor(epi_comp$outbreak, levels=epi_comp$outbreak)
-  
-  p1 <- ggplot(epi_comp, aes(x = outbreak, y = outcome, fill=outbreak, text = paste0(outbreak, ": ",outcome))) + geom_bar(alpha = 0.8, stat="identity") +
-    ylab("N") + xlab("") + theme_bw() + 
-    scale_fill_manual(values=c("2019-COVID"=covid_col, "2003-SARS"=sars_col, "2014-Ebola"=ebola_col,"2009-H1N1 (swine flu)"=h1n1_col)) +
-    theme(legend.position = "")
-  
-  if(comparison == "cfr") { p1 = p1 + ylab("%") }
-  if(comparison == "deaths") { p1 = p1 + scale_y_continuous(labels = function(l) {trans = l / 1000; paste0(trans, "K")}) }
-  if(comparison == "cases") { p1 = p1 + scale_y_continuous(trans='log10', limits = c(1,1e8), breaks=c(1,1000,1e6,1e9), labels = function(l) {trans = l / 1000; paste0(trans, "K")}) }
-  ggplotly(p1 + coord_flip(), tooltip = c("text")) %>% layout(showlegend = FALSE)
-}
 
-
-
-
-
-### DATA PROCESSING: COVID-19 ###
-
+# ### DATA PROCESSING: COVID-19 ###
+# 
 # extract time stamp from cv_cases
-update = tail(cv_cases$last_update,1) 
-
-# check consistency of country names across datasets
+update = tail(cv_cases$last_update,1)
+# 
+# # check consistency of country names across datasets
 if (all(unique(cv_cases$country) %in% unique(countries$country))==FALSE) { print("Error: inconsistent country names")}
 
 # extract dates from cv data
-if (any(grepl("/", cv_cases$date))) { 
-  cv_cases$date = format(as.Date(cv_cases$date, format="%d/%m/%Y"),"%Y-%m-%d") 
+if (any(grepl("/", cv_cases$date))) {
+  cv_cases$date = format(as.Date(cv_cases$date, format="%d/%m/%Y"),"%Y-%m-%d")
 } else { cv_cases$date = as.Date(cv_cases$date, format="%Y-%m-%d") }
 cv_cases$date = as.Date(cv_cases$date)
 cv_min_date = as.Date(min(cv_cases$date),"%Y-%m-%d")
@@ -251,15 +169,15 @@ for (i in 1:length(unique(cv_cases$country))) {
 }
 
 # creat variable for today's data
-cv_today = subset(cv_cases, date==current_date) 
+cv_today = subset(cv_cases, date==current_date)
 current_case_count = sum(cv_today$cases)
 current_case_count_China = sum(cv_today$cases[cv_today$country=="Mainland China"])
 current_case_count_other = sum(cv_today$cases[cv_today$country!="Mainland China"])
 current_death_count = sum(cv_today$deaths)
 
 # create subset of state data for today's data
-if (any(grepl("/", cv_states$date))) { 
-  cv_states$date = format(as.Date(cv_states$date, format="%d/%m/%Y"),"%Y-%m-%d") 
+if (any(grepl("/", cv_states$date))) {
+  cv_states$date = format(as.Date(cv_states$date, format="%d/%m/%Y"),"%Y-%m-%d")
 } else { cv_states$date = as.Date(cv_states$date, format="%Y-%m-%d") }
 cv_states_today = subset(cv_states, date==max(cv_states$date))
 
@@ -320,30 +238,13 @@ cv_large_countries = cv_today %>% filter(alpha3 %in% worldcountry$ADM0_A3)
 if (all(cv_large_countries$alpha3 %in% worldcountry$ADM0_A3)==FALSE) { print("Error: inconsistent country names")}
 cv_large_countries = cv_large_countries[order(cv_large_countries$alpha3),]
 
-# create plotting parameters for map
-bins = c(0,10,50,100,500,1000,Inf)
-cv_pal <- colorBin("Oranges", domain = cv_large_countries$cases_per_million, bins = bins)
-plot_map <- worldcountry[worldcountry$ADM0_A3 %in% cv_large_countries$alpha3, ]
-
-# creat cv base map 
-basemap = leaflet(plot_map) %>% 
-  addTiles() %>% 
-  addLayersControl(
-    position = "bottomright",
-    overlayGroups = c("2019-COVID (new)", "2019-COVID (cumulative)", "2003-SARS", "2009-H1N1 (swine flu)", "2014-Ebola"),
-    options = layersControlOptions(collapsed = FALSE)) %>% 
-  hideGroup(c("2019-COVID (cumulative)", "2003-SARS", "2009-H1N1 (swine flu)", "2014-Ebola")) %>%
-  addProviderTiles(providers$CartoDB.Positron) %>%
-  fitBounds(~-100,-60,~60,70) %>%
-  addLegend("bottomright", pal = cv_pal, values = ~cv_large_countries$deaths_per_million,
-            title = "<small>Deaths per million</small>") 
 
 # sum cv case counts by date
 cv_aggregated = aggregate(cv_cases$cases, by=list(Category=cv_cases$date), FUN=sum)
 names(cv_aggregated) = c("date", "cases")
 
 # add variable for new cases in last 7 days
-for (i in 1:nrow(cv_aggregated)) { 
+for (i in 1:nrow(cv_aggregated)) {
   if (i==1) { cv_aggregated$new[i] = 0 }
   if (i>1) { cv_aggregated$new[i] = cv_aggregated$cases[i] - cv_aggregated$cases[i-1] }
 }
@@ -352,7 +253,7 @@ for (i in 1:nrow(cv_aggregated)) {
 cv_aggregated$region = "Global"
 cv_aggregated$date = as.Date(cv_aggregated$date,"%Y-%m-%d")
 
-# assign colours to countries to ensure consistency between plots 
+# assign colours to countries to ensure consistency between plots
 cls = rep(c(brewer.pal(8,"Dark2"), brewer.pal(10, "Paired"), brewer.pal(12, "Set3"), brewer.pal(8,"Set2"), brewer.pal(9, "Set1"), brewer.pal(8, "Accent"),  brewer.pal(9, "Pastel1"),  brewer.pal(8, "Pastel2")),4)
 cls_names = c(as.character(unique(cv_cases$country)), as.character(unique(cv_cases_continent$continent)), as.character(unique(cv_states$state)),"Global")
 country_cols = cls[1:length(cls_names)]
@@ -459,8 +360,7 @@ ui <- bootstrapPage(
                         "Dr Edward Parker, The Vaccine Centre, London School of Hygiene & Tropical Medicine",tags$br(),
                         "Quentin Leclerc, Department of Infectious Disease Epidemiology, London School of Hygiene & Tropical Medicine",tags$br(),
                         tags$br(),tags$br(),tags$h4("Contact"),
-                        "edward.parker@lshtm.ac.uk",tags$br(),tags$br(),
-                        tags$img(src = "vac_dark.png", width = "150px", height = "75px"), tags$img(src = "lshtm_dark.png", width = "150px", height = "75px")
+                        "edward.parker@lshtm.ac.uk",tags$br()
                       )
              )
              
