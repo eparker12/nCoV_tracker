@@ -203,9 +203,9 @@ comparison_plot = function(epi_comp, comparison) {
     scale_fill_manual(values=c("2019-COVID"=covid_col, "2003-SARS"=sars_col, "2014-Ebola"=ebola_col,"2009-H1N1 (swine flu)"=h1n1_col)) +
     theme(legend.position = "")
   
-  if(comparison == "cfr") { p1 = p1 + ylab("%") }
-  if(comparison == "deaths") { p1 = p1 + scale_y_continuous(labels = function(l) {trans = l / 1000; paste0(trans, "K")}) }
-  if(comparison == "cases") { p1 = p1 + scale_y_continuous(trans='log10', limits = c(1,1e8), breaks=c(1,1000,1e6,1e9), labels = function(l) {trans = l / 1000; paste0(trans, "K")}) }
+ # if(comparison == "cfr") { p1 = p1 + ylab("%") }
+  if(comparison == "deaths") { p1 = p1 + scale_y_continuous(trans='log10', limits = c(1,1e7), breaks=c(1,1000,1e6), labels = function(l) {trans = l / 1000; paste0(trans, "K")}) }
+  if(comparison == "cases") { p1 = p1 + scale_y_continuous(trans='log10', limits = c(1,1e10), breaks=c(1,1000,1e6,1e9), labels = function(l) {trans = l / 1000; paste0(trans, "K")}) }
   ggplotly(p1 + coord_flip(), tooltip = c("text")) %>% layout(showlegend = FALSE)
 }
 
@@ -455,8 +455,8 @@ epi_comp$outbreak = factor(epi_comp$outbreak, levels = epi_comp$outbreak)
 epi_comp$cases[1] = current_case_count
 epi_comp$deaths[1] = current_death_count
 epi_comp$countries[1] = nrow(subset(cv_today, country!="Diamond Princess Cruise Ship"))
-epi_comp$cfr[1] = round(epi_comp$deaths[1]/epi_comp$cases[1]*100,1)
-epi_comp$cfr = round(epi_comp$cfr,2)
+#epi_comp$cfr[1] = round(epi_comp$deaths[1]/epi_comp$cases[1]*100,1)
+#epi_comp$cfr = round(epi_comp$cfr,2)
 
 
 
@@ -600,11 +600,9 @@ ui <- bootstrapPage(
                           radioButtons("comparison_metric", h3("Select comparison:"),
                                        c("Cases" = "cases",
                                          "Deaths" = "deaths",
-                                         "Countries/regions affected" = "countries",
-                                         "Case fatality rate" = "cfr")),
+                                         "Countries/regions affected" = "countries")),
                           textOutput("epi_notes_1"),
-                          textOutput("epi_notes_2"),
-                          textOutput("epi_notes_3")
+                          textOutput("epi_notes_2") 
                         ),
                         
                         mainPanel(plotlyOutput("comparison_plot"), width = 6)
@@ -881,23 +879,22 @@ server = function(input, output, session) {
   
   # add footnote for cases
   output$epi_notes_1 <- renderText({
-    if(input$comparison_metric=="cases") { paste0("Note that the axis is on a log10 scale so moves in 10-fold increments.
-                                                  The 60.8 million estimated cases of H1N1 dwarf all other outbreaks of plotted on a standard linear scale.") }
+    if(input$comparison_metric=="cases") { paste0("Note that the axis is on a log10 scale so moves in 10-fold increments.") }
     })
   
   # add footnote for deaths
   output$epi_notes_2 <- renderText({
     if(input$comparison_metric=="deaths") { 
-      paste0("For H1N1, the number of laboratory-confirmed deaths reported by the WHO is displayed. Subsequent modelling studies have estimated the actual number to be in the range of 123,000 to 203,000.")
+      paste0("Note that the axis is on a log10 scale so moves in 10-fold increments. For H1N1, the number of laboratory-confirmed deaths reported by the WHO is displayed. Subsequent modelling studies have estimated the actual number to be in the range of 123,000 to 203,000.")
     }
   })
   
   # add note for cfr
-  output$epi_notes_3 <- renderText({
-    if(input$comparison_metric=="cfr") { 
-      paste0("For COVID-19, this displays the proportion of confirmed cases who have subsequently died. When factoring in mild or asymptomatic infections that are not picked up by case surveillance efforts, current estimates place the case fatality rate in the range of 0.3-1%.")
-    }
-  })
+  # output$epi_notes_3 <- renderText({
+  #   if(input$comparison_metric=="cfr") { 
+  #     paste0("For COVID-19, this displays the proportion of confirmed cases who have subsequently died. When factoring in mild or asymptomatic infections that are not picked up by case surveillance efforts, current estimates place the case fatality rate in the range of 0.3-1%.")
+  #   }
+  # })
   
   # update region selections
   observeEvent(input$level_select, {

@@ -196,11 +196,11 @@ for (i in 1:length(country_list)) {
 }
 
 # shift from daily to weekly updates in collated_data
-weekly_ind = seq(1, tail(collated_data$update,1), 7)
-ind_plus = tail(collated_data$update,1) - max(weekly_ind)
-if (ind_plus>0) { weekly_ind = c(1,weekly_ind+ind_plus) } 
-collated_reduced = collated_data[collated_data$update %in% weekly_ind,]
+# weekly_ind = seq(1, tail(collated_data$update,1), 7)
+# ind_plus = tail(collated_data$update,1) - max(weekly_ind)
+# if (ind_plus>0) { weekly_ind = c(1,weekly_ind+ind_plus) } 
+# collated_reduced = collated_data[collated_data$update %in% weekly_ind,]
 
 # save file
-write.csv(collated_reduced, "input_data/coronavirus.csv", row.names=F)
+write.csv(collated_data, "input_data/coronavirus_daily.csv", row.names=F)
 rm(list = ls())
